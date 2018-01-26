@@ -29,7 +29,7 @@
                     Hackathon #1: Sound-Responsive Art - Feb. 10
                 </h3>
                 <br/>
-                <a href="https://join.slack.com/t/dccyber/shared_invite/enQtMzAzNzcxOTgwMDk3LTZiZWMyNGM5Y2UwMmY3NWIwYmZkOGIzNWY5NTAzOWE5YzZlZjQ4NzRhYWM4NGRiY2RmNTZkZjc0MjFiZmU2ZTU">
+                <a href="https://join.slack.com/t/cyberart-io/shared_invite/enQtMzAzNzcxOTgwMDk3LTZiZWMyNGM5Y2UwMmY3NWIwYmZkOGIzNWY5NTAzOWE5YzZlZjQ4NzRhYWM4NGRiY2RmNTZkZjc0MjFiZmU2ZTU">
                     <img style="width: 200px; height: 50px;" src="/img/btn-sign-in-with-slack.svg">
                 </a>
             </div>
