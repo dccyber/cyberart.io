@@ -41,10 +41,9 @@
                 <br/>
                 <!-- Your like button code -->
                 <div
-                        style="margin-left: 200px;"
                         class="fb-like"
                         data-href="https://www.facebook.com/cyberart.io/"
-                        data-layout="standard"
+                        data-layout="button_count"
                         data-colorscheme="dark"
                         data-action="like"
                         data-size="large"
