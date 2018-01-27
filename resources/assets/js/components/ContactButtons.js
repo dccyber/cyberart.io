@@ -12,8 +12,6 @@ class ContactButtons extends Component {
                 </div>
                 <div className="contact-button-column-two">
                     <SlackButton /><br/>
-                </div>
-                <div className="contact-button-column-three">
                     <GithubButton />
                 </div>
             </div>
