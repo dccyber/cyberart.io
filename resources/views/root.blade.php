@@ -40,6 +40,7 @@
                 <div
                     class="fb-page"
                     data-href="https://www.facebook.com/cyberart.io/"
+                    data-width="500px"
                     data-tabs="timeline, events"
                     data-small-header="true"
                     data-adapt-container-width="true"
