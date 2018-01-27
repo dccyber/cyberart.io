@@ -4,10 +4,10 @@ body {
 
 #container {
   display: table;
-  margin: 0 auto;
-  width: 100%;
+  margin: 0;
   background-color: #000000;
   height: 100vh;
+  width: 100%;
   overflow:hidden;
   color:#FFFFFF;
   text-align: center
@@ -15,7 +15,6 @@ body {
 
 .content {
   background: #262626;
-  padding: 40px;
   text-align: center;
   display: table-cell;
   vertical-align: middle;
