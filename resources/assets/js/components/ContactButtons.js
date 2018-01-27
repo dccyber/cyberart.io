@@ -8,13 +8,13 @@ class ContactButtons extends Component {
         return (
             <div className="contact-button-wrapper">
                 <div className="contact-button-column-one">
-                    <GithubButton />
+                    <FacebookButtons />
                 </div>
                 <div className="contact-button-column-two">
                     <SlackButton /><br/>
                 </div>
                 <div className="contact-button-column-three">
-                    <FacebookButtons />
+                    <GithubButton />
                 </div>
             </div>
         );
