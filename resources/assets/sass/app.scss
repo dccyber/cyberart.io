@@ -1,3 +1,7 @@
+body {
+  background: black;
+}
+
 #container {
   display: table;
   margin: 0 auto;
@@ -19,20 +23,20 @@
 }
 
 #slack-button {
-  width: 200px; height: auto;
+  width: 130px; height: auto;
 }
 
 #github-button {
-  width: 200px; height: auto;
+  width: 130px; height: auto;
 }
 
 #find-us-button {
-  width: 200px; height: auto; margin-bottom: 10px;
+  width: 100px; height: auto; margin-bottom: 10px;
 }
 
 #art-box {
-  width: 880px;
-  height: 880px;
+  width: 500px;
+  height: 500px;
   background: #761c19;
   margin: auto;
 }
@@ -42,7 +46,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
-  width: 880px;
+  width: 500px;
   margin: 25px auto;
 }
 
@@ -56,7 +60,7 @@
   grid-column: 2;
   grid-row: 1;
   text-align: center;
-  margin: 20px auto;
+  margin: 10px auto;
 
 }
 .contact-button-column-three {
