@@ -23,31 +23,40 @@ class Canvas extends Component {
         this.ctx.putImageData(this.imageData, 0, 0);
     }
 
+    changeState(i, j, state) {
+        state[i][j] += 4;
+    }
+
+    getColorForCellState (cellState) {
+        return {
+            red: 3 + cellState % 252,
+            green: 7 + cellState % 248,
+            blue: 11 + cellState % 244,
+            alpha: 255
+        };
+    }
+
     iterate () {
         for ( let i = 0; i < this.props.height; i++ ) {
             for ( let j = 0; j < this.props.width; j++ ) {
-                this.animationState[i][j]+=10;
-                this.paintPixel (i, j);
+                // Calculate next state
+                this.changeState(i, j, this.animationState);
+
+                // Calculate color for next state
+                const cellState = this.animationState[i][j];
+                let rgba = this.getColorForCellState (cellState);
+
+                // Draw color for next state
+                this.paintPixel(i, j, rgba);
             }
         }
     };
 
-
-    paintPixel (i, j) {
-        const pixelValue = this.animationState[i][j];
-
-        const red = pixelValue % 255;
-        const green = pixelValue % 255;
-        const blue = 0;
-
-        this.literalPaintPixel(i, j, red, green, blue);
-    }
-
-    literalPaintPixel(x, y, red, green, blue, alpha = 255) {
-        let imageData = this.g;
-
+    paintPixel(x, y, rgba) {
         //TODO: explanation
+        const imageData = this.g;
         const idx = 4 * (x + y * this.props.width);
+        const {red, green, blue, alpha} = rgba;
 
         imageData[idx] = red;
         imageData[1 + idx] = green;
