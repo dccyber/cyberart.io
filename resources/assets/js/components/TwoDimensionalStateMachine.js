@@ -1,68 +1,61 @@
+import StateBuffer from './StateBuffer';
+
 class TwoDimensionalStateMachine {
 
     constructor (initialState, stateTransition, colorGenerator) {
 
-        this.stateBuffer = [
-            initialState,
-            initialState
-        ];
-        this.cbi = 0;
+        this.stateBuffer = new StateBuffer(initialState);
 
-        this.state = this.stateBuffer[0];
-        this.nextState = this.stateBuffer[1];
+        this.state = this.stateBuffer.current();
+        this.nextState = this.stateBuffer.next();
 
         this.stateTransition = stateTransition; //TODO: support multiple state transitions
         this.colorGenerator = colorGenerator;
     }
 
     getState () {
-        return this.stateBuffer[this.cbi];
+        return this.stateBuffer.current();
     }
 
     performStateTransition () {
-
-
-        let useBuffer = true;
-        if (useBuffer) {
-
-            for ( let i = 0; i < this.state.length; i++ ) {
-                for ( let j = 0; j < this.state[i].length; j++ ) {
-                    // Calculate next state
-                    this.nextState[i][j] = this.getNextCellState(i, j);
-                }
-            }
-
-            this.cbi = (this.cbi + 1) % 2;
-            this.state = this.stateBuffer[this.cbi];
-            this.nextState = this.stateBuffer[(this.cbi + 1) % 2];
-
-        } else {
-
-            for ( let i = 0; i < this.state.length; i++ ) {
-                for ( let j = 0; j < this.state[i].length; j++ ) {
-                    // Calculate next state
-                    this.performCellStateTransition(i, j);
-                }
+        for ( let i = 0; i < this.state.length; i++ ) {
+            for ( let j = 0; j < this.state[i].length; j++ ) {
+                // Calculate next state
+                this.performCellStateTransition(i, j);
             }
         }
+
+        this.stateBuffer.tick();
+        this.state = this.stateBuffer.current();
+        this.nextState = this.stateBuffer.next();
     }
 
+    /*
+    // N-dimensional version
+    getCellState (...coords) {
+        let state = this.state;
+        for(let i=0; i<coords.length; i++) {
+            state = state[coords[i]];
+        }
+        return state;
+    }
+    */
 
-    //TODO: support specifying a state transition
     getCellState (i, j) {
         return this.state[i][j];
     }
 
-    getNextCellState (i, j) {
-        return this.stateTransition(this.getCellState(i, j));
+    //TODO: support specifying a state transition
+    getNextCellState (...coords) {
+        return this.stateTransition(this.getCellState(...coords));
     }
 
     performCellStateTransition(i, j) {
-        this.state[i][j] = this.getNextCellState(i, j);
+        this.nextState[i][j] = this.getNextCellState(i, j);
     }
 
-    generateColor(i, j) {
-        return this.colorGenerator(this.getCellState(i, j));
+    generateColor(...coords) {
+        return this.colorGenerator(this.getCellState(...coords));
     }
 }
 

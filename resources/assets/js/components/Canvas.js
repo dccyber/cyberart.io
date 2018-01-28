@@ -23,15 +23,6 @@ class Canvas extends Component {
         this.ctx.putImageData(this.imageData, 0, 0);
     }
 
-    getColorForCellState (cellState) {
-        return {
-            red: 3 + cellState % 252,
-            green: 7 + cellState % 248,
-            blue: 11 + cellState % 244,
-            alpha: 255
-        };
-    }
-
     iterate () {
 
         // Move state machine to the next state
