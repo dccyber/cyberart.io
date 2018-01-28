@@ -7,7 +7,7 @@ class Canvas extends Component {
         this.iterate = this.iterate.bind(this);
         this.redraw = this.redraw.bind(this);
 
-        this.animationState = props.initialState || [];
+        this.stateMachine = props.stateMachine || [[]];
     }
 
     componentDidMount() {
@@ -23,10 +23,6 @@ class Canvas extends Component {
         this.ctx.putImageData(this.imageData, 0, 0);
     }
 
-    changeState(i, j, state) {
-        state[i][j] += 4;
-    }
-
     getColorForCellState (cellState) {
         return {
             red: 3 + cellState % 252,
@@ -37,16 +33,16 @@ class Canvas extends Component {
     }
 
     iterate () {
+
+        // Move state machine to the next state
+        this.stateMachine.performStateTransition();
+
         for ( let i = 0; i < this.props.height; i++ ) {
             for ( let j = 0; j < this.props.width; j++ ) {
-                // Calculate next state
-                this.changeState(i, j, this.animationState);
+                // Calculate color for cell
+                const rgba = this.stateMachine.generateColor(i, j);
 
-                // Calculate color for next state
-                const cellState = this.animationState[i][j];
-                let rgba = this.getColorForCellState (cellState);
-
-                // Draw color for next state
+                // Draw color for cell
                 this.paintPixel(i, j, rgba);
             }
         }

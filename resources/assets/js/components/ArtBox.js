@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Canvas from './Canvas';
+import TwoDimensionalStateMachine from './TwoDimensionalStateMachine';
 
 const FPS = 10;
 const LIMIT_FRAMERATE = false;
@@ -69,13 +70,25 @@ class ArtBox extends Component {
             }
         }
 
+        const stateTransition = (state) => state + 4;
+        const colorGenerator = (cellState) => {
+            return {
+                red: 3 + cellState % 252,
+                green: 7 + cellState % 248,
+                blue: 11 + cellState % 244,
+                alpha: 255
+            };
+        };
+
+        let stateMachine = new TwoDimensionalStateMachine(initialState, stateTransition, colorGenerator);
+
         // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
 
         return (
             <Canvas ref={(c) => this._canvas = c}
                     width={this.state.width}
                     height={this.state.height}
-                    initialState={initialState}
+                    stateMachine={stateMachine}
             />
         );
     }
