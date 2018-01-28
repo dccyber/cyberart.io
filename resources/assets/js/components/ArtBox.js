@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Canvas from './Canvas';
 
-const FPS = 60;
+const FPS = 10;
+const LIMIT_FRAMERATE = false;
 
 class ArtBox extends Component {
 
@@ -15,56 +16,66 @@ class ArtBox extends Component {
 
         this.counter = 0;
         this.drawLoopInterval = Math.floor(1000/FPS);
-        this.redrawNecessary = true;
 
         this.drawLoop = this.drawLoop.bind(this);
-        this.draw = this.draw.bind(this);
-        this.requestRedraw = this.requestRedraw.bind(this);
-        this.initializePixelBuffer = this.initializePixelBuffer.bind(this);
+        this.animate = this.animate.bind(this);
+        this.stopAnimation = this.stopAnimation.bind(this);
     }
 
-    componentWillMount(){
-        this.initializePixelBuffer();
-    }
 
     componentDidMount(){
-        this.drawLoop();
+        this.registerVendorAnimationFunctions();
+        this.animate();
     }
 
-    initializePixelBuffer () {
-        this.setState({
-            drawBuffer: []
-        });
+    // TODO: would be good in a utility somewhere
+    registerVendorAnimationFunctions () {
+        const vendors = ['ms', 'moz', 'webkit', 'o'];
+        for(let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                || window[vendors[x]+'CancelRequestAnimationFrame'];
+        }
     }
 
     drawLoop () {
+        // Redraw the canvas using the buffer
+        this._canvas.redraw();
 
-        if (this.redrawNecessary) {
-            this.draw();
+        if (LIMIT_FRAMERATE) {
+            setTimeout(this.animate, this.drawLoopInterval);
+        } else {
+            this.animate();
         }
 
-        setTimeout(this.drawLoop, this.drawLoopInterval);
     }
 
-    draw () {
-        // Clean out the buffer
-        this.initializePixelBuffer();
-
-        // Redraw the canvas using the buffer
-        this._canvas.redraw(this.state.drawBuffer);
+    animate () {
+        this.animationId = requestAnimationFrame(this.drawLoop);
     }
 
-
-
-    requestRedraw () {
-        this.redrawNecessary = true;
+    stopAnimation () {
+        cancelAnimationFrame(this.animationId);
     }
 
     render() {
+
+        // Set starting conditions
+        let initialState = [];
+        for ( let i = 0; i < this.state.height; i++ ) {
+            initialState[i] = [];
+            for ( let j = 0; j < this.state.width; j++ ) {
+                initialState[i][j] = i+j;
+            }
+        }
+
+        // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
+
         return (
             <Canvas ref={(c) => this._canvas = c}
                     width={this.state.width}
                     height={this.state.height}
+                    initialState={initialState}
             />
         );
     }

@@ -1,63 +1,32 @@
 import React, {Component} from 'react';
 
 class Canvas extends Component {
-    constructor () {
-        super();
-        this.updateCanvas = this.updateCanvas.bind(this);
+
+    constructor (props) {
+        super(props);
         this.iterate = this.iterate.bind(this);
         this.redraw = this.redraw.bind(this);
 
-        this.drawBuffer = [];
+        this.animationState = props.initialState || [];
     }
 
     componentDidMount() {
         this.ctx = this.refs.canvas.getContext('2d');
         this.imageData = this.ctx.createImageData( this.props.width, this.props.height );
         this.g  = this.imageData.data;
-
-        const vendors = ['ms', 'moz', 'webkit', 'o'];
-        for(let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-            window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                || window[vendors[x]+'CancelRequestAnimationFrame'];
-        }
-
-        for ( let i = 0; i < this.props.height; i++ ) {
-            this.drawBuffer[i] = [];
-            for ( let j = 0; j < this.props.width; j++ ) {
-                this.drawBuffer[i][j] = i+j;
-            }
-        }
-
-        for ( let i = 0; i < this.props.height; i++ ) {
-            for ( let j = 0; j < this.props.width; j++ ) {
-                this.paintPixel (i, j);
-            }
-        }
     }
 
-    componentWillReceiveProps() {
-    }
+    redraw(){
+        this.iterate();
 
-    updateCanvas() {
-        requestAnimationFrame(this.iterate);
-    }
-
-    redraw(repaintedPixels){
-        this.drawBuffer = repaintedPixels;
-        this.updateCanvas();
+        //Used for drawing raw pixels in the buffer
+        this.ctx.putImageData(this.imageData, 0, 0);
     }
 
     iterate () {
-        //Used for drawing raw pixels in the buffer
-        this.ctx.putImageData(this.imageData, 0, 0);
-
-        /*this.drawBuffer.map(instruction => {
-           instruction(this.ctx);
-        });*/
-
         for ( let i = 0; i < this.props.height; i++ ) {
             for ( let j = 0; j < this.props.width; j++ ) {
+                this.animationState[i][j]+=10;
                 this.paintPixel (i, j);
             }
         }
@@ -65,16 +34,27 @@ class Canvas extends Component {
 
 
     paintPixel (i, j) {
+        const pixelValue = this.animationState[i][j];
 
-        const pixelValue = this.drawBuffer[i][j];
+        const red = pixelValue % 255;
+        const green = pixelValue % 255;
+        const blue = 0;
 
-        let g = this.g;
-        const idx = 4 * (j + i * this.props.width);
-        g[idx] = pixelValue % 255; //R
-        g[1 + idx] = pixelValue % 255;//G
-        g[2 + idx] = 0;//B
-        g[3 + idx] = 255;
+        this.literalPaintPixel(i, j, red, green, blue);
     }
+
+    literalPaintPixel(x, y, red, green, blue, alpha = 255) {
+        let imageData = this.g;
+
+        //TODO: explanation
+        const idx = 4 * (x + y * this.props.width);
+
+        imageData[idx] = red;
+        imageData[1 + idx] = green;
+        imageData[2 + idx] = blue;
+        imageData[3 + idx] = alpha;
+    }
+
 
     render() {
         return (
