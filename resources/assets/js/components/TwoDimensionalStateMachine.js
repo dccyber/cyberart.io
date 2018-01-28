@@ -47,11 +47,11 @@ class TwoDimensionalStateMachine {
 
     //TODO: support specifying a state transition
     getNextCellState (...coords) {
-        return this.stateTransition(this.getCellState(...coords));
+        this.stateTransition(this.getCellState(...coords));
     }
 
     performCellStateTransition(i, j) {
-        this.nextState[i][j] = this.getNextCellState(i, j);
+        this.getNextCellState(i, j);
     }
 
     generateColor(...coords) {

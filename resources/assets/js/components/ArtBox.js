@@ -66,16 +66,21 @@ class ArtBox extends Component {
         for ( let i = 0; i < this.state.height; i++ ) {
             initialState[i] = [];
             for ( let j = 0; j < this.state.width; j++ ) {
-                initialState[i][j] = i+j;
+                initialState[i][j] = {a: (i+j)%j, b: i+(j+75), c: i+j*2};
             }
         }
 
-        const stateTransition = (state) => state + 4;
+        const stateTransition = (state) => {
+            state.a = state.a + 3;
+            state.b = state.b - 2;
+            state.c = state.c + 7;
+        };
+
         const colorGenerator = (cellState) => {
             return {
-                red: 3 + cellState % 252,
-                green: 7 + cellState % 248,
-                blue: 11 + cellState % 244,
+                red: 3 + cellState.a % 252,
+                green: 7 + Math.abs(cellState.b) % 248,
+                blue: 11 + cellState.c % 244,
                 alpha: 255
             };
         };
