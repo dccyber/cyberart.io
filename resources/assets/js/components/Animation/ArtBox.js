@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Canvas from './Engine/Canvas';
-import TwoDimensionalStateMachine from './Engine/TwoDimensionalStateMachine';
-import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation";
+import RandomModularArithmeticAnimation from "./Animations/RandomModularArithmeticAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -62,7 +61,7 @@ class ArtBox extends Component {
 
     render() {
 
-        let animation = new ModularArithmeticAnimation(this.state.height, this.state.width);
+        let animation = new RandomModularArithmeticAnimation(this.state.height, this.state.width);
         // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
 
         return (
