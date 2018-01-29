@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Canvas from './Canvas';
-import TwoDimensionalStateMachine from './TwoDimensionalStateMachine';
+import Canvas from './Engine/Canvas';
+import TwoDimensionalStateMachine from './Engine/TwoDimensionalStateMachine';
+import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation";
 
-const FPS = 10;
+const FPS = 120;
 const LIMIT_FRAMERATE = false;
 
 class ArtBox extends Component {
@@ -61,39 +62,14 @@ class ArtBox extends Component {
 
     render() {
 
-        // Set starting conditions
-        let initialState = [];
-        for ( let i = 0; i < this.state.height; i++ ) {
-            initialState[i] = [];
-            for ( let j = 0; j < this.state.width; j++ ) {
-                initialState[i][j] = {a: (i+j)%j, b: i+(j+75), c: i+j*2};
-            }
-        }
-
-        const stateTransition = (state) => {
-            state.a = state.a + 3;
-            state.b = state.b - 2;
-            state.c = state.c + 7;
-        };
-
-        const colorGenerator = (cellState) => {
-            return {
-                red: 3 + cellState.a % 252,
-                green: 7 + Math.abs(cellState.b) % 248,
-                blue: 11 + cellState.c % 244,
-                alpha: 255
-            };
-        };
-
-        let stateMachine = new TwoDimensionalStateMachine(initialState, stateTransition, colorGenerator);
-
+        let animation = new ModularArithmeticAnimation(this.state.height, this.state.width);
         // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
 
         return (
             <Canvas ref={(c) => this._canvas = c}
                     width={this.state.width}
                     height={this.state.height}
-                    stateMachine={stateMachine}
+                    animation={animation}
             />
         );
     }

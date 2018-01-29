@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ContactButtons from './ContactButtons';
-import ArtBox from './ArtBox';
+import ContactButtons from './Social/ContactButtons';
+import ArtBox from './Animation/ArtBox';
 
 export default class App extends Component {
     render() {

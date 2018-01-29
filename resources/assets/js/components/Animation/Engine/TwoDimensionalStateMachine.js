@@ -2,15 +2,21 @@ import StateBuffer from './StateBuffer';
 
 class TwoDimensionalStateMachine {
 
-    constructor (initialState, stateTransition, colorGenerator) {
-
-        this.stateBuffer = new StateBuffer(initialState);
-
-        this.state = this.stateBuffer.current();
-        this.nextState = this.stateBuffer.next();
+    constructor (height, width, initialStateGenerator, stateTransition) {
 
         this.stateTransition = stateTransition; //TODO: support multiple state transitions
-        this.colorGenerator = colorGenerator;
+
+        // Set starting conditions
+        let initialState = [];
+        for ( let i = 0; i < height; i++ ) {
+            initialState[i] = [];
+            for ( let j = 0; j < width; j++ ) {
+                initialState[i][j] = initialStateGenerator(i, j);
+            }
+        }
+
+        this.stateBuffer = new StateBuffer(initialState);
+        this.state = this.stateBuffer.current();
     }
 
     getState () {
@@ -25,9 +31,8 @@ class TwoDimensionalStateMachine {
             }
         }
 
+        // TODO: explain or rename this method
         this.stateBuffer.tick();
-        this.state = this.stateBuffer.current();
-        this.nextState = this.stateBuffer.next();
     }
 
     /*
@@ -52,10 +57,6 @@ class TwoDimensionalStateMachine {
 
     performCellStateTransition(i, j) {
         this.getNextCellState(i, j);
-    }
-
-    generateColor(...coords) {
-        return this.colorGenerator(this.getCellState(...coords));
     }
 }
 
