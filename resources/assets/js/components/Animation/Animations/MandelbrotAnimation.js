@@ -34,23 +34,24 @@ class MandelbrotAnimation extends StateMachineAnimation {
             };
         };
 
-        const stateTransition = (state) => {
-            if (!(state.escaped || state.dead)) {
+        const stateTransition = (i, j) => {
+            const cellState = this.getCellState(i, j);
+            if (!(cellState.escaped || cellState.dead)) {
 
                 // The mandelbrot equation
-                let newReal = (state.real + state.imag) * (state.real - state.imag);
-                let newImag = 2 * state.real * state.imag;
+                let newReal = (cellState.real + cellState.imag) * (cellState.real - cellState.imag);
+                let newImag = 2 * cellState.real * cellState.imag;
 
-                state.real = newReal + state.real_seed;
-                state.imag = newImag + state.imag_seed;
+                cellState.real = newReal + cellState.real_seed;
+                cellState.imag = newImag + cellState.imag_seed;
 
 
-                state.iter++;
-                state.escaped = escaped(state.real, state.imag);
+                cellState.iter++;
+                cellState.escaped = escaped(cellState.real, cellState.imag);
 
                 // Stop iterating after this many iterations
-                if (state.iter > 100) {
-                    state.dead = true;
+                if (cellState.iter > 100) {
+                    cellState.dead = true;
                 }
             }
         };
@@ -112,7 +113,7 @@ class MandelbrotAnimation extends StateMachineAnimation {
 
         };
 
-        super(height, width, initialStateGenerator, stateTransition, colorGenerator );
+        super(height, width, initialStateGenerator, stateTransition, colorGenerator, 'Mandelbrot Set' );
     }
 
 }

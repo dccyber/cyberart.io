@@ -8,7 +8,8 @@ class ModularArithmeticAnimation extends StateMachineAnimation {
             return {a: (i+j)%(Math.abs(i-j)), b: i+(j+75), c: i+j*2};
         };
 
-        const stateTransition = (state) => {
+        const stateTransition = (i, j) => {
+            const state = this.getCellState(i, j);
             state.a = state.a + 0.5;
             state.b = state.b - 2;
             state.c = state.c + 7;
@@ -23,7 +24,7 @@ class ModularArithmeticAnimation extends StateMachineAnimation {
             };
         };
 
-        super(height, width, initialStateGenerator, stateTransition, colorGenerator );
+        super(height, width, initialStateGenerator, stateTransition, colorGenerator, 'Modular Arithmetic Sample #1');
     }
 
 }

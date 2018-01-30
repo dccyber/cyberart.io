@@ -23,40 +23,20 @@ class TwoDimensionalStateMachine {
         return this.stateBuffer.current();
     }
 
+    getNextState () {
+        return this.stateBuffer.next();
+    }
+
     performStateTransition () {
         for ( let i = 0; i < this.state.length; i++ ) {
             for ( let j = 0; j < this.state[i].length; j++ ) {
                 // Calculate next state
-                this.performCellStateTransition(i, j);
+                this.stateTransition(i, j);
             }
         }
 
         // TODO: explain or rename this method
         this.stateBuffer.tick();
-    }
-
-    /*
-    // N-dimensional version
-    getCellState (...coords) {
-        let state = this.state;
-        for(let i=0; i<coords.length; i++) {
-            state = state[coords[i]];
-        }
-        return state;
-    }
-    */
-
-    getCellState (i, j) {
-        return this.state[i][j];
-    }
-
-    //TODO: support specifying a state transition
-    getNextCellState (...coords) {
-        this.stateTransition(this.getCellState(...coords));
-    }
-
-    performCellStateTransition(i, j) {
-        this.getNextCellState(i, j);
     }
 }
 

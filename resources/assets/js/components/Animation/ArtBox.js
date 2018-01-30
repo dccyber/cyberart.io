@@ -3,6 +3,8 @@ import Canvas from './Engine/Canvas';
 import RandomModularArithmeticAnimation from "./Animations/RandomModularArithmeticAnimation";
 import MandelbrotAnimation from "./Animations/MandelbrotAnimation";
 import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation";
+import GameOfLifeAnimation from "./Animations/GameOfLifeAnimation";
+import BloomingGameOfLifeAnimation from "./Animations/BloomingGameOfLifeAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -26,11 +28,14 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
+            new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
+            new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
+            new GameOfLifeAnimation(this.state.height, this.state.width),
+            new GameOfLifeAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
             new ModularArithmeticAnimation(this.state.height, this.state.width),
-            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
             new RandomModularArithmeticAnimation(this.state.height, this.state.width),
             new RandomModularArithmeticAnimation(this.state.height, this.state.width),
             new RandomModularArithmeticAnimation(this.state.height, this.state.width),

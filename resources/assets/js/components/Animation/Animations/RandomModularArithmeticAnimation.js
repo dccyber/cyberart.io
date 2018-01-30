@@ -84,7 +84,8 @@ class RandomModularArithmeticAnimation extends StateMachineAnimation {
         const bModifier = Math.floor((Math.random() - 0.5) * 10);
         const cModifier = Math.floor((Math.random() - 0.5) * 10);
 
-        const stateTransition = (state) => {
+        const stateTransition = (i, j) => {
+            const state = this.getCellState(i, j);
 
             state.a = state.a + aModifier;
             state.b = state.b + bModifier;
@@ -107,7 +108,7 @@ class RandomModularArithmeticAnimation extends StateMachineAnimation {
             };
         };
 
-        super(height, width, initialStateGenerator, stateTransition, colorGenerator );
+        super(height, width, initialStateGenerator, stateTransition, colorGenerator, 'Randomized Modular Arithmetic' );
     }
 
 }

@@ -7,10 +7,20 @@ class StateBuffer {
 
         this.buffer = [];
         for (let i = 0; i < bufferSize; i++) {
-            this.buffer[i] = initialState;
+            this.buffer[i] = this.copy(initialState);
         }
 
         this.currentIndex = 0;
+    }
+
+    copy(o) {
+        var output, v, key;
+        output = Array.isArray(o) ? [] : {};
+        for (key in o) {
+            v = o[key];
+            output[key] = (typeof v === "object") ? this.copy(v) : v;
+        }
+        return output;
     }
 
     at (idx) {

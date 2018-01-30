@@ -6,9 +6,6 @@ class Canvas extends Component {
         super(props);
         this.iterate = this.iterate.bind(this);
         this.redraw = this.redraw.bind(this);
-
-        this.animation = props.animation;
-        this.stateMachine = props.animation.stateMachine;
     }
 
     componentDidMount() {
@@ -27,12 +24,12 @@ class Canvas extends Component {
     iterate () {
 
         // Advance animation to the next frame
-        this.animation.moveToNextFrame();
+        this.props.animation.moveToNextFrame();
 
         for ( let i = 0; i < this.props.height; i++ ) {
             for ( let j = 0; j < this.props.width; j++ ) {
                 // Calculate color for cell
-                const rgba = this.animation.generateColor(i, j);
+                const rgba = this.props.animation.generateColor(i, j);
 
                 // Draw color for cell, if one was requested
                 if (rgba) {
@@ -57,12 +54,16 @@ class Canvas extends Component {
 
     render() {
         return (
-            <canvas
-                id="canvas"
-                ref="canvas"
-                width={this.props.width}
-                height={this.props.height}
-            />
+            <React.Fragment>
+                <h5>{this.props.animation.title}</h5>
+                <canvas
+                    id="canvas"
+                    ref="canvas"
+                    width={this.props.width}
+                    height={this.props.height}
+                />
+            </React.Fragment>
+
         );
     }
 }
