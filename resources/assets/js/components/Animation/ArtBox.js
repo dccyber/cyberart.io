@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Canvas from './Engine/Canvas';
 import RandomModularArithmeticAnimation from "./Animations/RandomModularArithmeticAnimation";
+import MandelbrotAnimation from "./Animations/MandelbrotAnimation";
+import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -21,6 +23,22 @@ class ArtBox extends Component {
         this.drawLoop = this.drawLoop.bind(this);
         this.animate = this.animate.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
+
+        // Don't feel like working out probabilities. They are what they are.
+        this.animationList = [
+            new MandelbrotAnimation(this.state.height, this.state.width),
+            new MandelbrotAnimation(this.state.height, this.state.width),
+            new MandelbrotAnimation(this.state.height, this.state.width),
+            new ModularArithmeticAnimation(this.state.height, this.state.width),
+            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+        ];
+
+        this.animation = this.animationList[Math.floor(Math.random()*this.animationList.length)];
     }
 
 
@@ -61,14 +79,13 @@ class ArtBox extends Component {
 
     render() {
 
-        let animation = new RandomModularArithmeticAnimation(this.state.height, this.state.width);
         // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
 
         return (
             <Canvas ref={(c) => this._canvas = c}
                     width={this.state.width}
                     height={this.state.height}
-                    animation={animation}
+                    animation={this.animation}
             />
         );
     }

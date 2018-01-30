@@ -34,8 +34,10 @@ class Canvas extends Component {
                 // Calculate color for cell
                 const rgba = this.animation.generateColor(i, j);
 
-                // Draw color for cell
-                this.paintPixel(i, j, rgba);
+                // Draw color for cell, if one was requested
+                if (rgba) {
+                    this.paintPixel(i, j, rgba);
+                }
             }
         }
     };

@@ -1,8 +1,9 @@
 class StateBuffer {
 
     //life doesn't work with buffer size less than 2
-    constructor(initialState, bufferSize = 2) {
+    constructor(initialState, bufferSize = 2, unlimitedBuffer = false) {
         this.bufferSize = bufferSize;
+        this.unlimitedBuffer = unlimitedBuffer;
 
         this.buffer = [];
         for (let i = 0; i < bufferSize; i++) {
@@ -17,11 +18,11 @@ class StateBuffer {
     }
 
     current () {
-        return this.buffer[this.currentIndex];
+        return this.at(this.currentIndex);
     }
 
     next () {
-        return this.buffer[this.getNextIdx()];
+        return this.at(this.getNextIdx());
     }
 
     tick () {
@@ -29,7 +30,9 @@ class StateBuffer {
     }
 
     getNextIdx () {
-        return (this.currentIndex + 1) % this.bufferSize;
+        return this.unlimitedBuffer ?
+            (this.currentIndex + 1) :
+            (this.currentIndex + 1) % this.bufferSize;
     }
 
 }
