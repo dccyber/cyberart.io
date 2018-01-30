@@ -7,6 +7,7 @@ import GameOfLifeAnimation from "./Animations/GameOfLifeAnimation";
 import BloomingGameOfLifeAnimation from "./Animations/BloomingGameOfLifeAnimation";
 import BloomTrailGameOfLifeAnimation from "./Animations/BloomTrailGameOfLifeAnimation";
 import SymmetricalBTGameOfLifeAnimation from "./Animations/SymmetricalBTGameOfLifeAnimation";
+import SymmetricalBTGameOfLifeAnimationB from "./Animations/SymmetricalBTGameOfLifeAnimationB";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -33,7 +34,7 @@ class ArtBox extends Component {
             new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
             new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
             new SymmetricalBTGameOfLifeAnimation(this.state.height, this.state.width),
-            new SymmetricalBTGameOfLifeAnimation(this.state.height, this.state.width),
+            new SymmetricalBTGameOfLifeAnimationB(this.state.height, this.state.width),
             new GameOfLifeAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
