@@ -17,8 +17,8 @@ class ArtBox extends Component {
         super();
 
         this.state = {
-            width: 750,
-            height: 750
+            width: 375,
+            height: 375
         };
 
         this.counter = 0;
