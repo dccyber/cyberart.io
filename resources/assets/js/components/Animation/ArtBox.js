@@ -5,6 +5,7 @@ import MandelbrotAnimation from "./Animations/MandelbrotAnimation";
 import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation";
 import GameOfLifeAnimation from "./Animations/GameOfLifeAnimation";
 import BloomingGameOfLifeAnimation from "./Animations/BloomingGameOfLifeAnimation";
+import BloomTrailGameOfLifeAnimation from "./Animations/BloomTrailGameOfLifeAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -30,7 +31,8 @@ class ArtBox extends Component {
         this.animationList = [
             new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
             new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
-            new GameOfLifeAnimation(this.state.height, this.state.width),
+            new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
+            new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
             new GameOfLifeAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
