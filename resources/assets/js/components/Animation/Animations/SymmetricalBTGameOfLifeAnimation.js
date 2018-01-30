@@ -1,15 +1,12 @@
 import StateMachineAnimation from "../Engine/StateMachineAnimation";
 
 // TODO: cleanup and comment
-class BloomingGameOfLifeAnimation extends StateMachineAnimation {
+class SymmetricalBTGameOfLifeAnimation extends StateMachineAnimation {
 
     constructor (height, width) {
 
-
+        //TODO: refactor this with SymmetricalBTGameOfLifeAnimation to just pass in different initial states
         const initialStateGenerator = (i, j) => {
-
-            // Random Start
-            //let alive = Math.floor(Math.random() + 0.5) === 1;
 
             // Structured start
             let alive = i > Math.floor(height / 2) - 6 && i < Math.floor(height / 2) + 6 && j == Math.floor(width / 2);
@@ -126,9 +123,9 @@ class BloomingGameOfLifeAnimation extends StateMachineAnimation {
             };
         };
 
-        super(height, width, initialStateGenerator, stateTransition, colorGenerator, "Game of Life - Bloom Mod w/Trails" );
+        super(height, width, initialStateGenerator, stateTransition, colorGenerator, "Game of Life - Bloom Mod w/Trails - Symmetrical Seed" );
     }
 
 }
 
-export default BloomingGameOfLifeAnimation;
+export default SymmetricalBTGameOfLifeAnimation;

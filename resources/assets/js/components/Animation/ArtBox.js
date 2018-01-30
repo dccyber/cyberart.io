@@ -6,6 +6,7 @@ import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation"
 import GameOfLifeAnimation from "./Animations/GameOfLifeAnimation";
 import BloomingGameOfLifeAnimation from "./Animations/BloomingGameOfLifeAnimation";
 import BloomTrailGameOfLifeAnimation from "./Animations/BloomTrailGameOfLifeAnimation";
+import SymmetricalBTGameOfLifeAnimation from "./Animations/SymmetricalBTGameOfLifeAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -16,8 +17,8 @@ class ArtBox extends Component {
         super();
 
         this.state = {
-            width: 375,
-            height: 375
+            width: 750,
+            height: 750
         };
 
         this.counter = 0;
@@ -29,10 +30,10 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
-            new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
             new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
-            new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
+            new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
+            new SymmetricalBTGameOfLifeAnimation(this.state.height, this.state.width),
+            new SymmetricalBTGameOfLifeAnimation(this.state.height, this.state.width),
             new GameOfLifeAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
             new MandelbrotAnimation(this.state.height, this.state.width),
