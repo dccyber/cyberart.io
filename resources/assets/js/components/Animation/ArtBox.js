@@ -39,14 +39,14 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            //BloomingGameOfLifeAnimation,
-            //SymmetricalBTGameOfLifeAnimation,
-            //SymmetricalBTGameOfLifeAnimationB,
+            BloomingGameOfLifeAnimation,
+            SymmetricalBTGameOfLifeAnimation,
+            SymmetricalBTGameOfLifeAnimationB,
             SymmetricalBTGameOfLifeAnimationC,
-            //MandelbrotAnimation,
-           //MandelbrotAnimationZoom,
-            //ModularArithmeticAnimation,
-            //RandomModularArithmeticAnimation,
+            MandelbrotAnimation,
+            MandelbrotAnimationZoom,
+            ModularArithmeticAnimation,
+            RandomModularArithmeticAnimation,
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
