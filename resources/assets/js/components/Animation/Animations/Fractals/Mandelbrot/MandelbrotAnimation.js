@@ -1,4 +1,4 @@
-import StateMachineAnimation from "../Engine/StateMachineAnimation";
+import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
 
 // TODO: cleanup and comment
 class MandelbrotAnimation extends StateMachineAnimation {

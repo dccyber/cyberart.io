@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Canvas from './Engine/Canvas';
-import RandomModularArithmeticAnimation from "./Animations/RandomModularArithmeticAnimation";
-import MandelbrotAnimation from "./Animations/MandelbrotAnimation";
-import ModularArithmeticAnimation from "./Animations/ModularArithmeticAnimation";
-import BloomingGameOfLifeAnimation from "./Animations/BloomingGameOfLifeAnimation";
-import SymmetricalBTGameOfLifeAnimation from "./Animations/SymmetricalBTGameOfLifeAnimation";
-import SymmetricalBTGameOfLifeAnimationB from "./Animations/SymmetricalBTGameOfLifeAnimationB";
-import MandelbrotAnimationZoom from "./Animations/MandelbrotAnimationZoom";
+import RandomModularArithmeticAnimation from "./Animations/ModularArithmetic/RandomModularArithmeticAnimation";
+import MandelbrotAnimation from "./Animations/Fractals/Mandelbrot/MandelbrotAnimation";
+import ModularArithmeticAnimation from "./Animations/ModularArithmetic/ModularArithmeticAnimation";
+import BloomingGameOfLifeAnimation from "./Animations/CellularAutomata/GameOfLife/BloomingGameOfLifeAnimation";
+import SymmetricalBTGameOfLifeAnimation from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimation";
+import SymmetricalBTGameOfLifeAnimationB from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
+import MandelbrotAnimationZoom from "./Animations/Fractals/Mandelbrot/MandelbrotAnimationZoom";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -61,7 +61,7 @@ class ArtBox extends Component {
 
     setRandomAnimation () {
         this.stopAnimation();
-        
+
         const oldAnimationIdx = this.chosenAnimationIdx;
 
         // Ensure a different animatino

@@ -1,4 +1,4 @@
-import StateMachineAnimation from "../Engine/StateMachineAnimation";
+import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
 import GameOfLifeAnimation from "./GameOfLifeAnimation";
 
 // TODO: cleanup and comment
