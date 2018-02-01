@@ -7,6 +7,7 @@ import BloomingGameOfLifeAnimation from "./Animations/CellularAutomata/GameOfLif
 import SymmetricalBTGameOfLifeAnimation from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimation";
 import SymmetricalBTGameOfLifeAnimationB from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
 import MandelbrotAnimationZoom from "./Animations/Fractals/Mandelbrot/MandelbrotAnimationZoom";
+import SymmetricalBTGameOfLifeAnimationC from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -16,10 +17,10 @@ class ArtBox extends Component {
     constructor () {
         super();
 
-        const size = 375;
+        const size = 374;
 
         this.state = {
-            width:375,
+            width:374,
             height: size
         };
 
@@ -38,15 +39,14 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            BloomingGameOfLifeAnimation,
-            ////BloomTrailGameOfLifeAnimation,
-            SymmetricalBTGameOfLifeAnimation,
-            SymmetricalBTGameOfLifeAnimationB,
-            ////GameOfLifeAnimation,
-            MandelbrotAnimation,
-            MandelbrotAnimationZoom,
-            ModularArithmeticAnimation,
-            RandomModularArithmeticAnimation,
+            //BloomingGameOfLifeAnimation,
+            //SymmetricalBTGameOfLifeAnimation,
+            //SymmetricalBTGameOfLifeAnimationB,
+            SymmetricalBTGameOfLifeAnimationC,
+            //MandelbrotAnimation,
+           //MandelbrotAnimationZoom,
+            //ModularArithmeticAnimation,
+            //RandomModularArithmeticAnimation,
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);

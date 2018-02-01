@@ -27,7 +27,7 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
     createDeadCell (nextCellState, cellState) {
         nextCellState.blooming = 0;
         super.createDeadCell(nextCellState, cellState);
-        nextCellState.fade = Math.max(0, cellState.fade - 1);
+        nextCellState.fade = Math.max(0, cellState.fade - 0.5);
     }
 
     handleDeadCellTransition (cellState, nextCellState, neighborInfo) {
