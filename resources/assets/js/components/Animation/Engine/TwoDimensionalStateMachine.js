@@ -6,15 +6,16 @@ class TwoDimensionalStateMachine {
     constructor (animationContainer) {
 
         this.animationContainer = animationContainer;
-        this.height = animationContainer.height;
         this.width = animationContainer.width;
+        this.height = animationContainer.height;
+
 
 
         // Set starting conditions
         let initialState = [];
-        for ( let i = 0; i < this.height; i++ ) {
+        for ( let i = 0; i < this.width; i++ ) {
             initialState[i] = [];
-            for ( let j = 0; j < this.width; j++ ) {
+            for ( let j = 0; j < this.height; j++ ) {
                 initialState[i][j] = animationContainer.initialStateGenerator(i, j);
             }
         }
@@ -33,10 +34,10 @@ class TwoDimensionalStateMachine {
     }
 
     performStateTransition () {
-        for ( let i = 0; i < this.state.length; i++ ) {
-            for ( let j = 0; j < this.state[i].length; j++ ) {
+        for ( let i = 0; i < this.width; i++ ) {
+            for ( let j = 0; j < this.height; j++ ) {
                 // Calculate next state
-                this.animationContainer.stateTransition(i, j, this.height, this.width, this.getState(), this.getNextState());
+                this.animationContainer.stateTransition(i, j, this.width, this.height, this.getState(), this.getNextState());
             }
         }
 

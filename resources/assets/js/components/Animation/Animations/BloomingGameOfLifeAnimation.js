@@ -4,8 +4,8 @@ import GameOfLifeAnimation from "./GameOfLifeAnimation";
 // TODO: cleanup and comment
 class BloomingGameOfLifeAnimation extends GameOfLifeAnimation {
 
-    constructor (height, width, title = "Game of Life - Bloom Mod") {
-        super(height, width, title );
+    constructor (width, height, title = "Game of Life - Bloom Mod") {
+        super(width, height, title );
     }
 
     initialStateGenerator (i, j) {

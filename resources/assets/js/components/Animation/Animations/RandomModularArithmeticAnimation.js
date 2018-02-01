@@ -5,8 +5,8 @@ import StateMachineAnimation from "../Engine/StateMachineAnimation";
 
 class RandomModularArithmeticAnimation extends StateMachineAnimation {
 
-    constructor (height, width, title = 'Randomized Modular Arithmetic') {
-        super(height, width, title);
+    constructor (width, height, title = 'Randomized Modular Arithmetic') {
+        super(width, height, title);
     }
 
     initialStateGenerator (i, j) {
@@ -18,7 +18,7 @@ class RandomModularArithmeticAnimation extends StateMachineAnimation {
     }
 
 
-    stateTransition (i, j, height, width, state, nextState) {
+    stateTransition (i, j, width, height, state, nextState) {
         const cellState = state[i][j];
 
         cellState.a = cellState.a + aModifier;

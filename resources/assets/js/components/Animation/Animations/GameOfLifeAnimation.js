@@ -3,9 +3,9 @@ import StateMachineAnimation from "../Engine/StateMachineAnimation";
 // TODO: cleanup and comment
 class GameOfLifeAnimation extends StateMachineAnimation {
 
-    constructor (height, width, title = 'Game of Life') {
+    constructor (width, height, title = 'Game of Life') {
 
-        super(height, width, title);
+        super(width, height, title);
     }
 
     initialStateGenerator (i, j) {
@@ -53,7 +53,7 @@ class GameOfLifeAnimation extends StateMachineAnimation {
 
 
 
-    stateTransition (i, j, height, width, state, nextState) {
+    stateTransition (i, j, width, height, state, nextState) {
 
         let cellState = state[i][j];
         let nextCellState = nextState[i][j];

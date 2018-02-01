@@ -3,8 +3,8 @@ import BloomTrailGameOfLifeAnimation from "./BloomTrailGameOfLifeAnimation";
 
 class SymmetricalBTGameOfLifeAnimationB extends BloomTrailGameOfLifeAnimation {
 
-    constructor (height, width, title = "Game of Life - Bloom Mod w/Trails - Diagonal Symmetrical Seed") {
-        super(height, width, title);
+    constructor (width, height, title = "Game of Life - Bloom Mod w/Trails - Diagonal Symmetrical Seed") {
+        super(width, height, title);
     }
 
     seedIsAlive (i, j) {

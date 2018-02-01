@@ -26,8 +26,8 @@ class Canvas extends Component {
         // Advance animation to the next frame
         this.props.animation.moveToNextFrame();
 
-        for ( let i = 0; i < this.props.height; i++ ) {
-            for ( let j = 0; j < this.props.width; j++ ) {
+        for ( let i = 0; i < this.props.width; i++ ) {
+            for ( let j = 0; j < this.props.height; j++ ) {
                 // Calculate color for cell
                 const rgba = this.props.animation.generateColor(i, j);
 
@@ -55,7 +55,8 @@ class Canvas extends Component {
     render() {
         return (
             <React.Fragment>
-                <h5>{this.props.animation.title}</h5>
+                <h5 style={{margin: '5px'}}>{this.props.animation.title}</h5>
+                <button style={{marginBottom: '5px'}} onClick={this.props.changeAnimation}>Randomize</button>
                 <canvas
                     id="canvas"
                     ref="canvas"

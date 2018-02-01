@@ -2,8 +2,8 @@ import BloomingGameOfLifeAnimation from "./BloomingGameOfLifeAnimation";
 
 // TODO: cleanup and comment
 class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
-    constructor (height, width, title = "Game of Life - Bloom Mod w/Trails - Random Seed") {
-        super(height, width, title );
+    constructor (width, height, title = "Game of Life - Bloom Mod w/Trails - Random Seed") {
+        super(width, height, title );
     }
 
 

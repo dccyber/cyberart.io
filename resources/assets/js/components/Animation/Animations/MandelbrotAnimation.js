@@ -3,27 +3,43 @@ import StateMachineAnimation from "../Engine/StateMachineAnimation";
 // TODO: cleanup and comment
 class MandelbrotAnimation extends StateMachineAnimation {
 
-    constructor (height, width, title = 'Mandelbrot Set') {
-        super(height, width, title );
+    constructor (width, height, title = 'Mandelbrot Set') {
+        super(width, height, title );
+    }
+
+    generateParams () {
+        //default 1
+        const zoom = 1; // Increase to zoom in
+
+        //default 0
+        const leftward = 0; // Increase to move the fractal leftward relative to the view pane
+
+        //default 0
+        const upward = 0 // Increase to move the fractal upward relative to the view pane
+
+        //TODO: rename
+        this.a = 4 / (this.height * zoom);
+        this.b = (leftward - 2 * (this.width / this.height)) / zoom;
+
+        this.c = 4 / (this.height * zoom);
+        this.d = (upward - 2) / zoom;
+
+        this.usePrecalc = false;
     }
 
     initialStateGenerator (i, j) {
 
         if (!this.a) {
-            const zoom = 1.5; // Increase to zoom in
-            const leftward = -1; // Increase to move the fractal leftward relative to the view pane
-            const upward = 0; // Increase to move the fractal upward relative to the view pane
 
-            //TODO: rename
-            this.a = 4 / (this.width * zoom);
-            this.b = (leftward - 2) / zoom;
+            this.generateParams();
 
-            this.c = 4 / (this.height * zoom);
-            this.d = (upward - 2) / zoom;
+            // when width/height = 2, coefficient should be 1
+            // when width/height = 1, coefficient should be 2\
+            // when width/height = 4, coefficient should be
 
             // Precalculate some colors, so they don't need to be calculated every time a color is generated
             // Useful for large renders
-            this.usePrecalc = false;
+
             if (this.usePrecalc) {
                 this.precalcColors = [];
                 for (let e=0; e < 1000; e++) {
@@ -58,7 +74,7 @@ class MandelbrotAnimation extends StateMachineAnimation {
         };
     }
 
-    stateTransition (i, j, height, width, state, nextState) {
+    stateTransition (i, j, width, height, state, nextState) {
         const cellState = state[i][j];
 
         if (!(cellState.escaped || cellState.dead)) {
@@ -75,7 +91,7 @@ class MandelbrotAnimation extends StateMachineAnimation {
             cellState.escaped = this.escaped(cellState.real, cellState.imag);
 
             // Stop iterating after this many iterations
-            if (cellState.iter > 100) {
+            if (cellState.iter > 100) { //TODO: use constant
                 //cellState.dead = true;
             }
         }
@@ -88,7 +104,7 @@ class MandelbrotAnimation extends StateMachineAnimation {
 
         if (cellState.escaped) {
             if (this.usePrecalc && this.precalcColors[framesElapsed] && this.precalcColors[framesElapsed][cellState.iter]) {
-                return precalcColors[framesElapsed][cellState.iter];
+                return this.precalcColors[framesElapsed][cellState.iter];
             }
             return {
                 red: (cellState.iter * Math.abs(Math.sin(framesElapsed/101)) * 89) % 256,
@@ -103,15 +119,16 @@ class MandelbrotAnimation extends StateMachineAnimation {
                 alpha: 255
             };
         } else {
-            return null;
-            /*
+            // TODO: this is an interesting effect. Animations can blend together if you send up no colors.
+            // return null;
+
             return {
                 red: 0,
                 green: 0,
                 blue: 0,
                 alpha: 255
             };
-            */
+
         }
 
     }
