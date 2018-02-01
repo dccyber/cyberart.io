@@ -1,22 +1,27 @@
 import StateBuffer from './StateBuffer';
 
+//TODO: combine this class into StateMachineAnimation
 class TwoDimensionalStateMachine {
 
-    constructor (height, width, initialStateGenerator, stateTransition) {
+    constructor (animationContainer) {
 
-        this.stateTransition = stateTransition; //TODO: support multiple state transitions
+        this.animationContainer = animationContainer;
+        this.height = animationContainer.height;
+        this.width = animationContainer.width;
+
 
         // Set starting conditions
         let initialState = [];
-        for ( let i = 0; i < height; i++ ) {
+        for ( let i = 0; i < this.height; i++ ) {
             initialState[i] = [];
-            for ( let j = 0; j < width; j++ ) {
-                initialState[i][j] = initialStateGenerator(i, j);
+            for ( let j = 0; j < this.width; j++ ) {
+                initialState[i][j] = animationContainer.initialStateGenerator(i, j);
             }
         }
 
         this.stateBuffer = new StateBuffer(initialState);
         this.state = this.stateBuffer.current();
+
     }
 
     getState () {
@@ -31,7 +36,7 @@ class TwoDimensionalStateMachine {
         for ( let i = 0; i < this.state.length; i++ ) {
             for ( let j = 0; j < this.state[i].length; j++ ) {
                 // Calculate next state
-                this.stateTransition(i, j);
+                this.animationContainer.stateTransition(i, j, this.height, this.width, this.getState(), this.getNextState());
             }
         }
 

@@ -3,118 +3,122 @@ import StateMachineAnimation from "../Engine/StateMachineAnimation";
 // TODO: cleanup and comment
 class MandelbrotAnimation extends StateMachineAnimation {
 
-    constructor (height, width) {
+    constructor (height, width, title = 'Mandelbrot Set') {
+        super(height, width, title );
+    }
 
-        const zoom = 1.5; // Increase to zoom in
-        const leftward = -1; // Increase to move the fractal leftward relative to the view pane
-        const upward = 0; // Increase to move the fractal upward relative to the view pane
+    initialStateGenerator (i, j) {
 
-        const a = 4 / (width * zoom);
-        const b = (leftward - 2) / zoom;
+        if (!this.a) {
+            const zoom = 1.5; // Increase to zoom in
+            const leftward = -1; // Increase to move the fractal leftward relative to the view pane
+            const upward = 0; // Increase to move the fractal upward relative to the view pane
 
-        const c = 4 / (height * zoom);
-        const d = (upward - 2) / zoom;
+            //TODO: rename
+            this.a = 4 / (this.width * zoom);
+            this.b = (leftward - 2) / zoom;
 
-        const escaped = (real, imag) => {
-            return real*real + imag*imag > 4;
-        };
+            this.c = 4 / (this.height * zoom);
+            this.d = (upward - 2) / zoom;
 
-        const initialStateGenerator = (i, j) => {
-            const real_seed = i*a + b;
-            const imag_seed = j*c + d;
-
-            return {
-                real: 0,
-                imag: 0,
-                real_seed: i*a + b,
-                imag_seed: j*c + d,
-                iter: 0,
-                escaped: escaped(real_seed, imag_seed),
-                dead: false
-            };
-        };
-
-        const stateTransition = (i, j) => {
-            const cellState = this.getCellState(i, j);
-            if (!(cellState.escaped || cellState.dead)) {
-
-                // The mandelbrot equation
-                let newReal = (cellState.real + cellState.imag) * (cellState.real - cellState.imag);
-                let newImag = 2 * cellState.real * cellState.imag;
-
-                cellState.real = newReal + cellState.real_seed;
-                cellState.imag = newImag + cellState.imag_seed;
-
-
-                cellState.iter++;
-                cellState.escaped = escaped(cellState.real, cellState.imag);
-
-                // Stop iterating after this many iterations
-                if (cellState.iter > 100) {
-                    cellState.dead = true;
-                }
-            }
-        };
-
-        // Precalculate some colors, so they don't need to be calculated every time a color is generated
-        // Useful for large renders
-        const usePrecalc = false;
-        if (usePrecalc) {
-            let precalcColors = [];
-            for (let e=0; e < 100000; e++) {
-                let f = Math.abs(Math.sin(e/17)) * 5;
-                let g = Math.abs(Math.sin(e/29)) * 5;
-                let h = Math.abs(Math.sin(e/13)) * 5;
-                precalcColors[e] = [];
-                for(let m=0; m<102; m++) {
-                    precalcColors[e][m] = {
-                        red: (m * f) % 256,
-                        green: (m * g) % 256,
-                        blue: (m * h) % 256,
-                        alpha: 255
+            // Precalculate some colors, so they don't need to be calculated every time a color is generated
+            // Useful for large renders
+            this.usePrecalc = false;
+            if (this.usePrecalc) {
+                this.precalcColors = [];
+                for (let e=0; e < 1000; e++) {
+                    let f = Math.abs(Math.sin(e/17)) * 5;
+                    let g = Math.abs(Math.sin(e/29)) * 5;
+                    let h = Math.abs(Math.sin(e/13)) * 5;
+                    this.precalcColors[e] = [];
+                    for(let m=0; m<102; m++) {
+                        this.precalcColors[e][m] = {
+                            red: (m * f) % 256,
+                            green: (m * g) % 256,
+                            blue: (m * h) % 256,
+                            alpha: 255
+                        }
                     }
                 }
             }
         }
 
 
-        const colorGenerator = (cellState, framesElapsed) => {
-            if (cellState.dead) {
-                return null;
-            }
+        const real_seed = i*this.a + this.b;
+        const imag_seed = j*this.c + this.d;
 
-            if (cellState.escaped) {
-                if (usePrecalc && precalcColors[framesElapsed] && precalcColors[framesElapsed][cellState.iter]) {
-                    return precalcColors[framesElapsed][cellState.iter];
-                }
-                return {
-                    red: (cellState.iter * Math.abs(Math.sin(framesElapsed/31)) * 20) % 256,
-                    green: (cellState.iter * Math.abs(Math.sin(framesElapsed/29)) * 20) % 256,
-                    blue: (cellState.iter * Math.abs(Math.sin(framesElapsed/47)) * 20) % 256,
-
-                    /*
-                    red: (cellState.iter + framesElapsed * 3) % 256,
-                    green: (cellState.iter + framesElapsed * 13) % 256,
-                    blue: (cellState.iter + framesElapsed * 29) % 256,
-                    */
-                    alpha: 255
-                };
-            } else {
-                return null;
-                /*
-                return {
-                    red: 0,
-                    green: 0,
-                    blue: 0,
-                    alpha: 255
-                };
-                */
-            }
-
+        return {
+            real: 0,
+            imag: 0,
+            real_seed: real_seed,
+            imag_seed: imag_seed,
+            iter: 0,
+            escaped: this.escaped(real_seed, imag_seed),
+            dead: false
         };
-
-        super(height, width, initialStateGenerator, stateTransition, colorGenerator, 'Mandelbrot Set' );
     }
+
+    stateTransition (i, j, height, width, state, nextState) {
+        const cellState = state[i][j];
+
+        if (!(cellState.escaped || cellState.dead)) {
+
+            // The mandelbrot equation
+            let newReal = (cellState.real + cellState.imag) * (cellState.real - cellState.imag);
+            let newImag = 2 * cellState.real * cellState.imag;
+
+            cellState.real = newReal + cellState.real_seed;
+            cellState.imag = newImag + cellState.imag_seed;
+
+
+            cellState.iter++;
+            cellState.escaped = this.escaped(cellState.real, cellState.imag);
+
+            // Stop iterating after this many iterations
+            if (cellState.iter > 100) {
+                //cellState.dead = true;
+            }
+        }
+    }
+
+    colorGenerator (cellState, framesElapsed)  {
+        if (cellState.dead) {
+            //return null;
+        }
+
+        if (cellState.escaped) {
+            if (this.usePrecalc && this.precalcColors[framesElapsed] && this.precalcColors[framesElapsed][cellState.iter]) {
+                return precalcColors[framesElapsed][cellState.iter];
+            }
+            return {
+                red: (cellState.iter * Math.abs(Math.sin(framesElapsed/101)) * 89) % 256,
+                green: (cellState.iter * Math.abs(Math.sin(framesElapsed/61)) * 67) % 256,
+                blue: (cellState.iter * Math.abs(Math.sin(framesElapsed/107)) * 20) % 256,
+
+                /*
+                red: (cellState.iter + framesElapsed * 3) % 256,
+                green: (cellState.iter + framesElapsed * 13) % 256,
+                blue: (cellState.iter + framesElapsed * 29) % 256,
+                */
+                alpha: 255
+            };
+        } else {
+            return null;
+            /*
+            return {
+                red: 0,
+                green: 0,
+                blue: 0,
+                alpha: 255
+            };
+            */
+        }
+
+    }
+
+    escaped (real, imag) {
+        return real*real + imag*imag > 4;
+    };
 
 }
 

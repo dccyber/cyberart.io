@@ -17,9 +17,11 @@ class ArtBox extends Component {
     constructor () {
         super();
 
+        const size = 375;
+
         this.state = {
-            width: 375,
-            height: 375
+            width: size,
+            height: size
         };
 
         this.counter = 0;
@@ -29,30 +31,36 @@ class ArtBox extends Component {
         this.animate = this.animate.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
 
+
+    }
+
+    componentWillMount () {
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
-            new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
-            new SymmetricalBTGameOfLifeAnimation(this.state.height, this.state.width),
-            new SymmetricalBTGameOfLifeAnimationB(this.state.height, this.state.width),
-            new GameOfLifeAnimation(this.state.height, this.state.width),
-            new MandelbrotAnimation(this.state.height, this.state.width),
-            new MandelbrotAnimation(this.state.height, this.state.width),
-            new MandelbrotAnimation(this.state.height, this.state.width),
-            new ModularArithmeticAnimation(this.state.height, this.state.width),
-            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
-            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
-            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
-            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
-            new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            () => new BloomingGameOfLifeAnimation(this.state.height, this.state.width),
+            () => new BloomTrailGameOfLifeAnimation(this.state.height, this.state.width),
+            () => new SymmetricalBTGameOfLifeAnimation(this.state.height, this.state.width),
+            () => new SymmetricalBTGameOfLifeAnimationB(this.state.height, this.state.width),
+
+
+            () => new GameOfLifeAnimation(this.state.height, this.state.width),
+            () => new MandelbrotAnimation(this.state.height, this.state.width),
+            () => new MandelbrotAnimation(this.state.height, this.state.width),
+            () => new MandelbrotAnimation(this.state.height, this.state.width),
+            () => new ModularArithmeticAnimation(this.state.height, this.state.width),
+            () => new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            () => new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            () => new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            () => new RandomModularArithmeticAnimation(this.state.height, this.state.width),
+            () => new RandomModularArithmeticAnimation(this.state.height, this.state.width),
         ];
 
-        this.animation = this.animationList[Math.floor(Math.random()*this.animationList.length)];
+        this.animation = this.animationList[Math.floor(Math.random()*this.animationList.length)]();
+        this.registerVendorAnimationFunctions();
     }
 
 
     componentDidMount(){
-        this.registerVendorAnimationFunctions();
         this.animate();
     }
 
