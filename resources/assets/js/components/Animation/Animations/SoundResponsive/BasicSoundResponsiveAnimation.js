@@ -4,7 +4,7 @@ import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFuncti
 
 class BasicSoundResponsiveAnimation extends StateMachineAnimation {
 
-    constructor (width, height, title = 'Game of Life') {
+    constructor (width, height, title = 'Basic Equalizer') {
         super(width, height, title);
         this.width = width; this.height =height;
         this.soundGenerator = new SoundResponsiveFunctionGenerator((note, frequencyData) => this.soundEventCallback(note, frequencyData, this));

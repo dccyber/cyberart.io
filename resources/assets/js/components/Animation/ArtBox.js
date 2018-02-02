@@ -40,7 +40,7 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            /*
+
             BloomingGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimationB,
@@ -49,7 +49,6 @@ class ArtBox extends Component {
             MandelbrotAnimationZoom,
             ModularArithmeticAnimation,
             RandomModularArithmeticAnimation,
-            */
             BasicSoundResponsiveAnimation
         ];
 
@@ -115,7 +114,7 @@ class ArtBox extends Component {
 
         return (
             <div>
-                { this.state.animation.render()}
+                { this.state.animation.render ? this.state.animation.render() : null}
                 <Canvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}
