@@ -41,6 +41,8 @@ class TwoDimensionalStateMachine {
             }
         }
 
+        this.animationContainer.stateTransitionCleanup();
+
         // TODO: explain or rename this method
         this.stateBuffer.tick();
     }

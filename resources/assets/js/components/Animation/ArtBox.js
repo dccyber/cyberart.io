@@ -8,6 +8,7 @@ import SymmetricalBTGameOfLifeAnimation from "./Animations/CellularAutomata/Game
 import SymmetricalBTGameOfLifeAnimationB from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
 import MandelbrotAnimationZoom from "./Animations/Fractals/Mandelbrot/MandelbrotAnimationZoom";
 import SymmetricalBTGameOfLifeAnimationC from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC";
+import BasicSoundResponsiveAnimation from "./Animations/SoundResponsive/BasicSoundResponsiveAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -17,10 +18,10 @@ class ArtBox extends Component {
     constructor () {
         super();
 
-        const size = 374;
+        const size = 375;
 
         this.state = {
-            width:374,
+            width:375,
             height: size
         };
 
@@ -39,6 +40,7 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
+            /*
             BloomingGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimationB,
@@ -47,6 +49,8 @@ class ArtBox extends Component {
             MandelbrotAnimationZoom,
             ModularArithmeticAnimation,
             RandomModularArithmeticAnimation,
+            */
+            BasicSoundResponsiveAnimation
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
@@ -111,7 +115,7 @@ class ArtBox extends Component {
 
         return (
             <div>
-
+                { this.state.animation.render()}
                 <Canvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}

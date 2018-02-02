@@ -32,6 +32,10 @@ class StateMachineAnimation {
 
     }
 
+    stateTransitionCleanup () {
+
+    }
+
     colorGenerator (cellState, framesElapsed) {
         return {
             red: 0,
