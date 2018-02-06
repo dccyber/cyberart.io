@@ -13,15 +13,20 @@ import BasicSoundResponsiveAnimation from "./Animations/SoundResponsive/BasicSou
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
 
+const VISUALIZER_WIDTH = 512;
+const VISUALIZER_HEIGHT = 250;
+
+const STATE_MACHINE_SIZE = 375;
+
 class ArtBox extends Component {
 
     constructor () {
         super();
 
-        const size = 375;
+        const size = VISUALIZER_HEIGHT;
 
         this.state = {
-            width:375,
+            width:VISUALIZER_WIDTH,//512,
             height: size
         };
 
@@ -40,6 +45,7 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
+            BasicSoundResponsiveAnimation,
 
             BloomingGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimation,
@@ -49,7 +55,7 @@ class ArtBox extends Component {
             MandelbrotAnimationZoom,
             ModularArithmeticAnimation,
             RandomModularArithmeticAnimation,
-            BasicSoundResponsiveAnimation
+
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
@@ -74,7 +80,9 @@ class ArtBox extends Component {
 
         const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
         this.state.animation = null;
-        this.setState({animation: new ChosenAnimation(this.state.width, this.state.height) });
+        this.setState({
+            animation: new ChosenAnimation(this.state.width, this.state.height)
+        });
         this.animate();
     }
 
@@ -114,7 +122,7 @@ class ArtBox extends Component {
 
         return (
             <div>
-                { this.state.animation.render ? this.state.animation.render() : null}
+
                 <Canvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}

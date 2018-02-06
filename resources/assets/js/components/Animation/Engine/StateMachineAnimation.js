@@ -11,7 +11,7 @@ class StateMachineAnimation {
 
 
 
-
+        // TODO: instantiation with param this makes it hard to update machine dimensions
         this.stateMachine = new TwoDimensionalStateMachine(this);
     }
 

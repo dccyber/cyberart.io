@@ -14,6 +14,10 @@ class Canvas extends Component {
         this.g  = this.imageData.data;
     }
 
+    componentDidUpdate() {
+        //this.imageData = this.ctx.createImageData( this.props.width, this.props.height );
+    }
+
     redraw(){
         this.iterate();
 
@@ -55,8 +59,10 @@ class Canvas extends Component {
     render() {
         return (
             <React.Fragment>
-                <h5 style={{margin: '5px'}}>{this.props.animation.title}</h5>
                 <button style={{marginBottom: '5px'}} onClick={this.props.changeAnimation}>Randomize</button>
+                <h5 style={{margin: '5px'}}>{this.props.animation.title}</h5>
+                { this.props.animation.render ? this.props.animation.render() : null}
+
                 <canvas
                     id="canvas"
                     ref="canvas"

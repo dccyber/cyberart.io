@@ -77,16 +77,27 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
             count++;
         }
         */
-        for( let a = Math.floor(i * 1024/width); a < Math.floor((i+1)*1024/width); a++ ) {
+
+        // Percentage of lower end to show
+        const percentageOfSonicSpectrum = 0.37;
+        const positionMultiplier = percentageOfSonicSpectrum * 1024/width;
+
+        for( let a = Math.floor(i * positionMultiplier); a < Math.ceil((i+1)*positionMultiplier); a++ ) {
             total += this.frequencyData[a];
             count++;
         }
 
         let avg = total/count;
-        //console.log(avg);
+
+        let m = 140;
+        let n = 90;
+        let barHeight = avg + m;
+        let barHeight2 = (barHeight/n)*(barHeight);
+
+
 
         //(this.frequencyData[Math.floor(i*1024/width)] + 140) * 2
-        cellState.isRectangle = j > height - (avg + 140) * 3//i < width * this.frequencyData.length / 1024;
+        cellState.isRectangle = j > height - barHeight2 * height/n;//i < width * this.frequencyData.length / 1024;
         //cellState.isNote = i === Math.floor((this.note - 60) * 1.9) && cellState.isRectangle;
         if (cellState.isRectangle) {
             cellState.timeSinceSound = 0;
@@ -96,9 +107,9 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
             //(height - j) / (height - w) => 1
             //height - j / (height - w) => 0
 
-            let w = (height - j) / ( (avg + 140) * 3);
+            let w = (height - j) / ( (barHeight) * height/n);
 
-            cellState.rectangleStrength = w * w;
+            cellState.rectangleStrength = 4*w*w*w;
         } else {
             if (cellState.timeSinceSound !== null) {
                 cellState.timeSinceSound = Math.min(256, cellState.timeSinceSound + 20);
