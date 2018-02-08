@@ -1,1 +1,1 @@
-require('./components/App');
+require('./pages/App');

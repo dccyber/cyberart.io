@@ -8,13 +8,9 @@ import SymmetricalBTGameOfLifeAnimation from "./Animations/CellularAutomata/Game
 import SymmetricalBTGameOfLifeAnimationB from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
 import MandelbrotAnimationZoom from "./Animations/Fractals/Mandelbrot/MandelbrotAnimationZoom";
 import SymmetricalBTGameOfLifeAnimationC from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC";
-import BasicSoundResponsiveAnimation from "./Animations/SoundResponsive/BasicSoundResponsiveAnimation";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
-
-const VISUALIZER_WIDTH = 512;
-const VISUALIZER_HEIGHT = 250;
 
 const STATE_MACHINE_SIZE = 375;
 
@@ -23,10 +19,10 @@ class ArtBox extends Component {
     constructor () {
         super();
 
-        const size = VISUALIZER_HEIGHT;
+        const size = STATE_MACHINE_SIZE;
 
         this.state = {
-            width:VISUALIZER_WIDTH,//512,
+            width: size,
             height: size
         };
 
@@ -45,8 +41,6 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            BasicSoundResponsiveAnimation,
-
             BloomingGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimation,
             SymmetricalBTGameOfLifeAnimationB,
@@ -122,12 +116,11 @@ class ArtBox extends Component {
 
         return (
             <div>
-
+                <button style={{marginBottom: '5px'}} onClick={this.setRandomAnimation}>Randomize</button>
                 <Canvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}
                         animation={this.state.animation}
-                        changeAnimation={this.setRandomAnimation}
                 />
             </div>
 

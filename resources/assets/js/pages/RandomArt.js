@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import ContactButtons from './Social/ContactButtons';
-import ArtBox from './Animation/ArtBox';
+import ContactButtons from '../components/Social/ContactButtons';
+import ArtBox from '../components/Animation/ArtBox';
 
-export default class App extends Component {
+class RandomArt extends Component {
     render() {
+
         return (
             <div id="container">
                 <div className="content">
@@ -16,6 +16,4 @@ export default class App extends Component {
     }
 }
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
-}
+export default RandomArt;

@@ -59,7 +59,7 @@ class Canvas extends Component {
     render() {
         return (
             <React.Fragment>
-                <button style={{marginBottom: '5px'}} onClick={this.props.changeAnimation}>Randomize</button>
+
                 <h5 style={{margin: '5px'}}>{this.props.animation.title}</h5>
                 { this.props.animation.render ? this.props.animation.render() : null}
 
