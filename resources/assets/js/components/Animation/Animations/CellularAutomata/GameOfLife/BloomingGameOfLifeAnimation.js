@@ -2,6 +2,9 @@ import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
 import GameOfLifeAnimation from "./GameOfLifeAnimation";
 
 // TODO: cleanup and comment
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class BloomingGameOfLifeAnimation extends GameOfLifeAnimation {
 
     constructor (width, height, title = "Game of Life - Bloom Mod") {

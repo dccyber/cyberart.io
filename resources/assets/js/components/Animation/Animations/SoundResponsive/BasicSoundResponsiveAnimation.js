@@ -2,6 +2,9 @@ import React from 'react';
 import StateMachineAnimation from "../../Engine/StateMachineAnimation";
 import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
 
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class BasicSoundResponsiveAnimation extends StateMachineAnimation {
 
     constructor (width, height, title = 'Basic Equalizer') {

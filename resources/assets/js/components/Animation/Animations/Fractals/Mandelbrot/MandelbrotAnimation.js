@@ -1,6 +1,9 @@
 import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
 
 // TODO: cleanup and comment
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class MandelbrotAnimation extends StateMachineAnimation {
 
     constructor (width, height, title = 'Mandelbrot Set') {

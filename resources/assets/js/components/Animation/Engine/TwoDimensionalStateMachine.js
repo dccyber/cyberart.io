@@ -1,6 +1,9 @@
 import StateBuffer from './StateBuffer';
 
 //TODO: combine this class into StateMachineAnimation
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class TwoDimensionalStateMachine {
 
     constructor (animationContainer) {

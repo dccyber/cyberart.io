@@ -1,3 +1,7 @@
+
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class StateBuffer {
 
     //life doesn't work with buffer size less than 2

@@ -3,6 +3,9 @@
 // TODO: cleanup and comment
 import MandelbrotAnimation from "./MandelbrotAnimation";
 
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class MandelbrotAnimationZoom extends MandelbrotAnimation {
 
     constructor (width, height, title = 'Mandelbrot Set - Zoom with 2 color phases') {

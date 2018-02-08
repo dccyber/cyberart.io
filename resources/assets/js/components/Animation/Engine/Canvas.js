@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class Canvas extends Component {
 
     constructor (props) {

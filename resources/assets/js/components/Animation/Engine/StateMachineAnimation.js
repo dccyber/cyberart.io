@@ -1,6 +1,9 @@
 import TwoDimensionalStateMachine from "./TwoDimensionalStateMachine";
 
 // TODO Combine with state machine
+/**
+ * Copyright Aaron Boyarsky, 2018
+ */
 class StateMachineAnimation {
 
     constructor (width, height, title = 'Untitled Animation') {
