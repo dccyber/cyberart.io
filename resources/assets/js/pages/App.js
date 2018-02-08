@@ -5,18 +5,24 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import RandomArt from "./RandomArt";
 import SoundVisualizer from "./SoundVisualizer";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 export default class App extends Component {
     render() {
 
         return (
-            <BrowserRouter basename="/" >
-                <Switch>
-                    <Route exact path="/" component={RandomArt} />
-                    <Route path="/visualizer" component={SoundVisualizer} />
-                    <Route component={NoMatch}/>
-                </Switch>
-            </BrowserRouter>
+            <div>
+                <MuiThemeProvider>
+                    <BrowserRouter basename="/" >
+                        <Switch>
+                            <Route exact path="/" component={RandomArt} />
+                            <Route path="/visualizer" component={SoundVisualizer} />
+                            <Route component={NoMatch}/>
+                        </Switch>
+                    </BrowserRouter>
+                </MuiThemeProvider>
+            </div>
         );
     }
 }

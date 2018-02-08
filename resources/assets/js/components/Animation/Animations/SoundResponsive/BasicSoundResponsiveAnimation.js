@@ -13,6 +13,8 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
         this.frequencyData = [];
 
         this.soundEventCallback = this.soundEventCallback.bind(this);
+
+        this.soundGenerator.toggleLiveInput();
     }
 
     initialStateGenerator (i, j) {
@@ -163,7 +165,7 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
     };
 
     render () {
-        return <button onClick={this.soundGenerator.toggleLiveInput}>use live input</button>
+        return null;//<button onClick={this.soundGenerator.toggleLiveInput}>toggle live input</button>
     }
 }
 

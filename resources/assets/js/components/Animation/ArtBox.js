@@ -116,7 +116,7 @@ class ArtBox extends Component {
 
         return (
             <div>
-                <button style={{marginBottom: '5px'}} onClick={this.setRandomAnimation}>Randomize</button>
+                <button style={{marginBottom: '5px', marginTop: '5px'}} onClick={this.setRandomAnimation}>Randomize</button>
                 <Canvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}
