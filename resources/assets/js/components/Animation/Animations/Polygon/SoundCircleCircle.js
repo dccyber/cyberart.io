@@ -46,7 +46,7 @@ class SoundCircleCircle {
 
         //console.log(note);
         for(let a=0; a < frequencyData.length; a++) {
-            this.polygons[a].radius = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
+            this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
 
     }
@@ -113,7 +113,7 @@ class SoundCircleCircle {
             this.polygons[a].prevY = this.polygons[a].y;
 
             // Deflate
-            this.polygons[a].radius = Math.max(1, this.polygons[a].radius - 1);
+            this.polygons[a].radius = Math.max(0, this.polygons[a].radius - 1);
 
             if(this.returningHome) {
 

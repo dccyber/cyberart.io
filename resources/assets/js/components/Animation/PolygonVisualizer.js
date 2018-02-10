@@ -4,6 +4,7 @@ import BasicSoundResponsiveAnimation from "./Animations/StateMachine/SoundRespon
 import PolygonCanvas from "./Engine/PolygonCanvas";
 import SoundCircle from "./Animations/Polygon/SoundCircle";
 import SoundCircleCircle from "./Animations/Polygon/SoundCircleCircle";
+import SquareSpiral from "./Animations/Polygon/SquareSpiral";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -38,7 +39,8 @@ class PolygonVisualizer extends Component {
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
             SoundCircle,
-            SoundCircleCircle
+            SoundCircleCircle,
+            SquareSpiral
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);

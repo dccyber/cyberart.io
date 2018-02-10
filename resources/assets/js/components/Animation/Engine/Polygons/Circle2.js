@@ -103,13 +103,13 @@ class Circle2 {
 
     red(ctx, framesElapsed) {
         return this.goodColor (
-            Math.floor((this.idx + framesElapsed) % 256)
+            Math.floor((this.idx * 5 + framesElapsed / 3) % 256)
         );
     }
 
     green(ctx, framesElapsed) {
         return this.goodColor(
-            Math.floor(this.idx / 4)
+            Math.floor((this.idx * 3 + framesElapsed / 5) % 256)
         );
     }
 
