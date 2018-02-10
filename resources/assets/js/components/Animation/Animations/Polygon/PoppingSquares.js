@@ -57,7 +57,7 @@ class PoppingSquares {
         for(let a=0; a < frequencyData.length; a++) {
             this.polygons[a].width = Math.max(1, Math.floor(frequencyData[a] + 110) * 2);
             this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
-            //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
+            //this.polygons[a].height = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
 
     }

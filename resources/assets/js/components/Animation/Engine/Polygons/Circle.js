@@ -9,7 +9,7 @@ class Circle {
         this.y = y;
         this.prevY = y;
         this.originalY = y;
-        this.radius = radius;
+        this.height = radius;
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.anticlockwise = false;
@@ -53,11 +53,11 @@ class Circle {
     blue (ctx, framesElapsed) {
         return this.goodColor(
             this.avg(
-                Math.floor(((Math.sin(framesElapsed / 37) * 128) * this.radius)),
+                Math.floor(((Math.sin(framesElapsed / 37) * 128) * this.height)),
                 Math.floor(
                     (Math.sin(
                         this.avg(this.originalX, this.originalY) / 19
-                    ) * 128) * this.radius
+                    ) * 128) * this.height
                 )
             )
         );
@@ -66,14 +66,14 @@ class Circle {
     draw (ctx, framesElapsed) {
         let red = this.red(ctx, framesElapsed);
 
-        //let green = this.goodColor(this.radius);
+        //let green = this.goodColor(this.height);
         let green =this.green(ctx, framesElapsed);
 
         let blue = this.blue(ctx, framesElapsed);
 
         ctx.fillStyle=`rgb(${red},${green},${blue})`;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, this.anticlockwise);
+        ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
         ctx.fill();
     }
 

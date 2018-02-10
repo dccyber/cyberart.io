@@ -52,7 +52,7 @@ class SquareSpiral {
         //console.log(note);
         for(let a=0; a < frequencyData.length; a++) {
             this.polygons[a].strength = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
-            //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
+            //this.polygons[a].height = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
 
     }

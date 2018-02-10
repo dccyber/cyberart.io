@@ -50,7 +50,7 @@ class PoppinSquare {
     draw (ctx, framesElapsed) {
         let red = this.red(ctx, framesElapsed);
 
-        //let green = this.goodColor(this.radius);
+        //let green = this.goodColor(this.height);
         let green =this.green(ctx, framesElapsed);
 
         let blue = this.blue(ctx, framesElapsed);
