@@ -13,6 +13,8 @@ class Circle {
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.anticlockwise = false;
+
+        this.red = this.red.bind(this);
     }
 
     goodColor(color) {
@@ -29,14 +31,14 @@ class Circle {
         return Math.floor((a+b)/2);
     }
 
-    draw (ctx, framesElapsed) {
-        let red =  Math.max(30,this.goodColor(
+    red(ctx, framesElapsed) {
+        return Math.max(30,this.goodColor(
             Math.floor((Math.sin(framesElapsed / 67) * 128) + 80)
         ));
+    }
 
-        //let green = this.goodColor(this.radius);
-        let green =
-            this.goodColor(
+    green(ctx, framesElapsed) {
+        return (this.goodColor(
             (
                 Math.floor(
                     this.avg(
@@ -44,10 +46,12 @@ class Circle {
                         this.avg(this.y,this.prevY)
                     ) * 0.3
                 )
-            )
+            ))
         );
+    }
 
-        let blue = this.goodColor(
+    blue (ctx, framesElapsed) {
+        return this.goodColor(
             this.avg(
                 Math.floor(((Math.sin(framesElapsed / 37) * 128) * this.radius)),
                 Math.floor(
@@ -57,6 +61,15 @@ class Circle {
                 )
             )
         );
+    }
+
+    draw (ctx, framesElapsed) {
+        let red = this.red(ctx, framesElapsed);
+
+        //let green = this.goodColor(this.radius);
+        let green =this.green(ctx, framesElapsed);
+
+        let blue = this.blue(ctx, framesElapsed);
 
         ctx.fillStyle=`rgb(${red},${green},${blue})`;
         ctx.beginPath();

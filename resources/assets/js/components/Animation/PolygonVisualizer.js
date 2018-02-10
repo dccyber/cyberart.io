@@ -3,6 +3,7 @@ import Canvas from './Engine/Canvas';
 import BasicSoundResponsiveAnimation from "./Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation";
 import PolygonCanvas from "./Engine/PolygonCanvas";
 import SoundCircle from "./Animations/Polygon/SoundCircle";
+import SoundCircleCircle from "./Animations/Polygon/SoundCircleCircle";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -27,6 +28,7 @@ class PolygonVisualizer extends Component {
         this.drawLoop = this.drawLoop.bind(this);
         this.animate = this.animate.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
+        this.setRandomAnimation = this.setRandomAnimation.bind(this);
 
     }
 
@@ -36,16 +38,37 @@ class PolygonVisualizer extends Component {
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
             SoundCircle,
+            SoundCircleCircle
         ];
 
-        const ChosenAnimation = this.animationList[0];
-        this.state.animation = new ChosenAnimation( this.state.width, this.state.height );
+        this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+        this.state.animation = new ChosenAnimation(this.state.width, this.state.height );
     }
 
 
     componentDidMount(){
         this.animate();
     }
+
+    setRandomAnimation () {
+        this.stopAnimation();
+
+        const oldAnimationIdx = this.chosenAnimationIdx;
+
+        // Ensure a different animatino
+        while (oldAnimationIdx === this.chosenAnimationIdx) {
+            this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+        }
+
+        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+        this.state.animation = null;
+        this.setState({
+            animation: new ChosenAnimation(this.state.width, this.state.height)
+        });
+        this.animate();
+    }
+
 
     // TODO: would be good in a utility somewhere
     registerVendorAnimationFunctions () {
@@ -83,7 +106,7 @@ class PolygonVisualizer extends Component {
 
         return (
             <div>
-
+                <button style={{marginBottom: '5px', marginTop: '5px'}} onClick={this.setRandomAnimation}>Randomize</button>
                 <PolygonCanvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}
