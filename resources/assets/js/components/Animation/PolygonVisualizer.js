@@ -5,6 +5,7 @@ import PolygonCanvas from "./Engine/PolygonCanvas";
 import SoundCircle from "./Animations/Polygon/SoundCircle";
 import SoundCircleCircle from "./Animations/Polygon/SoundCircleCircle";
 import SquareSpiral from "./Animations/Polygon/SquareSpiral";
+import PoppingSquares from "./Animations/Polygon/PoppingSquares";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -40,7 +41,8 @@ class PolygonVisualizer extends Component {
         this.animationList = [
             SoundCircle,
             SoundCircleCircle,
-            SquareSpiral
+            SquareSpiral,
+            PoppingSquares
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
@@ -64,6 +66,7 @@ class PolygonVisualizer extends Component {
         }
 
         const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+        this.state.animation.soundGenerator = null;
         this.state.animation = null;
         this.setState({
             animation: new ChosenAnimation(this.state.width, this.state.height)
