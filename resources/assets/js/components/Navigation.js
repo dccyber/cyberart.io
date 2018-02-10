@@ -52,7 +52,8 @@ class Navigation extends Component {
                 >
                     <Menu style={{backgroundColor:'#222'}} menuItemStyle={{color:'#FFF'}}>
                         <MenuItem onClick={() => {window.location.href='/'}} primaryText="Random Animations" />
-                        <MenuItem onClick={() => {window.location.href='/visualizer'}} primaryText="Sound Visualizer" />
+                        <MenuItem onClick={() => {window.location.href='/visualizer'}} primaryText="Equalizer (sound)" />
+                        <MenuItem onClick={() => {window.location.href='/polygonVisualizer'}} primaryText="Drifting Circles (sound)" />
                     </Menu>
                 </Popover>
             </div>

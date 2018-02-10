@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Canvas from './Engine/Canvas';
 import BasicSoundResponsiveAnimation from "./Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation";
+import PolygonCanvas from "./Engine/PolygonCanvas";
+import SoundCircle from "./Animations/Polygon/SoundCircle";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
 
-const VISUALIZER_WIDTH = 512;
-const VISUALIZER_HEIGHT = 250;
+const VISUALIZER_WIDTH = 1684;
+const VISUALIZER_HEIGHT = 1684;
 
 
-class ArtBox extends Component {
+class PolygonVisualizer extends Component {
 
     constructor () {
         super();
@@ -33,7 +35,7 @@ class ArtBox extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            BasicSoundResponsiveAnimation,
+            SoundCircle,
         ];
 
         const ChosenAnimation = this.animationList[0];
@@ -82,7 +84,7 @@ class ArtBox extends Component {
         return (
             <div>
 
-                <Canvas ref={(c) => this._canvas = c}
+                <PolygonCanvas ref={(c) => this._canvas = c}
                         width={this.state.width}
                         height={this.state.height}
                         animation={this.state.animation}
@@ -93,4 +95,4 @@ class ArtBox extends Component {
     }
 }
 
-export default ArtBox;
+export default PolygonVisualizer;

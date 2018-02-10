@@ -25,9 +25,9 @@ SOFTWARE.
 
 // TODO: clean this up, or replace with another library
 class SoundResponsiveFunctionGenerator {
-    constructor(soundEventCallback) {
+    constructor(soundEventCallback, sensitivity = 0.0001) {
 
-
+        this.sensitivity = sensitivity;
 
         var audioContext = null;
         this.isPlaying = false;
@@ -152,7 +152,7 @@ class SoundResponsiveFunctionGenerator {
             rms += val*val;
         }
         rms = Math.sqrt(rms/SIZE);
-        if (rms<0.0001) // not enough signal
+        if (rms< this.sensitivity) // not enough signal
             return -1;
 
         let lastCorrelation=1;
@@ -185,7 +185,7 @@ class SoundResponsiveFunctionGenerator {
             }
             lastCorrelation = correlation;
         }
-        if (best_correlation > 0.0001) {
+        if (best_correlation > this.sensitivity) {
             // console.log("f = " + sampleRate/best_offset + "Hz (rms: " + rms + " confidence: " + best_correlation + ")")
             return sampleRate/best_offset;
         }

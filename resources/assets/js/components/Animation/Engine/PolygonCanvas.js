@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 /**
  * Copyright Aaron Boyarsky, 2018
  */
-class Canvas extends Component {
+class PolygonCanvas extends Component {
 
     constructor (props) {
         super(props);
@@ -15,31 +15,67 @@ class Canvas extends Component {
         this.ctx = this.refs.canvas.getContext('2d');
         this.imageData = this.ctx.createImageData( this.props.width, this.props.height );
         this.g  = this.imageData.data;
+
+        this.ctx.putImageData(this.imageData, 0, 0);
     }
 
     redraw(){
         this.iterate();
 
         //Used for drawing raw pixels in the buffer
-        this.ctx.putImageData(this.imageData, 0, 0);
+
     }
 
     iterate () {
 
+        this.ctx.fillStyle="#000000";
+        this.ctx.fillRect(0, 0, this.props.width, this.props.height);
+
         // Advance animation to the next frame
         this.props.animation.moveToNextFrame();
 
-        for ( let i = 0; i < this.props.width; i++ ) {
-            for ( let j = 0; j < this.props.height; j++ ) {
-                // Calculate color for cell
-                const rgba = this.props.animation.generateColor(i, j);
+        // TODO: draw the objects in the animation
 
-                // Draw color for cell, if one was requested
-                if (rgba) {
-                    this.paintPixel(i, j, rgba);
-                }
+        /*
+        ctx.draw(
+            image,
+            x,
+            y - objectHeight,
+            objectWidth,
+            objectHeight
+        );
+        */
+
+        // smaller circles on top
+        let polygonsCopy = [...this.props.animation.polygons];
+        polygonsCopy.sort(function (a, b) {
+            if (a.radius < b.radius) {
+                return 1;
             }
-        }
+
+            if (a.radius > b.radius) {
+                return -1;
+            }
+
+            return 0;
+        });
+
+        polygonsCopy.forEach(polygon => {
+           polygon.draw(this.ctx, this.props.animation.framesElapsed);
+        });
+
+        /*
+        let x = 50;
+        let y = 50;
+        let radius = 10;
+        let startAngle = 0;
+        let endAngle = Math.PI * 2;
+        let anticlockwise = false;
+        this.ctx.fillStyle="#FF0000";
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+        this.ctx.fill();
+        */
     };
 
     paintPixel(x, y, rgba) {
@@ -74,4 +110,4 @@ class Canvas extends Component {
     }
 }
 
-export default Canvas;
+export default PolygonCanvas;

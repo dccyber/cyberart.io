@@ -1,4 +1,4 @@
-import StateMachineAnimation from "../../Engine/StateMachineAnimation";
+import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
 
 /**
  * Copyright Aaron Boyarsky, 2018

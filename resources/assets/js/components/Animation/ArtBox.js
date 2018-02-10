@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Canvas from './Engine/Canvas';
-import RandomModularArithmeticAnimation from "./Animations/ModularArithmetic/RandomModularArithmeticAnimation";
-import MandelbrotAnimation from "./Animations/Fractals/Mandelbrot/MandelbrotAnimation";
-import ModularArithmeticAnimation from "./Animations/ModularArithmetic/ModularArithmeticAnimation";
-import BloomingGameOfLifeAnimation from "./Animations/CellularAutomata/GameOfLife/BloomingGameOfLifeAnimation";
-import SymmetricalBTGameOfLifeAnimation from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimation";
-import SymmetricalBTGameOfLifeAnimationB from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
-import MandelbrotAnimationZoom from "./Animations/Fractals/Mandelbrot/MandelbrotAnimationZoom";
-import SymmetricalBTGameOfLifeAnimationC from "./Animations/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC";
+import RandomModularArithmeticAnimation from "./Animations/StateMachine/ModularArithmetic/RandomModularArithmeticAnimation";
+import MandelbrotAnimation from "./Animations/StateMachine/Fractals/Mandelbrot/MandelbrotAnimation";
+import ModularArithmeticAnimation from "./Animations/StateMachine/ModularArithmetic/ModularArithmeticAnimation";
+import BloomingGameOfLifeAnimation from "./Animations/StateMachine/CellularAutomata/GameOfLife/BloomingGameOfLifeAnimation";
+import SymmetricalBTGameOfLifeAnimation from "./Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimation";
+import SymmetricalBTGameOfLifeAnimationB from "./Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
+import MandelbrotAnimationZoom from "./Animations/StateMachine/Fractals/Mandelbrot/MandelbrotAnimationZoom";
+import SymmetricalBTGameOfLifeAnimationC from "./Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
