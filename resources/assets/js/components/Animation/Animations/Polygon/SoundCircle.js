@@ -30,6 +30,8 @@ class SoundCircle {
         }
 
         this.returningHome = false;
+        this.sortable = 'radius';
+        this.sortOrder = 1;
     }
 
     soundEventCallback (note, frequencyData) {

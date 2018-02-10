@@ -35,6 +35,9 @@ class SoundCircleCircle {
         }
 
         this.returningHome = false;
+
+        this.sortable = 'idx';
+        this.sortOrder = 1;
     }
 
     soundEventCallback (note, frequencyData) {

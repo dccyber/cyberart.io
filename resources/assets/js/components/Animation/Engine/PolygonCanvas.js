@@ -49,12 +49,12 @@ class PolygonCanvas extends Component {
         // smaller circles on top
         let polygonsCopy = [...this.props.animation.polygons];
         polygonsCopy.sort(function (a, b) {
-            if (a.radius < b.radius) {
-                return 1;
+            if (a[a.sortable] < b[b.sortable]) {
+                return a.sortOrder;
             }
 
-            if (a.radius > b.radius) {
-                return -1;
+            if (a[a.sortable] > b[b.sortable]) {
+                return -1 * a.sortOrder;
             }
 
             return 0;
