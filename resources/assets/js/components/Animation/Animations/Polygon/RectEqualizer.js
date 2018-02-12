@@ -67,7 +67,7 @@ class RectEqualizer {
                 this.polygons[a].heightStack.splice(0,1);
             }
 
-            this.polygons[a].height = Math.max(1, Math.floor(frequencyData[a] + 140) * 3);
+            this.polygons[a].height = Math.max(1, Math.floor(frequencyData[a] + 180) * 3);
             this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
             //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
