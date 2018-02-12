@@ -10,7 +10,7 @@ import EqRect from "../../Engine/Polygons/EqRect";
 import EqSpark from "../../Engine/Polygons/EqSpark";
 
 class RectEqualizer {
-    constructor (height, width, title = 'Polygon Sound Visualizer - Confetti Equalizer') {
+    constructor (height, width, title = 'Polygon Sound Visualizer - Tetris Confetti Equalizer') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -98,7 +98,7 @@ class RectEqualizer {
 
                 if (descending && this.polygons[a].height > 150 + Math.random() * 20) {
                     this.polygons[a].isDescending = true;
-                    this.polygons.push(new EqSpark(this.polygons[a].x, this.polygons[a].y - this.polygons[a].height - 1 - distanceAbove, 2, 1, a, a));
+                    this.polygons.push(new EqSpark(this.polygons[a].x, this.polygons[a].y - this.polygons[a].height - 1 - distanceAbove, 2, 2, a, a));
                 }
             }
 
@@ -129,13 +129,24 @@ class RectEqualizer {
 
         const deleteMe = [];
         const driftSpeed = 5;
+
+        const windSpeed = Math.sin(this.framesElapsed / 1000) * 2;
+
         for (let b = 1024; b < this.polygons.length; b++) {
 
-            if (this.polygons[b].age < 40) {
-                this.polygons[b].width = Math.max(1, this.polygons[b].width + 1);
-                this.polygons[b].height = Math.max(1, this.polygons[b].height + 0.25);
+            if (this.polygons[b].age < 80) {
+                this.polygons[b].width = Math.max(1, this.polygons[b].width + 0.5);
+                this.polygons[b].height = Math.max(1, this.polygons[b].height + 0.5);
                 this.polygons[b].age++;
-                this.polygons[b].y = this.polygons[b].y - Math.min(20,(50 - this.polygons[b].height));
+                this.polygons[b].y = this.polygons[b].y - Math.min(5, (50 - this.polygons[b].height));
+            } else if (this.polygons[b].age < 120) {
+                this.polygons[b].age++;
+                this.polygons[b].y = this.polygons[b].y - Math.min(5, (50 - this.polygons[b].height));
+            } else if (this.polygons[b].age < 160) {
+                this.polygons[b].width = Math.max(5, this.polygons[b].width - 0.3);
+                this.polygons[b].height = Math.max(2, this.polygons[b].height - 0.3);
+                this.polygons[b].age++;
+                this.polygons[b].y = this.polygons[b].y - Math.min(5, (50 - this.polygons[b].height));
             } else if (this.polygons[b].age < 500) {
                 this.polygons[b].age++;
                 this.polygons[b].width = Math.max(5, this.polygons[b].width - 1);
@@ -147,10 +158,12 @@ class RectEqualizer {
                     this.polygons[b].x + (
                         Math.floor(Math.random() * driftSpeed * 2- driftSpeed + 0.5)
                     )
-                ) % this.width;
+                );
 
-                if (this.polygons[b].x < 0) {
-                    this.polygons[b].x += this.width;
+                if (this.polygons[b].x < 0 || this.polygons[b].x > 1684) {
+                    //this.polygons[b].x += this.width;
+                    deleteMe.push(b);
+                    continue;
                 }
 
                 this.polygons[b].y = (
@@ -164,7 +177,8 @@ class RectEqualizer {
                 }
 
                 this.polygons[b].y += 2;
-                
+                this.polygons[b].x += windSpeed;
+
                 
             } else {
                 deleteMe.push(b);
