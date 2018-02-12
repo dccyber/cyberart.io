@@ -160,20 +160,12 @@ class RectEqualizer {
                     )
                 );
 
-                if (this.polygons[b].x < 0 || this.polygons[b].x > 1684) {
+                if (this.polygons[b].x < 0 || this.polygons[b].x > 1684 ||
+                   this.polygons[b].y < 0 || this.polygons[b].y > 1684
+                   ) {
                     //this.polygons[b].x += this.width;
                     deleteMe.push(b);
                     continue;
-                }
-
-                this.polygons[b].y = (
-                    this.polygons[b].y + (
-                        Math.floor(Math.random() * driftSpeed * 2- driftSpeed + 0.5)
-                    )
-                ) % this.height;
-
-                if (this.polygons[b].y < 0) {
-                    this.polygons[b].y += this.height;
                 }
 
                 this.polygons[b].y += 2;
