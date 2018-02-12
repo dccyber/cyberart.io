@@ -61,7 +61,6 @@ class PolygonCanvas extends Component {
         });
 
         polygonsCopy.forEach(polygon => {
-            console.log(polygon.idx);
            polygon.draw(this.ctx, this.props.animation.framesElapsed);
         });
 

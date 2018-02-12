@@ -6,6 +6,8 @@ import SoundCircle from "./Animations/Polygon/SoundCircle";
 import SoundCircleCircle from "./Animations/Polygon/SoundCircleCircle";
 import SquareSpiral from "./Animations/Polygon/SquareSpiral";
 import PoppingSquares from "./Animations/Polygon/PoppingSquares";
+import PoppingSquares2 from "./Animations/Polygon/PoppingSquares2";
+import RectEqualizer from "./Animations/Polygon/RectEqualizer";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -39,10 +41,13 @@ class PolygonVisualizer extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
+
             SoundCircle,
             SoundCircleCircle,
             SquareSpiral,
-            PoppingSquares
+            //PoppingSquares,
+            PoppingSquares2,
+            RectEqualizer,
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
