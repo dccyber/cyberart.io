@@ -42,13 +42,13 @@ class PolygonVisualizer extends Component {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-/*
+
             SoundCircle,
             SoundCircleCircle,
             SquareSpiral,
             //PoppingSquares,
             PoppingSquares2,
-            */
+            
             RectEqualizer
         ];
 
