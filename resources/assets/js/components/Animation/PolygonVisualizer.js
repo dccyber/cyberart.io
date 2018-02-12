@@ -8,6 +8,7 @@ import SquareSpiral from "./Animations/Polygon/SquareSpiral";
 import PoppingSquares from "./Animations/Polygon/PoppingSquares";
 import PoppingSquares2 from "./Animations/Polygon/PoppingSquares2";
 import RectEqualizer from "./Animations/Polygon/RectEqualizer";
+import SoundTriangle from "./Animations/Polygon/SoundTriangle";
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -47,7 +48,7 @@ class PolygonVisualizer extends Component {
             SquareSpiral,
             //PoppingSquares,
             PoppingSquares2,
-            RectEqualizer,
+            RectEqualizer
         ];
 
         this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);

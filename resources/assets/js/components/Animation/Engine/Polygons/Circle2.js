@@ -3,7 +3,7 @@
 class Circle2 {
     constructor (idx) {
 
-        this.radius = 1;
+        this.height = 1;
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.anticlockwise = false;
@@ -30,7 +30,7 @@ class Circle2 {
 
 
 
-        //let radius = Math.floor(this.bigCircleRadius * Math.sin(radians * 4) );
+        //let height = Math.floor(this.bigCircleRadius * Math.sin(radians * 4) );
 
         let radius;
         switch (this.shapeIdx) {
@@ -75,8 +75,8 @@ class Circle2 {
 
         }
 
-        //this.originalX = 842 + radius * Math.cos(this.originalRadians);
-        //this.originalY = 842 + radius * Math.sin(this.originalRadians);
+        //this.originalX = 842 + height * Math.cos(this.originalRadians);
+        //this.originalY = 842 + height * Math.sin(this.originalRadians);
 
 
 
@@ -122,14 +122,14 @@ class Circle2 {
     draw (ctx, framesElapsed) {
         let red = this.red(ctx, framesElapsed);
 
-        //let green = this.goodColor(this.radius);
+        //let green = this.goodColor(this.height);
         let green =this.green(ctx, framesElapsed);
 
         let blue = this.blue(ctx, framesElapsed);
 
         ctx.fillStyle=`rgb(${red},${green},${blue})`;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, this.anticlockwise);
+        ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
         ctx.fill();
     }
 

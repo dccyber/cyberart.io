@@ -5,7 +5,7 @@ import Circle from "../../Engine/Polygons/Circle";
 import Circle2 from "../../Engine/Polygons/Circle2";
 
 class SoundCircleCircle {
-    constructor (height, width, title = 'Polygon Sound Visualizer - Circle of Circles') {
+    constructor (height, width, title = 'Polygon Sound Visualizer - Triangle of Circles') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -46,7 +46,7 @@ class SoundCircleCircle {
 
         //console.log(note);
         for(let a=0; a < frequencyData.length; a++) {
-            this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
+            this.polygons[a].height = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
 
     }
@@ -89,11 +89,11 @@ class SoundCircleCircle {
         /*
         // sort so smaller circles in front
         this.polygons.sort(function (a, b) {
-            if (a.radius < b.radius) {
+            if (a.height < b.height) {
                 return -1;
             }
 
-            if (a.radius > b.radius) {
+            if (a.height > b.height) {
                 return 1;
             }
 
@@ -113,7 +113,7 @@ class SoundCircleCircle {
             this.polygons[a].prevY = this.polygons[a].y;
 
             // Deflate
-            this.polygons[a].radius = Math.max(0, this.polygons[a].radius - 1);
+            this.polygons[a].height = Math.max(0, this.polygons[a].height - 1);
 
             if(this.returningHome) {
 

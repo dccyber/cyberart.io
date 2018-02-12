@@ -67,13 +67,13 @@ class PolygonCanvas extends Component {
         /*
         let x = 50;
         let y = 50;
-        let radius = 10;
+        let height = 10;
         let startAngle = 0;
         let endAngle = Math.PI * 2;
         let anticlockwise = false;
         this.ctx.fillStyle="#FF0000";
         this.ctx.beginPath();
-        this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+        this.ctx.arc(x, y, height, startAngle, endAngle, anticlockwise);
         this.ctx.fill();
         */
     };
