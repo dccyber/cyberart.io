@@ -1,45 +1,39 @@
 import React, { Component } from 'react';
-import Canvas from './Engine/Canvas';
-import BasicSoundResponsiveAnimation from "./Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation";
 
+const DEFAULT_WIDTH = 500;
+const DEFAULT_HEIGHT = 500;
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
 
-const VISUALIZER_WIDTH = 512;
-const VISUALIZER_HEIGHT = 250;
-
-
-class ArtBox extends Component {
+class Visualizer extends Component {
 
     constructor () {
         super();
 
         this.state = {
-            width:VISUALIZER_WIDTH,
-            height: VISUALIZER_HEIGHT
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT
         };
 
         this.counter = 0;
         this.drawLoopInterval = Math.floor(1000/FPS);
 
+
         this.drawLoop = this.drawLoop.bind(this);
         this.animate = this.animate.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
+        this.setRandomAnimation = this.setRandomAnimation.bind(this);
 
+        this.animationList = [];
     }
 
     componentWillMount () {
         this.registerVendorAnimationFunctions();
 
-        // Don't feel like working out probabilities. They are what they are.
-        this.animationList = [
-            BasicSoundResponsiveAnimation,
-        ];
-
-        const ChosenAnimation = this.animationList[0];
-        this.state.animation = new ChosenAnimation( this.state.width, this.state.height );
+        this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+        this.state.animation = new ChosenAnimation(this.state.width, this.state.height );
     }
-
 
     componentDidMount(){
         this.animate();
@@ -53,6 +47,25 @@ class ArtBox extends Component {
             window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
                 || window[vendors[x]+'CancelRequestAnimationFrame'];
         }
+    }
+
+    setRandomAnimation () {
+        this.stopAnimation();
+
+        const oldAnimationIdx = this.chosenAnimationIdx;
+
+        // Ensure a different animatino
+        while (oldAnimationIdx === this.chosenAnimationIdx) {
+            this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+        }
+
+        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+        this.state.animation.soundGenerator = null;
+        this.state.animation = null;
+        this.setState({
+            animation: new ChosenAnimation(this.state.width, this.state.height)
+        });
+        this.animate();
     }
 
     drawLoop () {
@@ -75,22 +88,13 @@ class ArtBox extends Component {
         cancelAnimationFrame(this.animationId);
     }
 
-    render() {
-
-        // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
-
+    render () {
         return (
             <div>
-
-                <Canvas ref={(c) => this._canvas = c}
-                        width={this.state.width}
-                        height={this.state.height}
-                        animation={this.state.animation}
-                />
+                { super.render() }
             </div>
-
-        );
+        )
     }
 }
 
-export default ArtBox;
+export default Visualizer;
