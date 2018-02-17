@@ -46,7 +46,10 @@ class PoppingSquares2 {
         }
 
         this.returningHome = false;
-
+        this.sliderSize = [
+            0.5,
+            0.5
+        ];
 
     }
 
@@ -56,8 +59,8 @@ class PoppingSquares2 {
 
         //console.log(note);
         for(let a=0; a < frequencyData.length; a++) {
-            this.polygons[a].width = Math.max(1, Math.floor(frequencyData[a] + 110) * 2);
-            this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
+            this.polygons[a].width = Math.max(1, Math.floor(frequencyData[a] + 110) * 4 * this.sliderSize[0]);
+            this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 10 * this.sliderSize[1]);
             //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
 

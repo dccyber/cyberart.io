@@ -50,22 +50,31 @@ class Visualizer extends Component {
     }
 
     setRandomAnimation () {
-        this.stopAnimation();
+        if (this.animationList.length > 1) {
+            console.log(this.animationList.length);
 
-        const oldAnimationIdx = this.chosenAnimationIdx;
+            this.stopAnimation();
 
-        // Ensure a different animatino
-        while (oldAnimationIdx === this.chosenAnimationIdx) {
-            this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+            const oldAnimationIdx = this.chosenAnimationIdx;
+
+            // Ensure a different animatino
+            while (oldAnimationIdx === this.chosenAnimationIdx) {
+                this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+            }
+
+            const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+            this.state.animation.soundGenerator = null;
+            this.state.animation = null;
+            this.setState({
+                animation: new ChosenAnimation(this.state.width, this.state.height)
+            });
+            this.animate();
         }
 
-        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
-        this.state.animation.soundGenerator = null;
-        this.state.animation = null;
-        this.setState({
-            animation: new ChosenAnimation(this.state.width, this.state.height)
-        });
-        this.animate();
+
+
+
+
     }
 
     drawLoop () {

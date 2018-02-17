@@ -10,9 +10,12 @@ import PoppingSquares2 from "./Animations/Polygon/PoppingSquares2";
 import RectEqualizer from "./Animations/Polygon/RectEqualizer";
 import SoundTriangle from "./Animations/Polygon/SoundTriangle";
 import Visualizer from "./Visualizer";
+import PoppingSquares3 from "./Animations/Polygon/PoppingSquares3";
 
-const VISUALIZER_WIDTH = 1684;
-const VISUALIZER_HEIGHT = 1684;
+import Slider from 'material-ui/Slider';
+
+const VISUALIZER_WIDTH = 1662;
+const VISUALIZER_HEIGHT = 1662;
 
 
 class PolygonVisualizer extends Visualizer {
@@ -29,18 +32,26 @@ class PolygonVisualizer extends Visualizer {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-                        SoundCircle,
-                        SoundCircleCircle,
-                        SquareSpiral,
+                        //SoundCircle,
+                        //SoundCircleCircle,
+                        //SquareSpiral,
                         //PoppingSquares,
-                        PoppingSquares2,
-
-            RectEqualizer
+                        //PoppingSquares2,
+                        PoppingSquares2
+            //RectEqualizer
         ];
 
+        this.handleSlider = this.handleSlider.bind(this);
+
+        this.sliders = [];
+        for(let a=0; a<10; a++){
+            this.sliders[a] = 0.5;
+        }
     }
 
-
+    handleSlider(event, newValue, sliderIdx) {
+        this.state.animation.sliderSize[sliderIdx] = newValue;
+    }
 
 
     render() {
@@ -49,6 +60,15 @@ class PolygonVisualizer extends Visualizer {
         return (
             <React.Fragment>
                 <button style={{marginBottom: '5px', marginTop: '5px'}} onClick={this.setRandomAnimation}>Randomize</button>
+                const SliderExampleSimple = () => (
+                <div>
+                    {
+                        this.sliders.map((defaultVal, sliderIdx) => {
+                            return <Slider key={sliderIdx} defaultValue={defaultVal} onChange={(event, newValue) => this.handleSlider(event, newValue, sliderIdx)} />;
+                        })
+                    }
+                </div>
+                );
                 <PolygonCanvas ref={(c) => this._canvas = c}
                                width={this.state.width}
                                height={this.state.height}
