@@ -77,6 +77,8 @@ class PoppingSquares2 {
 
         for (let a = 0; a < this.polygons.length; a++) {
 
+            this.polygons[a].redRate = this.sliderSize[2];
+
             driftSpeed = Math.floor(this.polygons[a].strength / 8);
             // Brownian motion Drift
             this.polygons[a].x = (

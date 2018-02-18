@@ -10,6 +10,8 @@ class PoppinSquare2 {
         this.width = width;
         this.idx = idx;
         this.strength = 0;
+
+        this.redRate = 0.5;
     }
 
     goodColor(color) {
@@ -23,88 +25,44 @@ class PoppinSquare2 {
     }
 
     avg (a, b) {
-        return Math.floor((a+b)/2);
+        return Math.round((a+b)/2);
     }
 
     red(ctx, framesElapsed) {
+        const multiplier = Math.ceil(this.idx / 256) * 64;
 
-        let color;
-        switch (Math.ceil(this.idx / 256)) {
-            case 1:
-                color = Math.floor(64 * Math.sin((Math.PI * this.idx / 1024)) * ((Math.sin(framesElapsed / 40) + 1)/2));
-                break;
-            case 2:
-                color = Math.floor(128 * Math.sin((Math.PI * this.idx / 1024)) * ((Math.sin(framesElapsed / 40) + 1)/2));
-                break;
-            case 3:
-                color = Math.floor(192 * Math.sin((Math.PI * this.idx / 1024)) * ((Math.sin(framesElapsed / 40) + 1)/2));
-                break;
-            case 4:
-                color = Math.floor(256 * Math.sin((Math.PI * this.idx / 1024)) * ((Math.sin(framesElapsed / 40) + 1)/2));
-                break;
-
-        }
-
-        return this.goodColor(
-            color
+        return Math.floor(
+            multiplier *
+            Math.sin(Math.PI * this.idx / 1024) *
+            (Math.sin(framesElapsed / 40) + 1)/2
         );
     }
 
     blue(ctx, framesElapsed) {
+        const multiplier = 2.5 - 0.5 * Math.ceil(this.idx / 256);
 
-        let color;
-        switch (Math.ceil(this.idx / 256)) {
-            case 1:
-                color = Math.floor(this.strength * 2);
-                break;
-            case 2:
-                color = Math.floor(this.strength * 1.5);
-                break;
-            case 3:
-                color = Math.floor(this.strength * 1);
-                break;
-            case 4:
-                color = Math.floor(this.strength * 0.5);
-                break;
-
-        }
-
-        return this.goodColor(
-            color
-        );
+        return Math.floor(this.strength * multiplier);
     }
 
     green (ctx, framesElapsed) {
+        const rateAdjustment = 100 + Math.ceil(this.idx / 256);
+        const rateMultiplier = 1 / ((rateAdjustment - this.strength) * 256);
 
-        let color;
-        switch (Math.ceil(this.idx / 256)) {
-            case 1:
-                color = Math.floor(256 * Math.sin((Math.PI * this.idx * (framesElapsed / (140 - this.strength)) / 256)));
-                break;
-            case 2:
-                color = Math.floor(256 * Math.sin((Math.PI * this.idx * (framesElapsed / (180 - this.strength)) / 256)));
-                break;
-            case 3:
-                color = Math.floor(256 * Math.sin((Math.PI * this.idx * (framesElapsed / (220 - this.strength)) / 256)));
-                break;
-            case 4:
-                color = Math.floor(256 * Math.sin((Math.PI * this.idx * (framesElapsed / (260 - this.strength)) / 256)));
-                break;
-
-        }
-
-        return this.goodColor(
-            color
+        return Math.floor(
+            256 *
+            Math.sin(
+                Math.PI *
+                this.idx *
+                framesElapsed *
+                rateMultiplier
+            )
         );
     }
 
     draw (ctx, framesElapsed) {
-        let red = this.red(ctx, framesElapsed);
-
-        //let green = this.goodColor(this.radius);
-        let green =this.green(ctx, framesElapsed);
-
-        let blue = this.blue(ctx, framesElapsed);
+        let red = this.goodColor(this.red(ctx, framesElapsed));
+        let green = this.goodColor(this.green(ctx, framesElapsed));
+        let blue = this.goodColor(this.blue(ctx, framesElapsed));
 
         ctx.fillStyle=`rgb(${red},${green},${blue})`;
         ctx.beginPath();
@@ -114,16 +72,17 @@ class PoppinSquare2 {
         ctx.rect(this.x - this.width/2, this.y - this.width/2, this.width, this.width);
         */
 
+        const rotationAmount = this.idx * (framesElapsed + this.strength) / 256;
 
         ctx.translate(this.x, this.y);
-        ctx.rotate((this.idx * (framesElapsed + this.strength) / 256) * Math.PI / 180);
+        ctx.rotate(rotationAmount * Math.PI / 180);
         ctx.translate(-this.x, -this.y);
 
         ctx.rect(this.x - this.width/2, this.y - this.width/2, this.width, this.width);
         ctx.fill();
 
         ctx.translate(this.x, this.y);
-        ctx.rotate(-(this.idx * (framesElapsed + this.strength) / 256) * Math.PI / 180);
+        ctx.rotate(-rotationAmount * Math.PI / 180);
         ctx.translate(-this.x, -this.y);
     }
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Sliders from "./Engine/Sliders";
+
 
 const DEFAULT_WIDTH = 500;
 const DEFAULT_HEIGHT = 500;
@@ -17,14 +19,13 @@ class Visualizer extends Component {
 
         this.counter = 0;
         this.drawLoopInterval = Math.floor(1000/FPS);
-
+        this.animationList = [];
 
         this.drawLoop = this.drawLoop.bind(this);
         this.animate = this.animate.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
         this.setRandomAnimation = this.setRandomAnimation.bind(this);
-
-        this.animationList = [];
+        this.setAnimationParameter = this.setAnimationParameter.bind(this);
     }
 
     componentWillMount () {
@@ -70,11 +71,6 @@ class Visualizer extends Component {
             });
             this.animate();
         }
-
-
-
-
-
     }
 
     drawLoop () {
@@ -97,12 +93,18 @@ class Visualizer extends Component {
         cancelAnimationFrame(this.animationId);
     }
 
+    setAnimationParameter(parameterIdx, newValue) {
+        //TODO: adjust sliderSize parameter
+        this.state.animation.sliderSize[parameterIdx] = newValue;
+    }
+
     render () {
         return (
-            <div>
-                { super.render() }
-            </div>
-        )
+            <React.Fragment>
+                <button style={{marginBottom: '5px', marginTop: '5px'}} onClick={this.setRandomAnimation}>Randomize</button>
+                <Sliders setAnimationParameter={this.setAnimationParameter}/>
+            </React.Fragment>
+        );
     }
 }
 
