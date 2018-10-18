@@ -28,13 +28,12 @@ class PolygonVisualizer extends Visualizer {
 
         // Don't feel like working out probabilities. They are what they are.
         this.animationList = [
-            //SoundCircle,
-            //SoundCircleCircle,
-            //SquareSpiral,
-            //PoppingSquares,
-            //PoppingSquares2,
-            PoppingSquares2
-            //RectEqualizer
+            SoundCircle,
+            SoundCircleCircle,
+            SquareSpiral,
+            PoppingSquares,
+            PoppingSquares2,
+            RectEqualizer
         ];
 
     }
