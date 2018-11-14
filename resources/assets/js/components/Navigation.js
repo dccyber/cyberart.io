@@ -54,6 +54,7 @@ class Navigation extends Component {
                         <MenuItem onClick={() => {window.location.href='/'}} primaryText="Random Animations" />
                         <MenuItem onClick={() => {window.location.href='/visualizer'}} primaryText="Equalizer (sound)" />
                         <MenuItem onClick={() => {window.location.href='/polygonVisualizer'}} primaryText="Drifting Circles (sound)" />
+                        <MenuItem onClick={() => {window.location.href='/mineflowVisualizer'}} primaryText="Mine Water Flow" />
                     </Menu>
                 </Popover>
             </div>

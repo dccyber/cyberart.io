@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Sliders from "./Engine/Sliders";
 
 
 const DEFAULT_WIDTH = 1024;

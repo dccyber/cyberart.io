@@ -7,6 +7,8 @@ import RandomArt from "./RandomArt";
 import SoundVisualizer from "./SoundVisualizer";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SoundPolygonVisualizer from "./SoundPolygonVisualizer";
+import MineFlowVisualizer from "./MineFlowVisualizer";
+import ImageLoader from "./ImageLoaderVisualizer";
 
 
 export default class App extends Component {
@@ -20,6 +22,8 @@ export default class App extends Component {
                             <Route exact path="/" component={RandomArt} />
                             <Route path="/visualizer" component={SoundVisualizer} />
                             <Route path="/polygonVisualizer" component={SoundPolygonVisualizer} />
+                            <Route path="/imageLoader" component={ImageLoader} />
+
                             <Route component={NoMatch}/>
                         </Switch>
                     </BrowserRouter>
