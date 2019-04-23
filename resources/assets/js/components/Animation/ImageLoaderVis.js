@@ -9,33 +9,33 @@ const VISUALIZER_WIDTH = 1024;
 const VISUALIZER_HEIGHT = 768;
 
 class ImageLoaderVisualizer extends Visualizer {
-  constructor() {
-    super();
+    constructor() {
+        super();
 
-    this.state = {
-      width: VISUALIZER_WIDTH,
-      height: VISUALIZER_HEIGHT
-    };
+        this.state = {
+            width: VISUALIZER_WIDTH,
+            height: VISUALIZER_HEIGHT
+        };
 
-    // Don't feel like working out probabilities. They are what they are.
-    this.animationList = [InterfaceAnimation];
-  }
+        // Don't feel like working out probabilities. They are what they are.
+        this.animationList = [InterfaceAnimation];
+    }
 
-  render() {
-    // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
+    render() {
+        // TODO: pass stopAnimation/animate as props to canvas, so that it can start/stop drawing if desired
 
-    return (
-      <React.Fragment>
-        {super.render()}
-        <InterfaceCanvas
-          ref={c => (this._canvas = c)}
-          width={this.state.width}
-          height={this.state.height}
-          animation={this.state.animation}
-        />
-      </React.Fragment>
-    );
-  }
+        return (
+            <React.Fragment>
+                {super.render()}
+                <InterfaceCanvas
+                    ref={c => (this._canvas = c)}
+                    width={this.state.width}
+                    height={this.state.height}
+                    animation={this.state.animation}
+                />
+            </React.Fragment>
+        );
+    }
 }
 
 export default ImageLoaderVisualizer;

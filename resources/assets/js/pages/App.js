@@ -13,42 +13,42 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 
 const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#222"
+    palette: {
+        type: "dark",
+        primary: {
+            main: "#222"
+        }
     }
-  }
 });
 
 export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <MuiThemeProvider theme={theme}>
-          <BrowserRouter basename="/">
-            <Switch>
-              {/*
+    render() {
+        return (
+            <div>
+                <MuiThemeProvider theme={theme}>
+                    <BrowserRouter basename="/">
+                        <Switch>
+                            {/*
                             <Route exact path="/" component={RandomArt} />
                             <Route path="/visualizer" component={SoundVisualizer} />
                             <Route path="/polygonVisualizer" component={SoundPolygonVisualizer} />
                             <Route path="/imageLoader" component={ImageLoader} />
 
                            */}
-              <Route path="/v2" component={V2} />
-              <Route component={NoMatch} />
-            </Switch>
-          </BrowserRouter>
-        </MuiThemeProvider>
-      </div>
-    );
-  }
+                            <Route path="/v2" component={V2} />
+                            <Route component={NoMatch} />
+                        </Switch>
+                    </BrowserRouter>
+                </MuiThemeProvider>
+            </div>
+        );
+    }
 }
 
 const NoMatch = () => {
-  return <p>No Match!</p>;
+    return <p>No Match!</p>;
 };
 
 if (document.getElementById("app")) {
-  ReactDOM.render(<App />, document.getElementById("app"));
+    ReactDOM.render(<App />, document.getElementById("app"));
 }
