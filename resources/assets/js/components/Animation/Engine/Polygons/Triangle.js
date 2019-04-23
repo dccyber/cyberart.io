@@ -16,10 +16,7 @@ class Triangle {
     }
 
     red(ctx, framesElapsed) {
-        return Math.max(
-            30,
-            this.goodColor(Math.floor(Math.sin(framesElapsed / 67) * 128 + 80))
-        );
+        return Math.max(30, this.goodColor(Math.floor(Math.sin(framesElapsed / 67) * 128 + 80)));
     }
 
     green(ctx, framesElapsed) {
@@ -40,9 +37,7 @@ class Triangle {
 
         ctx.fillStyle = `rgb(${red},${green},${blue})`;
 
-        const sideLength = Math.sqrt(
-            this.height * this.height + (this.height / 2) * (this.height / 2)
-        );
+        const sideLength = Math.sqrt(this.height * this.height + (this.height / 2) * (this.height / 2));
 
         ctx.translate(this.x, this.y);
         ctx.rotate(((this.height + framesElapsed) * Math.PI) / 180);

@@ -10,9 +10,8 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
         super(width, height, title);
         this.width = width;
         this.height = height;
-        this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this)
+        this.soundGenerator = new SoundResponsiveFunctionGenerator((note, frequencyData) =>
+            this.soundEventCallback(note, frequencyData, this)
         );
 
         this.note = 0;
@@ -88,11 +87,7 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
         const percentageOfSonicSpectrum = 0.37;
         const positionMultiplier = (percentageOfSonicSpectrum * 1024) / width;
 
-        for (
-            let a = Math.floor(i * positionMultiplier);
-            a < Math.ceil((i + 1) * positionMultiplier);
-            a++
-        ) {
+        for (let a = Math.floor(i * positionMultiplier); a < Math.ceil((i + 1) * positionMultiplier); a++) {
             total += this.frequencyData[a];
             count++;
         }
@@ -120,10 +115,7 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
             cellState.rectangleStrength = 4 * w * w * w;
         } else {
             if (cellState.timeSinceSound !== null) {
-                cellState.timeSinceSound = Math.min(
-                    256,
-                    cellState.timeSinceSound + 20
-                );
+                cellState.timeSinceSound = Math.min(256, cellState.timeSinceSound + 20);
             }
         }
     }
@@ -155,11 +147,7 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
             ? 0
             : cellState.timeSinceSound === null
             ? 0
-            : Math.min(
-                  255,
-                  4 * cellState.timeSinceSound -
-                      (cellState.timeSinceSound * cellState.timeSinceSound) / 64
-              );
+            : Math.min(255, 4 * cellState.timeSinceSound - (cellState.timeSinceSound * cellState.timeSinceSound) / 64);
     }
 
     colorGenerator(cellState, framesElapsed) {

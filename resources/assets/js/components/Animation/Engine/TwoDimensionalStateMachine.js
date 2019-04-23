@@ -15,10 +15,7 @@ class TwoDimensionalStateMachine {
         for (let i = 0; i < this.width; i++) {
             initialState[i] = [];
             for (let j = 0; j < this.height; j++) {
-                initialState[i][j] = animationContainer.initialStateGenerator(
-                    i,
-                    j
-                );
+                initialState[i][j] = animationContainer.initialStateGenerator(i, j);
             }
         }
 

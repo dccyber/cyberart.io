@@ -12,10 +12,7 @@ class ImageCanvas extends Component {
 
     componentDidMount() {
         this.ctx = this.refs.canvas.getContext("2d");
-        this.imageData = this.ctx.createImageData(
-            this.props.width,
-            this.props.height
-        );
+        this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
         this.g = this.imageData.data;
 
         this.ctx.putImageData(this.imageData, 0, 0);
@@ -28,13 +25,7 @@ class ImageCanvas extends Component {
         let self = this;
 
         image.onload = () => {
-            self.ctx.drawImage(
-                image,
-                0,
-                0,
-                self.props.width,
-                self.props.height
-            );
+            self.ctx.drawImage(image, 0, 0, self.props.width, self.props.height);
         };
     }
 
@@ -47,36 +38,22 @@ class ImageCanvas extends Component {
     iterate() {
         //var p = this.ctx.getImageData(30, 40, 1, 1).data;
         //console.log(p);
-        let p = this.ctx.getImageData(
-            0,
-            0,
-            this.props.width,
-            this.props.height
-        );
+        let p = this.ctx.getImageData(0, 0, this.props.width, this.props.height);
         let pdata = p.data;
         let index = 0;
         for (let x = 0; x < this.props.width; x++) {
             for (let y = 0; y < this.props.height; y++) {
-                pdata[index] = Math.min(
-                    pdata[index] + (1 / (x % 5)) * Math.random(),
-                    255
-                );
+                pdata[index] = Math.min(pdata[index] + (1 / (x % 5)) * Math.random(), 255);
                 if (pdata[index] >= 255) {
                     pdata[index] -= 255;
                 }
 
-                pdata[index + 1] = Math.min(
-                    pdata[index + 1] + (1 / 37) * Math.random(),
-                    255
-                );
+                pdata[index + 1] = Math.min(pdata[index + 1] + (1 / 37) * Math.random(), 255);
                 if (pdata[index + 1] >= 255) {
                     pdata[index + 1] -= 255;
                 }
 
-                pdata[index + 2] = Math.min(
-                    pdata[index + 2] + (1 / (y % 71)) * Math.random(),
-                    255
-                );
+                pdata[index + 2] = Math.min(pdata[index + 2] + (1 / (y % 71)) * Math.random(), 255);
                 if (pdata[index + 2] >= 255) {
                     pdata[index + 2] -= 255;
                 }
@@ -114,15 +91,8 @@ class ImageCanvas extends Component {
         return (
             <React.Fragment>
                 <h5 style={{ margin: "5px" }}>{this.props.animation.title}</h5>
-                {this.props.animation.render
-                    ? this.props.animation.render()
-                    : null}
-                <canvas
-                    id="canvas"
-                    ref="canvas"
-                    width={this.props.width}
-                    height={this.props.height}
-                />
+                {this.props.animation.render ? this.props.animation.render() : null}
+                <canvas id="canvas" ref="canvas" width={this.props.width} height={this.props.height} />
             </React.Fragment>
         );
     }

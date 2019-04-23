@@ -5,12 +5,7 @@ export default class FullCenteredWindow extends Window {
     constructor(containerPosition) {
         const { top, left, height, width } = containerPosition;
 
-        super(
-            left + width * 0.1,
-            top + height * 0.1,
-            width * 0.8,
-            height * 0.8
-        );
+        super(left + width * 0.1, top + height * 0.1, width * 0.8, height * 0.8);
 
         this.containerPosition = containerPosition;
         this.centeredPosition = {
@@ -30,34 +25,18 @@ export default class FullCenteredWindow extends Window {
         let buttonWidth = 40;
         let buttonHeight = 40;
 
-        let buttonLeft =
-            this.position.left +
-            this.position.width -
-            buttonWidth -
-            marginWidth;
+        let buttonLeft = this.position.left + this.position.width - buttonWidth - marginWidth;
         let buttonTop = this.position.top + marginWidth;
 
-        const button1 = new Button(
-            buttonLeft,
-            buttonTop,
-            buttonWidth,
-            buttonHeight
-        );
+        const button1 = new Button(buttonLeft, buttonTop, buttonWidth, buttonHeight);
 
         buttonLeft = buttonLeft - buttonWidth - marginWidth;
 
-        const button2 = new Button(
-            buttonLeft,
-            buttonTop,
-            buttonWidth,
-            buttonHeight
-        );
+        const button2 = new Button(buttonLeft, buttonTop, buttonWidth, buttonHeight);
 
         button2.addClickBehavior(() => {
             let { top, left, height, width } =
-                this.mode === "centered"
-                    ? this.centeredPosition
-                    : this.containerPosition;
+                this.mode === "centered" ? this.centeredPosition : this.containerPosition;
 
             this.mode = this.mode === "centered" ? "full" : "centered";
 
@@ -72,12 +51,7 @@ export default class FullCenteredWindow extends Window {
 
         buttonLeft = buttonLeft - buttonWidth - marginWidth;
 
-        const button3 = new Button(
-            buttonLeft,
-            buttonTop,
-            buttonWidth,
-            buttonHeight
-        );
+        const button3 = new Button(buttonLeft, buttonTop, buttonWidth, buttonHeight);
 
         this.buttons = [button1, button2, button3];
     }

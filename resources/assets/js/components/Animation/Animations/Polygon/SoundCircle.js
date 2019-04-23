@@ -2,11 +2,7 @@ import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFuncti
 import Circle from "../../Engine/Polygons/Circle";
 
 class SoundCircle {
-    constructor(
-        height,
-        width,
-        title = "Polygon Sound Visualizer - Brownian Motion Rainbow Circles"
-    ) {
+    constructor(height, width, title = "Polygon Sound Visualizer - Brownian Motion Rainbow Circles") {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -14,8 +10,7 @@ class SoundCircle {
         this.width = width;
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this),
+            (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
             0.0001
         );
 
@@ -42,10 +37,7 @@ class SoundCircle {
 
         //console.log(note);
         for (let a = 0; a < frequencyData.length; a++) {
-            this.polygons[a].height = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 110) * 3
-            );
+            this.polygons[a].height = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
         }
     }
 
@@ -93,36 +85,25 @@ class SoundCircle {
                 let xDiffSgn = Math.sign(xDiff);
                 let yDiffSgn = Math.sign(yDiff);
 
-                this.polygons[a].x +=
-                    xDiffSgn * Math.min(Math.abs(xDiff), returnHomeSpeed);
-                this.polygons[a].y +=
-                    yDiffSgn * Math.min(Math.abs(yDiff), returnHomeSpeed);
+                this.polygons[a].x += xDiffSgn * Math.min(Math.abs(xDiff), returnHomeSpeed);
+                this.polygons[a].y += yDiffSgn * Math.min(Math.abs(yDiff), returnHomeSpeed);
 
                 // If any x or y differences exist for any polygon, you aren't home yet
-                this.stillReturningHome =
-                    this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;
+                this.stillReturningHome = this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;
 
                 //this.polygons[a].x = this.avg(this.polygons[a].x, this.polygons[a].originalX);
                 //this.polygons[a].y = this.avg(this.polygons[a].y, this.polygons[a].originalY);
             } else {
                 // Brownian motion Drift
                 this.polygons[a].x =
-                    (this.polygons[a].x +
-                        Math.floor(
-                            Math.random() * driftSpeed * 2 - driftSpeed + 0.5
-                        )) %
-                    this.width;
+                    (this.polygons[a].x + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.width;
 
                 if (this.polygons[a].x < 0) {
                     this.polygons[a].x += this.width;
                 }
 
                 this.polygons[a].y =
-                    (this.polygons[a].y +
-                        Math.floor(
-                            Math.random() * driftSpeed * 2 - driftSpeed + 0.5
-                        )) %
-                    this.height;
+                    (this.polygons[a].y + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.height;
 
                 if (this.polygons[a].y < 0) {
                     this.polygons[a].y += this.height;

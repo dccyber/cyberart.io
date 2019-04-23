@@ -79,35 +79,17 @@ const lineGenerator1 = twoFactorGenerator();
 const lineGenerator2 = twoFactorGenerator();
 const lineGenerator3 = twoFactorGenerator();
 
-const differentLineGenerators = [
-    lineGenerator1,
-    lineGenerator2,
-    lineGenerator3
-];
+const differentLineGenerators = [lineGenerator1, lineGenerator2, lineGenerator3];
 
 const sameLineGenerators = [lineGenerator1];
 
-const generatorFamilies = [
-    checkerboardGenerators,
-    sameLineGenerators,
-    differentLineGenerators
-];
+const generatorFamilies = [checkerboardGenerators, sameLineGenerators, differentLineGenerators];
 
-const chosenGeneratorFamily =
-    generatorFamilies[Math.floor(Math.random() * generatorFamilies.length)];
+const chosenGeneratorFamily = generatorFamilies[Math.floor(Math.random() * generatorFamilies.length)];
 
-const chosenGenerator1 =
-    chosenGeneratorFamily[
-        Math.floor(Math.random() * chosenGeneratorFamily.length)
-    ];
-const chosenGenerator2 =
-    chosenGeneratorFamily[
-        Math.floor(Math.random() * chosenGeneratorFamily.length)
-    ];
-const chosenGenerator3 =
-    chosenGeneratorFamily[
-        Math.floor(Math.random() * chosenGeneratorFamily.length)
-    ];
+const chosenGenerator1 = chosenGeneratorFamily[Math.floor(Math.random() * chosenGeneratorFamily.length)];
+const chosenGenerator2 = chosenGeneratorFamily[Math.floor(Math.random() * chosenGeneratorFamily.length)];
+const chosenGenerator3 = chosenGeneratorFamily[Math.floor(Math.random() * chosenGeneratorFamily.length)];
 
 const aModifier = Math.floor((Math.random() - 0.5) * 10);
 const bModifier = Math.floor((Math.random() - 0.5) * 10);

@@ -3,11 +3,7 @@ import Circle from "../../Engine/Polygons/Circle";
 import Circle2 from "../../Engine/Polygons/Circle2";
 
 class SoundCircleCircle {
-    constructor(
-        height,
-        width,
-        title = "Polygon Sound Visualizer - Triangle of Circles"
-    ) {
+    constructor(height, width, title = "Polygon Sound Visualizer - Triangle of Circles") {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -15,8 +11,7 @@ class SoundCircleCircle {
         this.width = width;
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this),
+            (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
             0.0001
         );
 
@@ -48,10 +43,7 @@ class SoundCircleCircle {
 
         //console.log(note);
         for (let a = 0; a < frequencyData.length; a++) {
-            this.polygons[a].height = Math.max(
-                0,
-                Math.floor(frequencyData[a] + 110) * 3
-            );
+            this.polygons[a].height = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
     }
 
@@ -122,14 +114,11 @@ class SoundCircleCircle {
                 let xDiffSgn = Math.sign(xDiff);
                 let yDiffSgn = Math.sign(yDiff);
 
-                this.polygons[a].x +=
-                    xDiffSgn * Math.min(Math.abs(xDiff), returnHomeSpeed);
-                this.polygons[a].y +=
-                    yDiffSgn * Math.min(Math.abs(yDiff), returnHomeSpeed);
+                this.polygons[a].x += xDiffSgn * Math.min(Math.abs(xDiff), returnHomeSpeed);
+                this.polygons[a].y += yDiffSgn * Math.min(Math.abs(yDiff), returnHomeSpeed);
 
                 // If any x or y differences exist for any polygon, you aren't home yet
-                this.stillReturningHome =
-                    this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;
+                this.stillReturningHome = this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;
 
                 //this.polygons[a].x = this.avg(this.polygons[a].x, this.polygons[a].originalX);
                 //this.polygons[a].y = this.avg(this.polygons[a].y, this.polygons[a].originalY);

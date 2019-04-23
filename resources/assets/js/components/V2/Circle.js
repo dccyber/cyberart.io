@@ -24,32 +24,18 @@ class Circle {
     }
 
     red(ctx, framesElapsed) {
-        return Math.max(
-            30,
-            this.goodColor(Math.floor(Math.sin(framesElapsed / 67) * 128 + 80))
-        );
+        return Math.max(30, this.goodColor(Math.floor(Math.sin(framesElapsed / 67) * 128 + 80)));
     }
 
     green(ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor(
-                this.avg(
-                    this.avg(this.x, this.prevX),
-                    this.avg(this.y, this.prevY)
-                ) * 0.3
-            )
-        );
+        return this.goodColor(Math.floor(this.avg(this.avg(this.x, this.prevX), this.avg(this.y, this.prevY)) * 0.3));
     }
 
     blue(ctx, framesElapsed) {
         return this.goodColor(
             this.avg(
                 Math.floor(Math.sin(framesElapsed / 37) * 128 * this.height),
-                Math.floor(
-                    Math.sin(this.avg(this.originalX, this.originalY) / 19) *
-                        128 *
-                        this.height
-                )
+                Math.floor(Math.sin(this.avg(this.originalX, this.originalY) / 19) * 128 * this.height)
             )
         );
     }
@@ -64,14 +50,7 @@ class Circle {
 
         ctx.fillStyle = `rgb(${red},${green},${blue})`;
         ctx.beginPath();
-        ctx.arc(
-            this.x,
-            this.y,
-            this.height,
-            this.startAngle,
-            this.endAngle,
-            this.anticlockwise
-        );
+        ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
         ctx.fill();
     }
 }

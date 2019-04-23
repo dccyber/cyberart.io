@@ -22,34 +22,19 @@ class EqRect {
     }
 
     red(ctx, framesElapsed) {
-        let color = Math.floor(
-            (256 *
-                (Math.sin((Math.sin(framesElapsed / 23) * this.idx) / 197) +
-                    1)) /
-                2
-        );
+        let color = Math.floor((256 * (Math.sin((Math.sin(framesElapsed / 23) * this.idx) / 197) + 1)) / 2);
 
         return this.goodColor(color);
     }
 
     blue(ctx, framesElapsed) {
-        let color = Math.floor(
-            (256 *
-                (Math.sin((Math.sin(framesElapsed / 17) * this.idx) / 203) +
-                    1)) /
-                2
-        );
+        let color = Math.floor((256 * (Math.sin((Math.sin(framesElapsed / 17) * this.idx) / 203) + 1)) / 2);
 
         return this.goodColor(color);
     }
 
     green(ctx, framesElapsed) {
-        let color = Math.floor(
-            (256 *
-                (Math.sin((Math.sin(framesElapsed / 29) * this.idx) / 397) +
-                    1)) /
-                2
-        );
+        let color = Math.floor((256 * (Math.sin((Math.sin(framesElapsed / 29) * this.idx) / 397) + 1)) / 2);
 
         return this.goodColor(color);
     }

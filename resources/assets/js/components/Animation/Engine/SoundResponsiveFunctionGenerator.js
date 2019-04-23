@@ -33,20 +33,11 @@ class SoundResponsiveFunctionGenerator {
         var theBuffer = null;
         var DEBUGCANVAS = null;
         var mediaStreamSource = null;
-        var detectorElem,
-            canvasElem,
-            waveCanvas,
-            pitchElem,
-            noteElem,
-            detuneElem,
-            detuneAmount;
+        var detectorElem, canvasElem, waveCanvas, pitchElem, noteElem, detuneElem, detuneAmount;
 
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.audioContext = new AudioContext();
-        this.MAX_SIZE = Math.max(
-            4,
-            Math.floor(this.audioContext.sampleRate / 5000)
-        ); // corresponds to a 5kHz signal
+        this.MAX_SIZE = Math.max(4, Math.floor(this.audioContext.sampleRate / 5000)); // corresponds to a 5kHz signal
 
         this.detuneAmount = 0; //TODO: figure out what this needs to be
 
@@ -54,20 +45,7 @@ class SoundResponsiveFunctionGenerator {
         this.buflen = 1024;
         this.buf = new Float32Array(this.buflen);
 
-        this.noteStrings = [
-            "C",
-            "C#",
-            "D",
-            "D#",
-            "E",
-            "F",
-            "F#",
-            "G",
-            "G#",
-            "A",
-            "A#",
-            "B"
-        ];
+        this.noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
         this.MIN_SAMPLES = 0; // will be initialized when AudioContext is created.
         this.GOOD_ENOUGH_CORRELATION = 0.9; // this is the "bar" for how close a correlation needs to be
@@ -86,9 +64,7 @@ class SoundResponsiveFunctionGenerator {
     getUserMedia(dictionary, callback) {
         try {
             navigator.getUserMedia =
-                navigator.getUserMedia ||
-                navigator.webkitGetUserMedia ||
-                navigator.mozGetUserMedia;
+                navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia(dictionary, callback, this.error);
         } catch (e) {
             alert("getUserMedia threw exception :" + e);
@@ -97,9 +73,7 @@ class SoundResponsiveFunctionGenerator {
 
     gotStream(stream) {
         // Create an AudioNode from the stream.
-        let mediaStreamSource = this.audioContext.createMediaStreamSource(
-            stream
-        );
+        let mediaStreamSource = this.audioContext.createMediaStreamSource(stream);
 
         // Connect it to the destination.
         this.analyser = this.audioContext.createAnalyser();
@@ -115,8 +89,7 @@ class SoundResponsiveFunctionGenerator {
             this.sourceNode = null;
             this.analyser = null;
             this.isPlaying = false;
-            if (!window.cancelAnimationFrame)
-                window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
+            if (!window.cancelAnimationFrame) window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
             window.cancelAnimationFrame(this.rafID);
         }
         this.getUserMedia(
@@ -145,10 +118,7 @@ class SoundResponsiveFunctionGenerator {
     }
 
     centsOffFromPitch(frequency, note) {
-        return Math.floor(
-            (1200 * Math.log(frequency / this.frequencyFromNoteNumber(note))) /
-                Math.log(2)
-        );
+        return Math.floor((1200 * Math.log(frequency / this.frequencyFromNoteNumber(note))) / Math.log(2));
     }
 
     autoCorrelate(buf, sampleRate) {
@@ -178,10 +148,7 @@ class SoundResponsiveFunctionGenerator {
             }
             correlation = 1 - correlation / MAX_SAMPLES;
             correlations[offset] = correlation; // store it, for the tweaking we need to do below.
-            if (
-                correlation > this.GOOD_ENOUGH_CORRELATION &&
-                correlation > lastCorrelation
-            ) {
+            if (correlation > this.GOOD_ENOUGH_CORRELATION && correlation > lastCorrelation) {
                 foundGoodCorrelation = true;
                 if (correlation > best_correlation) {
                     best_correlation = correlation;
@@ -197,10 +164,7 @@ class SoundResponsiveFunctionGenerator {
                 // we know best_offset >=1,
                 // since foundGoodCorrelation cannot go to true until the second pass (offset=1), and
                 // we can't drop into this clause until the following pass (else if).
-                let shift =
-                    (correlations[best_offset + 1] -
-                        correlations[best_offset - 1]) /
-                    correlations[best_offset];
+                let shift = (correlations[best_offset + 1] - correlations[best_offset - 1]) / correlations[best_offset];
                 return sampleRate / (best_offset + 8 * shift);
             }
             lastCorrelation = correlation;
@@ -222,9 +186,7 @@ class SoundResponsiveFunctionGenerator {
         if (ac == -1) {
         } else {
             let pitch = ac;
-            let note = this.noteFromPitch(
-                this.autoCorrelate(this.buf, this.audioContext.sampleRate)
-            );
+            let note = this.noteFromPitch(this.autoCorrelate(this.buf, this.audioContext.sampleRate));
 
             let bufferLength = this.analyser.frequencyBinCount;
             let dataArray = new Float32Array(bufferLength);
@@ -238,8 +200,7 @@ class SoundResponsiveFunctionGenerator {
             }
         }
 
-        if (!window.requestAnimationFrame)
-            window.requestAnimationFrame = window.webkitRequestAnimationFrame;
+        if (!window.requestAnimationFrame) window.requestAnimationFrame = window.webkitRequestAnimationFrame;
         this.rafID = window.requestAnimationFrame(this.updatePitch);
     }
 }

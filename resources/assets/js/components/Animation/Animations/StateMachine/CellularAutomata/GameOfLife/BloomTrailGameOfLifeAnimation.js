@@ -5,11 +5,7 @@ import BloomingGameOfLifeAnimation from "./BloomingGameOfLifeAnimation";
  * Copyright Aaron Boyarsky, 2018
  */
 class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
-    constructor(
-        width,
-        height,
-        title = "Game of Life - Bloom Mod w/Trails - Random Seed"
-    ) {
+    constructor(width, height, title = "Game of Life - Bloom Mod w/Trails - Random Seed") {
         super(width, height, title);
     }
 
@@ -44,17 +40,13 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
         if (neighborInfo.count === 3) {
             this.createNewCell(nextCellState);
         } else {
-            if (
-                neighborInfo.maxAge > maxNeighborAgeToBloom ||
-                neighborInfo.ageTotal > totalNeighborAgeToBloom
-            ) {
+            if (neighborInfo.maxAge > maxNeighborAgeToBloom || neighborInfo.ageTotal > totalNeighborAgeToBloom) {
                 this.createNewCell(nextCellState);
             } else if (
                 neighborInfo.maxAge > maxNeighborAgeToBloom - 255 ||
                 neighborInfo.ageTotal > totalNeighborAgeToBloom - 255
             ) {
-                nextCellState.blooming =
-                    neighborInfo.ageTotal - (maxNeighborAgeToBloom - 255);
+                nextCellState.blooming = neighborInfo.ageTotal - (maxNeighborAgeToBloom - 255);
                 nextCellState.alive = 0;
                 nextCellState.age = 0;
                 nextCellState.fade = 0;
@@ -75,10 +67,7 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
     updateNeighborInfo(neighborInfo, cellState) {
         neighborInfo.count += cellState.alive;
         neighborInfo.ageTotal += cellState.age;
-        neighborInfo.maxAge =
-            neighborInfo.maxAge - cellState.age > 0
-                ? neighborInfo.maxAge
-                : cellState.age;
+        neighborInfo.maxAge = neighborInfo.maxAge - cellState.age > 0 ? neighborInfo.maxAge : cellState.age;
     }
 
     generateGreen(cellState) {
@@ -90,11 +79,7 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
     }
 
     generateBlue(cellState) {
-        return cellState.alive
-            ? 0
-            : cellState.blooming
-            ? cellState.blooming % 256
-            : cellState.fade;
+        return cellState.alive ? 0 : cellState.blooming ? cellState.blooming % 256 : cellState.fade;
     }
 }
 

@@ -28,14 +28,9 @@ class Visualizer extends Component {
     componentWillMount() {
         this.registerVendorAnimationFunctions();
 
-        this.chosenAnimationIdx = Math.floor(
-            Math.random() * this.animationList.length
-        );
+        this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
         const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
-        this.state.animation = new ChosenAnimation(
-            this.state.width,
-            this.state.height
-        );
+        this.state.animation = new ChosenAnimation(this.state.width, this.state.height);
     }
 
     componentDidMount() {
@@ -45,16 +40,10 @@ class Visualizer extends Component {
     // TODO: would be good in a utility somewhere
     registerVendorAnimationFunctions() {
         const vendors = ["ms", "moz", "webkit", "o"];
-        for (
-            let x = 0;
-            x < vendors.length && !window.requestAnimationFrame;
-            ++x
-        ) {
-            window.requestAnimationFrame =
-                window[vendors[x] + "RequestAnimationFrame"];
+        for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"];
             window.cancelAnimationFrame =
-                window[vendors[x] + "CancelAnimationFrame"] ||
-                window[vendors[x] + "CancelRequestAnimationFrame"];
+                window[vendors[x] + "CancelAnimationFrame"] || window[vendors[x] + "CancelRequestAnimationFrame"];
         }
     }
 
@@ -68,19 +57,14 @@ class Visualizer extends Component {
 
             // Ensure a different animatino
             while (oldAnimationIdx === this.chosenAnimationIdx) {
-                this.chosenAnimationIdx = Math.floor(
-                    Math.random() * this.animationList.length
-                );
+                this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
             }
 
             const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
             this.state.animation.soundGenerator = null;
             this.state.animation = null;
             this.setState({
-                animation: new ChosenAnimation(
-                    this.state.width,
-                    this.state.height
-                )
+                animation: new ChosenAnimation(this.state.width, this.state.height)
             });
             this.animate();
         }

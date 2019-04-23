@@ -29,19 +29,9 @@ class FlowA {
                 let x = a * BLOCK_WIDTH;
                 let y = b * BLOCK_WIDTH;
 
-                let contents =
-                    b === BLOCK_COUNT - 1 && a === HALF_BLOCK
-                        ? "water"
-                        : "earth";
+                let contents = b === BLOCK_COUNT - 1 && a === HALF_BLOCK ? "water" : "earth";
                 let depth = b === BLOCK_COUNT - 1 && a === HALF_BLOCK ? 300 : 0;
-                let square = new Cell(
-                    x,
-                    y,
-                    BLOCK_WIDTH - 1,
-                    a * BLOCK_COUNT + b,
-                    contents,
-                    depth
-                );
+                let square = new Cell(x, y, BLOCK_WIDTH - 1, a * BLOCK_COUNT + b, contents, depth);
                 this.polygons.push(square);
                 this.grid[a][b] = square;
 
@@ -118,10 +108,7 @@ class FlowA {
                     if (0.95 > Math.random()) {
                         score = this.getScore();
                         //TRY TO FLOW
-                        if (
-                            adjacentBlock.contents !== "water" &&
-                            waterBlock.depth > 1
-                        ) {
+                        if (adjacentBlock.contents !== "water" && waterBlock.depth > 1) {
                             let previousContents = adjacentBlock.contents;
                             adjacentBlock.contents = "water";
                             adjacentBlock.depth = waterBlock.depth - 1;
@@ -129,27 +116,13 @@ class FlowA {
 
                             let changed = [];
                             for (
-                                let a = Math.max(
-                                    adjacentBlock.x / BLOCK_WIDTH - 4,
-                                    0
-                                );
-                                a <
-                                Math.min(
-                                    adjacentBlock.x / BLOCK_WIDTH + 5,
-                                    BLOCK_COUNT
-                                );
+                                let a = Math.max(adjacentBlock.x / BLOCK_WIDTH - 4, 0);
+                                a < Math.min(adjacentBlock.x / BLOCK_WIDTH + 5, BLOCK_COUNT);
                                 a++
                             ) {
                                 for (
-                                    let b = Math.max(
-                                        adjacentBlock.y / BLOCK_WIDTH - 4,
-                                        0
-                                    );
-                                    b <
-                                    Math.min(
-                                        adjacentBlock.y / BLOCK_WIDTH + 5,
-                                        BLOCK_COUNT
-                                    );
+                                    let b = Math.max(adjacentBlock.y / BLOCK_WIDTH - 4, 0);
+                                    b < Math.min(adjacentBlock.y / BLOCK_WIDTH + 5, BLOCK_COUNT);
                                     b++
                                 ) {
                                     if (this.grid[a][b].contents === "earth") {
@@ -164,8 +137,7 @@ class FlowA {
                             if (newScore < score) {
                                 console.log("reverting flow, score was less");
                                 changed.forEach(change => {
-                                    this.grid[change[0]][change[1]].contents =
-                                        "earth";
+                                    this.grid[change[0]][change[1]].contents = "earth";
                                 });
                                 this.waterBlocks.pop();
                                 adjacentBlock.contents = previousContents;

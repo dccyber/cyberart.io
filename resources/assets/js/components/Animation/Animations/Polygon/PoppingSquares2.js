@@ -6,11 +6,7 @@ import PoppinSquare from "../../Engine/Polygons/PoppinSquare";
 import PoppinSquare2 from "../../Engine/Polygons/PoppinSquare2";
 
 class PoppingSquares2 {
-    constructor(
-        height,
-        width,
-        title = "Polygon Sound Visualizer - Popping Squares"
-    ) {
+    constructor(height, width, title = "Polygon Sound Visualizer - Popping Squares") {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -18,8 +14,7 @@ class PoppingSquares2 {
         this.width = width;
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this),
+            (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
             0.0001
         );
 
@@ -57,14 +52,8 @@ class PoppingSquares2 {
 
         //console.log(note);
         for (let a = 0; a < frequencyData.length; a++) {
-            this.polygons[a].width = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 110) * 4 * this.sliderSize[0]
-            );
-            this.polygons[a].strength = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 110) * 10 * this.sliderSize[1]
-            );
+            this.polygons[a].width = Math.max(1, Math.floor(frequencyData[a] + 110) * 4 * this.sliderSize[0]);
+            this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 10 * this.sliderSize[1]);
             //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
     }
@@ -84,22 +73,14 @@ class PoppingSquares2 {
             driftSpeed = Math.floor(this.polygons[a].strength / 8);
             // Brownian motion Drift
             this.polygons[a].x =
-                (this.polygons[a].x +
-                    Math.floor(
-                        Math.random() * driftSpeed * 2 - driftSpeed + 0.5
-                    )) %
-                this.width;
+                (this.polygons[a].x + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.width;
 
             if (this.polygons[a].x < 0) {
                 this.polygons[a].x += this.width;
             }
 
             this.polygons[a].y =
-                (this.polygons[a].y +
-                    Math.floor(
-                        Math.random() * driftSpeed * 2 - driftSpeed + 0.5
-                    )) %
-                this.height;
+                (this.polygons[a].y + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.height;
 
             if (this.polygons[a].y < 0) {
                 this.polygons[a].y += this.height;

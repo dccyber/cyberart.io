@@ -29,28 +29,20 @@ class Circle2 {
         switch (this.shapeIdx) {
             case 0:
                 // atom
-                radius = Math.floor(
-                    this.bigCircleRadius * Math.sin(this.radians * 4)
-                );
+                radius = Math.floor(this.bigCircleRadius * Math.sin(this.radians * 4));
                 break;
             case 1:
                 //heart
-                radius = Math.floor(
-                    (this.bigCircleRadius * (Math.sin(this.radians) + 1)) / 2
-                );
+                radius = Math.floor((this.bigCircleRadius * (Math.sin(this.radians) + 1)) / 2);
                 break;
 
             case 2:
                 //sunflower
-                radius = Math.floor(
-                    (this.bigCircleRadius * (Math.sin(this.idx) + 1)) / 2
-                );
+                radius = Math.floor((this.bigCircleRadius * (Math.sin(this.idx) + 1)) / 2);
                 break;
 
             default:
-                radius = Math.floor(
-                    (this.bigCircleRadius * (1024 - this.idx)) / 1024
-                );
+                radius = Math.floor((this.bigCircleRadius * (1024 - this.idx)) / 1024);
         }
 
         //spiral
@@ -61,12 +53,7 @@ class Circle2 {
         this.prevY = this.y;
         this.originalY = this.y;
         */
-        const radians = Math.abs(
-            (2 *
-                Math.PI *
-                ((this.idx - framesElapsed * rotationSpeed) % 1024)) /
-                1024
-        );
+        const radians = Math.abs((2 * Math.PI * ((this.idx - framesElapsed * rotationSpeed) % 1024)) / 1024);
         this.radians = radians;
 
         if (withLocation) {
@@ -90,15 +77,11 @@ class Circle2 {
     }
 
     red(ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor((this.idx * 5 + framesElapsed / 3) % 256)
-        );
+        return this.goodColor(Math.floor((this.idx * 5 + framesElapsed / 3) % 256));
     }
 
     green(ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor((this.idx * 3 + framesElapsed / 5) % 256)
-        );
+        return this.goodColor(Math.floor((this.idx * 3 + framesElapsed / 5) % 256));
     }
 
     blue(ctx, framesElapsed) {
@@ -115,14 +98,7 @@ class Circle2 {
 
         ctx.fillStyle = `rgb(${red},${green},${blue})`;
         ctx.beginPath();
-        ctx.arc(
-            this.x,
-            this.y,
-            this.height,
-            this.startAngle,
-            this.endAngle,
-            this.anticlockwise
-        );
+        ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
         ctx.fill();
     }
 }

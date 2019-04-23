@@ -1,9 +1,4 @@
-const tetrisColors = [
-    [255, 255, 0],
-    [0, 0, 255],
-    [0, 255, 255],
-    [138, 43, 226]
-];
+const tetrisColors = [[255, 255, 0], [0, 0, 255], [0, 255, 255], [138, 43, 226]];
 
 class EqSpark {
     constructor(x, y, width, height, idx, parentIdx) {
@@ -78,15 +73,9 @@ class EqSpark {
         ctx.fillStyle = `rgb(${red},${green},${blue})`;
         ctx.beginPath();
 
-        ctx.translate(
-            this.x + Math.round(this.width / 2),
-            this.y + Math.round(this.height / 2)
-        );
+        ctx.translate(this.x + Math.round(this.width / 2), this.y + Math.round(this.height / 2));
         ctx.rotate((this.randomRotation * this.age * Math.PI) / 180);
-        ctx.translate(
-            -this.x - Math.round(this.width / 2),
-            -this.y - Math.round(this.height / 2)
-        );
+        ctx.translate(-this.x - Math.round(this.width / 2), -this.y - Math.round(this.height / 2));
 
         ctx.beginPath();
         ctx.strokeStyle = "#FFFFFF";
@@ -97,14 +86,8 @@ class EqSpark {
                 // Square
                 ctx.moveTo(this.x - this.width / 3, this.y);
                 ctx.lineTo(this.x + this.width / 3, this.y);
-                ctx.lineTo(
-                    this.x + this.width / 3,
-                    this.y + this.height * 0.67
-                );
-                ctx.lineTo(
-                    this.x - this.width / 3,
-                    this.y + this.height * 0.67
-                );
+                ctx.lineTo(this.x + this.width / 3, this.y + this.height * 0.67);
+                ctx.lineTo(this.x - this.width / 3, this.y + this.height * 0.67);
                 ctx.lineTo(this.x - this.width / 3, this.y);
                 break;
             case 1:
@@ -112,10 +95,7 @@ class EqSpark {
                 ctx.moveTo(this.x - this.width / 4, this.y);
                 ctx.lineTo(this.x, this.y);
                 ctx.lineTo(this.x, this.y + this.height * 0.66);
-                ctx.lineTo(
-                    this.x + this.width / 4,
-                    this.y + this.height * 0.66
-                );
+                ctx.lineTo(this.x + this.width / 4, this.y + this.height * 0.66);
                 ctx.lineTo(this.x + this.width / 4, this.y + this.height);
                 ctx.lineTo(this.x - this.width / 4, this.y + this.height);
                 ctx.lineTo(this.x - this.width / 4, this.y);
@@ -159,15 +139,9 @@ class EqSpark {
             ctx.stroke();
         }
 
-        ctx.translate(
-            this.x + Math.round(this.width / 2),
-            this.y + Math.round(this.height / 2)
-        );
+        ctx.translate(this.x + Math.round(this.width / 2), this.y + Math.round(this.height / 2));
         ctx.rotate((-(this.randomRotation * this.age) * Math.PI) / 180);
-        ctx.translate(
-            -this.x - Math.round(this.width / 2),
-            -this.y - Math.round(this.height / 2)
-        );
+        ctx.translate(-this.x - Math.round(this.width / 2), -this.y - Math.round(this.height / 2));
     }
 }
 

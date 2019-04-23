@@ -22,11 +22,7 @@ class PoppinSquare {
         return Math.max(
             30,
             this.goodColor(
-                Math.floor(
-                    256 *
-                        Math.sin((Math.PI * this.idx) / 1024) *
-                        ((Math.sin(framesElapsed / 40) + 1) / 2)
-                )
+                Math.floor(256 * Math.sin((Math.PI * this.idx) / 1024) * ((Math.sin(framesElapsed / 40) + 1) / 2))
             )
         );
     }
@@ -38,15 +34,7 @@ class PoppinSquare {
     green(ctx, framesElapsed) {
         return this.goodColor(
             //Math.pow(((1024 - this.idx) / 1024), 2) * 256
-            Math.floor(
-                256 *
-                    Math.sin(
-                        (Math.PI *
-                            this.idx *
-                            (framesElapsed / (140 - this.strength))) /
-                            256
-                    )
-            )
+            Math.floor(256 * Math.sin((Math.PI * this.idx * (framesElapsed / (140 - this.strength))) / 256))
         );
     }
 
@@ -67,25 +55,14 @@ class PoppinSquare {
         */
 
         ctx.translate(this.x, this.y);
-        ctx.rotate(
-            (((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) /
-                180
-        );
+        ctx.rotate((((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) / 180);
         ctx.translate(-this.x, -this.y);
 
-        ctx.rect(
-            this.x - this.width / 2,
-            this.y - this.width / 2,
-            this.width,
-            this.width
-        );
+        ctx.rect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
         ctx.fill();
 
         ctx.translate(this.x, this.y);
-        ctx.rotate(
-            (-((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) /
-                180
-        );
+        ctx.rotate((-((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) / 180);
         ctx.translate(-this.x, -this.y);
     }
 }

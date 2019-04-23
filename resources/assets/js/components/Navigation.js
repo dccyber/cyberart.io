@@ -45,18 +45,10 @@ class Navigation extends Component {
                 <div className={classes.root}>
                     <AppBar position="static" color="primary">
                         <Toolbar>
-                            <IconButton
-                                className={classes.menuButton}
-                                color="inherit"
-                                aria-label="Menu"
-                            >
+                            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                                 <MenuIcon />
                             </IconButton>
-                            <Typography
-                                variant="h6"
-                                color="inherit"
-                                className={classes.grow}
-                            >
+                            <Typography variant="h6" color="inherit" className={classes.grow}>
                                 cyberart.io
                             </Typography>
                             <Button color="inherit">Login</Button>

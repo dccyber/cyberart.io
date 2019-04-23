@@ -78,17 +78,9 @@ class GameOfLifeAnimation extends StateMachineAnimation {
         }
 
         if (cellState.alive) {
-            this.handleLivingCellTransition(
-                cellState,
-                nextCellState,
-                neighborInfo
-            );
+            this.handleLivingCellTransition(cellState, nextCellState, neighborInfo);
         } else {
-            this.handleDeadCellTransition(
-                cellState,
-                nextCellState,
-                neighborInfo
-            );
+            this.handleDeadCellTransition(cellState, nextCellState, neighborInfo);
         }
     }
 

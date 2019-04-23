@@ -22,11 +22,7 @@ class Square {
         return Math.max(
             30,
             this.goodColor(
-                Math.floor(
-                    256 *
-                        Math.sin((Math.PI * this.idx) / 1024) *
-                        ((Math.sin(framesElapsed / 40) + 1) / 2)
-                )
+                Math.floor(256 * Math.sin((Math.PI * this.idx) / 1024) * ((Math.sin(framesElapsed / 40) + 1) / 2))
             )
         );
     }
@@ -38,15 +34,7 @@ class Square {
     green(ctx, framesElapsed) {
         return this.goodColor(
             //Math.pow(((1024 - this.idx) / 1024), 2) * 256
-            Math.floor(
-                256 *
-                    Math.sin(
-                        (Math.PI *
-                            this.idx *
-                            (framesElapsed / (140 - this.strength))) /
-                            256
-                    )
-            )
+            Math.floor(256 * Math.sin((Math.PI * this.idx * (framesElapsed / (140 - this.strength))) / 256))
         );
     }
 
@@ -68,12 +56,7 @@ class Square {
         */
         ctx.rotate((((this.idx * framesElapsed) / 128) * Math.PI) / 180);
         ctx.translate(-842, -842);
-        ctx.rect(
-            this.x - this.width / 2,
-            this.y - this.width / 2,
-            this.width,
-            this.width
-        );
+        ctx.rect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
         ctx.fill();
 
         ctx.translate(842, 842);

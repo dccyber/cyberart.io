@@ -33,12 +33,7 @@ class InterfaceAnimation {
     drawWindows(ctx) {
         this.windowList.forEach(aWindow => {
             ctx.fillStyle = "#BBBBBB";
-            ctx.fillRect(
-                aWindow.left,
-                1 * aWindow.top,
-                aWindow.width,
-                aWindow.height
-            );
+            ctx.fillRect(aWindow.left, 1 * aWindow.top, aWindow.width, aWindow.height);
 
             //now a button
             ctx.fillStyle = "#FF0000";

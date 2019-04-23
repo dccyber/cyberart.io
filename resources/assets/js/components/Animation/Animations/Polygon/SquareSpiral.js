@@ -4,11 +4,7 @@ import Circle2 from "../../Engine/Polygons/Circle2";
 import Square from "../../Engine/Polygons/Square";
 
 class SquareSpiral {
-    constructor(
-        height,
-        width,
-        title = "Polygon Sound Visualizer - Square Spiral"
-    ) {
+    constructor(height, width, title = "Polygon Sound Visualizer - Square Spiral") {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -16,8 +12,7 @@ class SquareSpiral {
         this.width = width;
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this),
+            (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
             0.0001
         );
 
@@ -51,10 +46,7 @@ class SquareSpiral {
 
         //console.log(note);
         for (let a = 0; a < frequencyData.length; a++) {
-            this.polygons[a].strength = Math.max(
-                0,
-                Math.floor(frequencyData[a] + 110) * 3
-            );
+            this.polygons[a].strength = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
             //this.polygons[a].height = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
     }

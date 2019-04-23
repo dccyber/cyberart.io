@@ -16,10 +16,7 @@ class StateMachineAnimation {
     }
 
     generateColor(i, j) {
-        return this.colorGenerator(
-            this.stateMachine.state[i][j],
-            this.framesElapsed
-        );
+        return this.colorGenerator(this.stateMachine.state[i][j], this.framesElapsed);
     }
 
     moveToNextFrame() {

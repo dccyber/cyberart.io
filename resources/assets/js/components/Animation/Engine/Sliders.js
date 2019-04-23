@@ -27,12 +27,7 @@ class Sliders extends Component {
                         <Slide
                             key={sliderIdx}
                             defaultValue={defaultVal}
-                            onChange={(event, newValue) =>
-                                this.props.setAnimationParameter(
-                                    sliderIdx,
-                                    newValue
-                                )
-                            }
+                            onChange={(event, newValue) => this.props.setAnimationParameter(sliderIdx, newValue)}
                         />
                     );
                 })}

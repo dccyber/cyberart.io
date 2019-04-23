@@ -12,10 +12,7 @@ class Canvas extends Component {
 
     componentDidMount() {
         this.ctx = this.refs.canvas.getContext("2d");
-        this.imageData = this.ctx.createImageData(
-            this.props.width,
-            this.props.height
-        );
+        this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
         this.g = this.imageData.data;
     }
 
@@ -59,16 +56,9 @@ class Canvas extends Component {
         return (
             <React.Fragment>
                 <h5 style={{ margin: "5px" }}>{this.props.animation.title}</h5>
-                {this.props.animation.render
-                    ? this.props.animation.render()
-                    : null}
+                {this.props.animation.render ? this.props.animation.render() : null}
 
-                <canvas
-                    id="canvas"
-                    ref="canvas"
-                    width={this.props.width}
-                    height={this.props.height}
-                />
+                <canvas id="canvas" ref="canvas" width={this.props.width} height={this.props.height} />
             </React.Fragment>
         );
     }

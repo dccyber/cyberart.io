@@ -42,9 +42,7 @@ class StateBuffer {
     }
 
     getNextIdx() {
-        return this.unlimitedBuffer
-            ? this.currentIndex + 1
-            : (this.currentIndex + 1) % this.bufferSize;
+        return this.unlimitedBuffer ? this.currentIndex + 1 : (this.currentIndex + 1) % this.bufferSize;
     }
 }
 

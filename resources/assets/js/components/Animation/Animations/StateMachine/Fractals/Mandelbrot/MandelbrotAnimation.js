@@ -78,9 +78,7 @@ class MandelbrotAnimation extends StateMachineAnimation {
 
         if (!(cellState.escaped || cellState.dead)) {
             // The mandelbrot equation
-            let newReal =
-                (cellState.real + cellState.imag) *
-                (cellState.real - cellState.imag);
+            let newReal = (cellState.real + cellState.imag) * (cellState.real - cellState.imag);
             let newImag = 2 * cellState.real * cellState.imag;
 
             cellState.real = newReal + cellState.real_seed;
@@ -111,21 +109,9 @@ class MandelbrotAnimation extends StateMachineAnimation {
                 return this.precalcColors[framesElapsed][cellState.iter];
             }
             return {
-                red:
-                    (cellState.iter *
-                        Math.abs(Math.sin(framesElapsed / 101)) *
-                        89) %
-                    256,
-                green:
-                    (cellState.iter *
-                        Math.abs(Math.sin(framesElapsed / 61)) *
-                        67) %
-                    256,
-                blue:
-                    (cellState.iter *
-                        Math.abs(Math.sin(framesElapsed / 107)) *
-                        20) %
-                    256,
+                red: (cellState.iter * Math.abs(Math.sin(framesElapsed / 101)) * 89) % 256,
+                green: (cellState.iter * Math.abs(Math.sin(framesElapsed / 61)) * 67) % 256,
+                blue: (cellState.iter * Math.abs(Math.sin(framesElapsed / 107)) * 20) % 256,
 
                 /*
                 red: (cellState.iter + framesElapsed * 3) % 256,

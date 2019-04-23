@@ -24,10 +24,7 @@ class PoppinSquare2 {
         const multiplier = Math.ceil(this.idx / 256) * 64;
 
         return Math.floor(
-            (multiplier *
-                Math.sin((Math.PI * this.idx) / 1024) *
-                (Math.sin(framesElapsed / 40) + 1)) /
-                2
+            (multiplier * Math.sin((Math.PI * this.idx) / 1024) * (Math.sin(framesElapsed / 40) + 1)) / 2
         );
     }
 
@@ -41,9 +38,7 @@ class PoppinSquare2 {
         const rateAdjustment = 100 + Math.ceil(this.idx / 256);
         const rateMultiplier = 1 / ((rateAdjustment - this.strength) * 256);
 
-        return Math.floor(
-            256 * Math.sin(Math.PI * this.idx * framesElapsed * rateMultiplier)
-        );
+        return Math.floor(256 * Math.sin(Math.PI * this.idx * framesElapsed * rateMultiplier));
     }
 
     draw(ctx, framesElapsed) {
@@ -59,19 +54,13 @@ class PoppinSquare2 {
         ctx.rect(this.x - this.width/2, this.y - this.width/2, this.width, this.width);
         */
 
-        const rotationAmount =
-            (this.idx * (framesElapsed + this.strength)) / 256;
+        const rotationAmount = (this.idx * (framesElapsed + this.strength)) / 256;
 
         ctx.translate(this.x, this.y);
         ctx.rotate((rotationAmount * Math.PI) / 180);
         ctx.translate(-this.x, -this.y);
 
-        ctx.rect(
-            this.x - this.width / 2,
-            this.y - this.width / 2,
-            this.width,
-            this.width
-        );
+        ctx.rect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
         ctx.fill();
 
         ctx.translate(this.x, this.y);

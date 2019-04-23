@@ -23,30 +23,22 @@ class PoppinSquare3 {
         switch (Math.ceil(this.idx / 256)) {
             case 1:
                 color = Math.floor(
-                    64 *
-                        Math.sin((Math.PI * this.idx) / 1024) *
-                        ((Math.sin(framesElapsed / 40) + 1) / 2)
+                    64 * Math.sin((Math.PI * this.idx) / 1024) * ((Math.sin(framesElapsed / 40) + 1) / 2)
                 );
                 break;
             case 2:
                 color = Math.floor(
-                    128 *
-                        Math.sin((Math.PI * this.idx) / 1024) *
-                        ((Math.sin(framesElapsed / 40) + 1) / 2)
+                    128 * Math.sin((Math.PI * this.idx) / 1024) * ((Math.sin(framesElapsed / 40) + 1) / 2)
                 );
                 break;
             case 3:
                 color = Math.floor(
-                    192 *
-                        Math.sin((Math.PI * this.idx) / 1024) *
-                        ((Math.sin(framesElapsed / 40) + 1) / 2)
+                    192 * Math.sin((Math.PI * this.idx) / 1024) * ((Math.sin(framesElapsed / 40) + 1) / 2)
                 );
                 break;
             case 4:
                 color = Math.floor(
-                    256 *
-                        Math.sin((Math.PI * this.idx) / 1024) *
-                        ((Math.sin(framesElapsed / 40) + 1) / 2)
+                    256 * Math.sin((Math.PI * this.idx) / 1024) * ((Math.sin(framesElapsed / 40) + 1) / 2)
                 );
                 break;
         }
@@ -79,46 +71,22 @@ class PoppinSquare3 {
         switch (Math.ceil(this.idx / 256)) {
             case 1:
                 color = Math.floor(
-                    256 *
-                        Math.sin(
-                            (Math.PI *
-                                this.idx *
-                                (framesElapsed / (140 - this.strength))) /
-                                256
-                        )
+                    256 * Math.sin((Math.PI * this.idx * (framesElapsed / (140 - this.strength))) / 256)
                 );
                 break;
             case 2:
                 color = Math.floor(
-                    256 *
-                        Math.sin(
-                            (Math.PI *
-                                this.idx *
-                                (framesElapsed / (180 - this.strength))) /
-                                256
-                        )
+                    256 * Math.sin((Math.PI * this.idx * (framesElapsed / (180 - this.strength))) / 256)
                 );
                 break;
             case 3:
                 color = Math.floor(
-                    256 *
-                        Math.sin(
-                            (Math.PI *
-                                this.idx *
-                                (framesElapsed / (220 - this.strength))) /
-                                256
-                        )
+                    256 * Math.sin((Math.PI * this.idx * (framesElapsed / (220 - this.strength))) / 256)
                 );
                 break;
             case 4:
                 color = Math.floor(
-                    256 *
-                        Math.sin(
-                            (Math.PI *
-                                this.idx *
-                                (framesElapsed / (260 - this.strength))) /
-                                256
-                        )
+                    256 * Math.sin((Math.PI * this.idx * (framesElapsed / (260 - this.strength))) / 256)
                 );
                 break;
         }
@@ -143,25 +111,14 @@ class PoppinSquare3 {
         */
 
         ctx.translate(this.x, this.y);
-        ctx.rotate(
-            (((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) /
-                180
-        );
+        ctx.rotate((((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) / 180);
         ctx.translate(-this.x, -this.y);
 
-        ctx.rect(
-            this.x - this.width / 2,
-            this.y - this.width / 2,
-            this.width,
-            this.width
-        );
+        ctx.rect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
         ctx.fill();
 
         ctx.translate(this.x, this.y);
-        ctx.rotate(
-            (-((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) /
-                180
-        );
+        ctx.rotate((-((this.idx * (framesElapsed + this.strength)) / 256) * Math.PI) / 180);
         ctx.translate(-this.x, -this.y);
     }
 }

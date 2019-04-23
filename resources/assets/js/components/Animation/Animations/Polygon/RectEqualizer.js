@@ -8,11 +8,7 @@ import EqRect from "../../Engine/Polygons/EqRect";
 import EqSpark from "../../Engine/Polygons/EqSpark";
 
 class RectEqualizer {
-    constructor(
-        height,
-        width,
-        title = "Polygon Sound Visualizer - Tetris Confetti Equalizer"
-    ) {
+    constructor(height, width, title = "Polygon Sound Visualizer - Tetris Confetti Equalizer") {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -20,8 +16,7 @@ class RectEqualizer {
         this.width = width;
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this),
+            (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
             0.0001
         );
 
@@ -65,14 +60,8 @@ class RectEqualizer {
                 this.polygons[a].heightStack.splice(0, 1);
             }
 
-            this.polygons[a].height = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 170) * 3
-            );
-            this.polygons[a].strength = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 110) * 3
-            );
+            this.polygons[a].height = Math.max(1, Math.floor(frequencyData[a] + 170) * 3);
+            this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
             //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
     }
@@ -94,31 +83,19 @@ class RectEqualizer {
                 let descending = true;
                 descending =
                     descending &&
-                    this.polygons[a].heightStack[0] <
-                        this.polygons[a].heightStack[1] &&
-                    this.polygons[a].heightStack[1] <
-                        this.polygons[a].heightStack[2] &&
-                    this.polygons[a].heightStack[2] <
-                        this.polygons[a].heightStack[3] &&
-                    this.polygons[a].heightStack[3] <
-                        this.polygons[a].heightStack[4] &&
-                    this.polygons[a].heightStack[4] >
-                        this.polygons[a].heightStack[5] &&
-                    this.polygons[a].heightStack[5] >
-                        this.polygons[a].heightStack[6];
+                    this.polygons[a].heightStack[0] < this.polygons[a].heightStack[1] &&
+                    this.polygons[a].heightStack[1] < this.polygons[a].heightStack[2] &&
+                    this.polygons[a].heightStack[2] < this.polygons[a].heightStack[3] &&
+                    this.polygons[a].heightStack[3] < this.polygons[a].heightStack[4] &&
+                    this.polygons[a].heightStack[4] > this.polygons[a].heightStack[5] &&
+                    this.polygons[a].heightStack[5] > this.polygons[a].heightStack[6];
 
-                if (
-                    descending &&
-                    this.polygons[a].height > 150 + Math.random() * 20
-                ) {
+                if (descending && this.polygons[a].height > 150 + Math.random() * 20) {
                     this.polygons[a].isDescending = true;
                     this.polygons.push(
                         new EqSpark(
                             this.polygons[a].x,
-                            this.polygons[a].y -
-                                this.polygons[a].height -
-                                1 -
-                                distanceAbove,
+                            this.polygons[a].y - this.polygons[a].height - 1 - distanceAbove,
                             2,
                             2,
                             a,
@@ -159,53 +136,25 @@ class RectEqualizer {
 
         for (let b = 1024; b < this.polygons.length; b++) {
             if (this.polygons[b].age < 80) {
-                this.polygons[b].width = Math.max(
-                    1,
-                    this.polygons[b].width + 0.5
-                );
-                this.polygons[b].height = Math.max(
-                    1,
-                    this.polygons[b].height + 0.5
-                );
+                this.polygons[b].width = Math.max(1, this.polygons[b].width + 0.5);
+                this.polygons[b].height = Math.max(1, this.polygons[b].height + 0.5);
                 this.polygons[b].age++;
-                this.polygons[b].y =
-                    this.polygons[b].y -
-                    Math.min(5, 50 - this.polygons[b].height);
+                this.polygons[b].y = this.polygons[b].y - Math.min(5, 50 - this.polygons[b].height);
             } else if (this.polygons[b].age < 120) {
                 this.polygons[b].age++;
-                this.polygons[b].y =
-                    this.polygons[b].y -
-                    Math.min(5, 50 - this.polygons[b].height);
+                this.polygons[b].y = this.polygons[b].y - Math.min(5, 50 - this.polygons[b].height);
             } else if (this.polygons[b].age < 160) {
-                this.polygons[b].width = Math.max(
-                    5,
-                    this.polygons[b].width - 0.3
-                );
-                this.polygons[b].height = Math.max(
-                    2,
-                    this.polygons[b].height - 0.3
-                );
+                this.polygons[b].width = Math.max(5, this.polygons[b].width - 0.3);
+                this.polygons[b].height = Math.max(2, this.polygons[b].height - 0.3);
                 this.polygons[b].age++;
-                this.polygons[b].y =
-                    this.polygons[b].y -
-                    Math.min(5, 50 - this.polygons[b].height);
+                this.polygons[b].y = this.polygons[b].y - Math.min(5, 50 - this.polygons[b].height);
             } else if (this.polygons[b].age < 500) {
                 this.polygons[b].age++;
-                this.polygons[b].width = Math.max(
-                    5,
-                    this.polygons[b].width - 1
-                );
-                this.polygons[b].height = Math.max(
-                    2,
-                    this.polygons[b].height - 1
-                );
+                this.polygons[b].width = Math.max(5, this.polygons[b].width - 1);
+                this.polygons[b].height = Math.max(2, this.polygons[b].height - 1);
 
                 // Brownian motion Drift
-                this.polygons[b].x =
-                    this.polygons[b].x +
-                    Math.floor(
-                        Math.random() * driftSpeed * 2 - driftSpeed + 0.5
-                    );
+                this.polygons[b].x = this.polygons[b].x + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5);
 
                 if (
                     this.polygons[b].x < 0 ||

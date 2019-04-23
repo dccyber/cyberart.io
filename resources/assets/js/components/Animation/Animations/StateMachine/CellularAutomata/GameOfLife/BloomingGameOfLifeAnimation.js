@@ -50,8 +50,7 @@ class BloomingGameOfLifeAnimation extends GameOfLifeAnimation {
             if (neighborInfo.ageTotal > totalNeighborAgeToBloom) {
                 this.createNewCell(nextCellState, cellState);
             } else if (neighborInfo.ageTotal > totalNeighborAgeToBloom - 255) {
-                nextCellState.blooming =
-                    neighborInfo.ageTotal - (totalNeighborAgeToBloom - 255);
+                nextCellState.blooming = neighborInfo.ageTotal - (totalNeighborAgeToBloom - 255);
                 this.createDeadCell(nextCellState);
             } else {
                 if (!neighborInfo.count) {
@@ -68,15 +67,11 @@ class BloomingGameOfLifeAnimation extends GameOfLifeAnimation {
     }
 
     generateRed(cellState) {
-        return cellState.alive
-            ? Math.min(cellState.age, 255)
-            : (cellState.blooming * 7) % 256;
+        return cellState.alive ? Math.min(cellState.age, 255) : (cellState.blooming * 7) % 256;
     }
 
     generateGreen(cellState) {
-        return cellState.alive
-            ? Math.max(255 - cellState.age, 0)
-            : (cellState.blooming * 11) % 256;
+        return cellState.alive ? Math.max(255 - cellState.age, 0) : (cellState.blooming * 11) % 256;
     }
 
     colorGenerator(cellState, framesElapsed) {

@@ -7,11 +7,7 @@ import PoppinSquare2 from "../../Engine/Polygons/PoppinSquare2";
 import PoppinSquare3 from "../../Engine/Polygons/PoppinSquare3";
 
 class PoppingSquares3 {
-    constructor(
-        height,
-        width,
-        title = "Polygon Sound Visualizer - Popping Squares 3"
-    ) {
+    constructor(height, width, title = "Polygon Sound Visualizer - Popping Squares 3") {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -19,8 +15,7 @@ class PoppingSquares3 {
         this.width = width;
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
-            (note, frequencyData) =>
-                this.soundEventCallback(note, frequencyData, this),
+            (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
             0.0001
         );
 
@@ -57,14 +52,8 @@ class PoppingSquares3 {
 
         //console.log(note);
         for (let a = 0; a < frequencyData.length; a++) {
-            this.polygons[a].width = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 110) * 2
-            );
-            this.polygons[a].strength = Math.max(
-                1,
-                Math.floor(frequencyData[a] + 110) * 3
-            );
+            this.polygons[a].width = Math.max(1, Math.floor(frequencyData[a] + 110) * 2);
+            this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 3);
             //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
     }
@@ -93,17 +82,10 @@ class PoppingSquares3 {
 
                 let distanceY = this.polygons[a].y - this.polygons[b].y;
 
-                let repulsionX =
-                    Math.sign(distanceX) *
-                    Math.max(0, maxRepelDistance - Math.abs(distanceX));
-                let repulsionY =
-                    Math.sign(distanceY) *
-                    Math.max(0, maxRepelDistance - Math.abs(distanceY));
+                let repulsionX = Math.sign(distanceX) * Math.max(0, maxRepelDistance - Math.abs(distanceX));
+                let repulsionY = Math.sign(distanceY) * Math.max(0, maxRepelDistance - Math.abs(distanceY));
 
-                repulsionX =
-                    120 *
-                    (repulsionX / maxRepelDistance) *
-                    (repulsionX / maxRepelDistance);
+                repulsionX = 120 * (repulsionX / maxRepelDistance) * (repulsionX / maxRepelDistance);
 
                 this.polygons[a].aggregateDistanceX -= repulsionX;
                 this.polygons[a].aggregateDistanceY -= repulsionY;
@@ -119,8 +101,7 @@ class PoppingSquares3 {
                 //this.polygons[a].aggregateDistanceY -= (500 - Math.abs(distanceY)) / 5;
 
                 if (Math.abs(distanceY) < maxRepelDistance) {
-                    this.polygons[a].aggregateDistanceY -=
-                        (maxRepelDistance - distanceY) / maxRepelDistance;
+                    this.polygons[a].aggregateDistanceY -= (maxRepelDistance - distanceY) / maxRepelDistance;
                 } else {
                     //aggregateDistanceY += (distanceY);
                 }
@@ -151,12 +132,8 @@ class PoppingSquares3 {
         }
 
         for (let a = 0; a < this.polygons.length; a++) {
-            this.polygons[a].x =
-                this.polygons[a].x -
-                this.polygons[a].aggregateDistanceX / 15000;
-            this.polygons[a].y =
-                this.polygons[a].y -
-                this.polygons[a].aggregateDistanceY / 15000;
+            this.polygons[a].x = this.polygons[a].x - this.polygons[a].aggregateDistanceX / 15000;
+            this.polygons[a].y = this.polygons[a].y - this.polygons[a].aggregateDistanceY / 15000;
 
             if (this.polygons[a].x < 0) {
                 this.polygons[a].x = 0;
