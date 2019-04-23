@@ -1,35 +1,41 @@
-import React, { Component } from 'react';
-import Slider from 'material-ui/Slider';
+import React, { Component } from "react";
+import Slider from "@material-ui/core/Slide";
 
 const style = {
-    position: 'absolute', left: 50, top: 50, width: '300px'
+  position: "absolute",
+  left: 50,
+  top: 50,
+  width: "300px"
 };
 
 class Sliders extends Component {
+  constructor() {
+    super();
 
-    constructor () {
-        super();
+    this.sliders = [];
 
-        this.sliders = [];
-
-        for (let a = 0; a < 10; a++) {
-            this.sliders[a] = 0.5;
-        }
+    for (let a = 0; a < 10; a++) {
+      this.sliders[a] = 0.5;
     }
+  }
 
-    render() {
-        return (
-            <div style={style}>{
-                this.sliders.map((defaultVal, sliderIdx) => {
-                    return <Slider
-                        key={sliderIdx}
-                        defaultValue={defaultVal}
-                        onChange={(event, newValue) => this.props.setAnimationParameter(sliderIdx, newValue)}
-                    />;
-                })
-            }</div>
-        );
-    }
+  render() {
+    return (
+      <div style={style}>
+        {this.sliders.map((defaultVal, sliderIdx) => {
+          return (
+            <Slide
+              key={sliderIdx}
+              defaultValue={defaultVal}
+              onChange={(event, newValue) =>
+                this.props.setAnimationParameter(sliderIdx, newValue)
+              }
+            />
+          );
+        })}
+      </div>
+    );
+  }
 }
 
 export default Sliders;

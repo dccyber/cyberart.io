@@ -1,138 +1,119 @@
-
-
 class Circle2 {
-    constructor (idx) {
+  constructor(idx) {
+    this.height = 1;
+    this.startAngle = 0;
+    this.endAngle = Math.PI * 2;
+    this.anticlockwise = false;
 
-        this.height = 1;
-        this.startAngle = 0;
-        this.endAngle = Math.PI * 2;
-        this.anticlockwise = false;
+    this.red = this.red.bind(this);
 
-        this.red = this.red.bind(this);
+    this.idx = idx;
+    this.bigCircleRadius = 600;
 
-        this.idx = idx;
-        this.bigCircleRadius = 600;
+    this.setCenterForIdx = this.setCenterForIdx.bind(this);
+    this.setCenterForIdx(idx);
 
-        this.setCenterForIdx = this.setCenterForIdx.bind(this);
-        this.setCenterForIdx(idx);
+    this.returningHome = false;
 
+    this.radians = 0;
+    this.originalRadians = 0;
+    this.shapeIdx = 0;
+  }
 
-        this.returningHome = false;
+  setCenterForIdx(framesElapsed = 0, withLocation = true) {
+    const rotationSpeed = 2;
 
-        this.radians = 0;
-        this.originalRadians = 0;
-        this.shapeIdx = 0;
+    //let height = Math.floor(this.bigCircleRadius * Math.sin(radians * 4) );
+
+    let radius;
+    switch (this.shapeIdx) {
+      case 0:
+        // atom
+        radius = Math.floor(this.bigCircleRadius * Math.sin(this.radians * 4));
+        break;
+      case 1:
+        //heart
+        radius = Math.floor(
+          (this.bigCircleRadius * (Math.sin(this.radians) + 1)) / 2
+        );
+        break;
+
+      case 2:
+        //sunflower
+        radius = Math.floor(
+          (this.bigCircleRadius * (Math.sin(this.idx) + 1)) / 2
+        );
+        break;
+
+      default:
+        radius = Math.floor((this.bigCircleRadius * (1024 - this.idx)) / 1024);
     }
 
-    setCenterForIdx (framesElapsed = 0, withLocation=true) {
+    //spiral
 
-        const rotationSpeed = 2;
-
-
-
-        //let height = Math.floor(this.bigCircleRadius * Math.sin(radians * 4) );
-
-        let radius;
-        switch (this.shapeIdx) {
-            case 0:
-                // atom
-                radius = Math.floor(this.bigCircleRadius * Math.sin(this.radians * 4) );
-                break;
-            case 1:
-                //heart
-                radius = Math.floor(this.bigCircleRadius * (Math.sin(this.radians) + 1)/2);
-                break;
-
-            case 2:
-                //sunflower
-                radius = Math.floor(this.bigCircleRadius * (Math.sin(this.idx) + 1)/2);
-                break;
-
-            default:
-                radius = Math.floor(this.bigCircleRadius * (1024 - this.idx) / 1024);
-        }
-
-
-
-        //spiral
-
-        /*
+    /*
         this.prevX = this.x;
         this.originalX = this.x;
         this.prevY = this.y;
         this.originalY = this.y;
         */
-        const radians = Math.abs(2*Math.PI* ((this.idx - framesElapsed * rotationSpeed) % 1024)/1024);
-        this.radians = radians;
+    const radians = Math.abs(
+      (2 * Math.PI * ((this.idx - framesElapsed * rotationSpeed) % 1024)) / 1024
+    );
+    this.radians = radians;
 
-        if(withLocation) {
-
-            //inside: circles move appropriately, but color skips
-            this.x = 842 + radius * Math.cos(radians);
-            this.y = 842 + radius * Math.sin(radians);
-
-
-
-        }
-
-        //this.originalX = 842 + height * Math.cos(this.originalRadians);
-        //this.originalY = 842 + height * Math.sin(this.originalRadians);
-
-
-
-
-
-        //outside: circles are discont, but color moves approp
-
-
+    if (withLocation) {
+      //inside: circles move appropriately, but color skips
+      this.x = 842 + radius * Math.cos(radians);
+      this.y = 842 + radius * Math.sin(radians);
     }
 
-    goodColor(color) {
-        return Math.min(
-            256,
-            Math.max(
-                10,
-                color
-            )
-        );
-    }
+    //this.originalX = 842 + height * Math.cos(this.originalRadians);
+    //this.originalY = 842 + height * Math.sin(this.originalRadians);
 
-    avg (a, b) {
-        return Math.floor((a+b)/2);
-    }
+    //outside: circles are discont, but color moves approp
+  }
 
-    red(ctx, framesElapsed) {
-        return this.goodColor (
-            Math.floor((this.idx * 5 + framesElapsed / 3) % 256)
-        );
-    }
+  goodColor(color) {
+    return Math.min(256, Math.max(10, color));
+  }
 
-    green(ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor((this.idx * 3 + framesElapsed / 5) % 256)
-        );
-    }
+  avg(a, b) {
+    return Math.floor((a + b) / 2);
+  }
 
-    blue (ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor(256 * this.radians / (2 * Math.PI))
-        );
-    }
+  red(ctx, framesElapsed) {
+    return this.goodColor(Math.floor((this.idx * 5 + framesElapsed / 3) % 256));
+  }
 
-    draw (ctx, framesElapsed) {
-        let red = this.red(ctx, framesElapsed);
+  green(ctx, framesElapsed) {
+    return this.goodColor(Math.floor((this.idx * 3 + framesElapsed / 5) % 256));
+  }
 
-        //let green = this.goodColor(this.height);
-        let green =this.green(ctx, framesElapsed);
+  blue(ctx, framesElapsed) {
+    return this.goodColor(Math.floor((256 * this.radians) / (2 * Math.PI)));
+  }
 
-        let blue = this.blue(ctx, framesElapsed);
+  draw(ctx, framesElapsed) {
+    let red = this.red(ctx, framesElapsed);
 
-        ctx.fillStyle=`rgb(${red},${green},${blue})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
-        ctx.fill();
-    }
+    //let green = this.goodColor(this.height);
+    let green = this.green(ctx, framesElapsed);
 
+    let blue = this.blue(ctx, framesElapsed);
+
+    ctx.fillStyle = `rgb(${red},${green},${blue})`;
+    ctx.beginPath();
+    ctx.arc(
+      this.x,
+      this.y,
+      this.height,
+      this.startAngle,
+      this.endAngle,
+      this.anticlockwise
+    );
+    ctx.fill();
+  }
 }
 
 export default Circle2;
