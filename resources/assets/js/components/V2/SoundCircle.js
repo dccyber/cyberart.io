@@ -1,4 +1,5 @@
 import Circle from "./Circle";
+import MathLib from "./util/MathLib.js";
 
 class SoundCircle {
     constructor(height, width, title = "Polygon Sound Visualizer - Brownian Motion Rainbow Circles") {
@@ -16,10 +17,6 @@ class SoundCircle {
         this.returningHome = false;
         this.sortable = "radius";
         this.sortOrder = 1;
-    }
-
-    avg(a, b) {
-        return Math.floor((a + b) / 2);
     }
 
     moveToNextFrame() {
@@ -68,8 +65,8 @@ class SoundCircle {
                 // If any x or y differences exist for any polygon, you aren't home yet
                 this.stillReturningHome = this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;
 
-                //this.polygons[a].x = this.avg(this.polygons[a].x, this.polygons[a].originalX);
-                //this.polygons[a].y = this.avg(this.polygons[a].y, this.polygons[a].originalY);
+                //this.polygons[a].x = MathLib.avg(this.polygons[a].x, this.polygons[a].originalX);
+                //this.polygons[a].y = MathLib.avg(this.polygons[a].y, this.polygons[a].originalY);
             } else {
                 // Brownian motion Drift
                 this.polygons[a].x =

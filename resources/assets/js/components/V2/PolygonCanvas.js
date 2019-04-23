@@ -4,12 +4,6 @@ import React, { Component } from "react";
  * Copyright Aaron Boyarsky, 2018
  */
 class PolygonCanvas extends Component {
-    constructor(props) {
-        super(props);
-        this.iterate = this.iterate.bind(this);
-        this.redraw = this.redraw.bind(this);
-    }
-
     componentDidMount() {
         this.ctx = this.refs.canvas.getContext("2d");
         this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
@@ -18,13 +12,13 @@ class PolygonCanvas extends Component {
         this.ctx.putImageData(this.imageData, 0, 0);
     }
 
-    redraw() {
+    redraw = () => {
         this.iterate();
 
         //Used for drawing raw pixels in the buffer
-    }
+    };
 
-    iterate() {
+    iterate = () => {
         this.ctx.fillStyle = "#000000";
         this.ctx.fillRect(0, 0, this.props.width, this.props.height);
 
@@ -73,7 +67,7 @@ class PolygonCanvas extends Component {
         this.ctx.arc(x, y, height, startAngle, endAngle, anticlockwise);
         this.ctx.fill();
         */
-    }
+    };
 
     paintPixel(x, y, rgba) {
         //TODO: explanation
