@@ -60,7 +60,7 @@ class SoundCircle {
     moveToNextFrame() {
         this.framesElapsed++;
 
-        if (this.framesElapsed % 500 === 0 && this.framesElapsed > 0) {
+        if (this.framesElapsed % 5000 === 0 && this.framesElapsed > 0) {
             this.returningHome = true;
             this.returningHomeFramesElapsed = 0;
         }
