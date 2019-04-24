@@ -12,11 +12,11 @@ class Visualizer extends Component {
         this.animationManager = new AnimationManager(this.props.animations, this.changeAnimation);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.changeAnimation(this.animationManager.getCurrentAnimation());
     }
 
-    changeAnimation = (Animation) => {
+    changeAnimation = Animation => {
         const animation = new Animation(this.props.height || DEFAULT_HEIGHT, this.props.width || DEFAULT_WIDTH);
         this.setState({
             animation

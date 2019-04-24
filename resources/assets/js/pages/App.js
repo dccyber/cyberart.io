@@ -16,8 +16,7 @@ const theme = createMuiTheme({
 });
 
 export default class App extends Component {
-
-    constructor () {
+    constructor() {
         super();
         RenderLib.registerVendorAnimationFunctions();
     }

@@ -24,15 +24,28 @@ class Circle {
     }
 
     red(ctx, framesElapsed) {
-        return Math.max(30, this.goodColor(Math.floor(Math.sin(framesElapsed / 7) * 128 + 80)));
+        return this.goodColor((16 - this.height) * 16);
+        /*
+        return Math.max(
+            30,
+            0//this.goodColor(Math.floor(Math.sin(framesElapsed / 7) * 128 + 80))
+        );
+        */
     }
 
     green(ctx, framesElapsed) {
-        return Math.max(30, this.goodColor(Math.floor(Math.sin(framesElapsed / (Math.sin(this.x) + 19) * 3) * 128 + 80)));
+        return Math.max(
+            30,
+            this.goodColor(
+                Math.floor(
+                    Math.sin(((framesElapsed + 500) / (Math.sin((this.height * this.avg(this.x, this.y)) / 100) + 19)) * 3) * 128 + 10
+                )
+            )
+        );
     }
 
     blue(ctx, framesElapsed) {
-        return Math.max(30, this.goodColor(Math.floor(Math.sin(framesElapsed / 19) * 128 + 80)));
+        return this.goodColor(this.height * 10);
     }
 
     draw(ctx, framesElapsed) {
