@@ -9,9 +9,15 @@ class SoundCircle {
         this.height = height;
         this.width = width;
 
+        console.log('foo', height, width);
+
         this.polygons = [];
-        for (let x = 0; x < 1024; x++) {
-            this.polygons.push(new Circle(x + 330, x + 330, 1));
+        for (let x = 0; x < width; x+=1) {
+            this.polygons.push(new Circle(
+                x,
+                Math.round(height/2) + Math.round(Math.sin(x/100) * 200),
+                Math.round((Math.sin(x/50) + 1)  * 7)  +2
+            ));
         }
 
         this.returningHome = false;
@@ -42,7 +48,7 @@ class SoundCircle {
         */
 
         const driftSpeed = 10;
-        const returnHomeSpeed = 3;
+        const returnHomeSpeed = 7;
 
         this.stillReturningHome = false;
         for (let a = 0; a < this.polygons.length; a++) {
@@ -51,7 +57,7 @@ class SoundCircle {
             this.polygons[a].prevY = this.polygons[a].y;
 
             // Deflate
-            this.polygons[a].height = Math.max(1, this.polygons[a].height - 1);
+            //this.polygons[a].height = Math.max(1, this.polygons[a].height - 1);
 
             if (this.returningHome) {
                 let xDiff = this.polygons[a].originalX - this.polygons[a].x;

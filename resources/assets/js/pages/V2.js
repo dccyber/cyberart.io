@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ContactButtons from "../components/Social/ContactButtons";
-import Visualizer from "../components/V2/Visualizer";
+import CircleLineVisualizer from "../components/V2/CircleLineVisualizer";
 import Navigation from "../components/Navigation";
 
 class SoundPolygonVisualizer extends Component {
@@ -10,7 +10,7 @@ class SoundPolygonVisualizer extends Component {
                 <Navigation />
                 <div id="container">
                     <div className="content">
-                        <Visualizer />
+                        <CircleLineVisualizer />
                         <ContactButtons />
                     </div>
                 </div>

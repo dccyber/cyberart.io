@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-
+import RenderLib from "../components/V2/util/RenderLib";
 import { render } from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import RandomArt from "./RandomArt";
-import SoundVisualizer from "./SoundVisualizer";
-import SoundPolygonVisualizer from "./SoundPolygonVisualizer";
 import V2 from "./V2";
-import MineFlowVisualizer from "./MineFlowVisualizer";
-import ImageLoader from "./ImageLoaderVisualizer";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
 
 const theme = createMuiTheme({
     palette: {
@@ -22,6 +16,12 @@ const theme = createMuiTheme({
 });
 
 export default class App extends Component {
+
+    constructor () {
+        super();
+        RenderLib.registerVendorAnimationFunctions();
+    }
+
     render() {
         return (
             <div>

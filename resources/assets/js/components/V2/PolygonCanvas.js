@@ -10,6 +10,8 @@ class PolygonCanvas extends Component {
         this.g = this.imageData.data;
 
         this.ctx.putImageData(this.imageData, 0, 0);
+
+        this.props.beginAnimation(this.redraw);
     }
 
     redraw = () => {
