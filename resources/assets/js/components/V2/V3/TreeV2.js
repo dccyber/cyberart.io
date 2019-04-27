@@ -18,7 +18,7 @@ class Tree {
         if (maxAge) {
             this.maxAge = Math.min(300, Math.max(0, maxAge + Math.floor(Math.random() * 15) - 7));
         } else {
-            this.maxAge = 220 + Math.floor(Math.random() * 100) - 50;
+            this.maxAge = 250 + Math.floor(Math.random() * 100) - 50;
         }
         const mutationAmount = 100;
 
@@ -29,7 +29,7 @@ class Tree {
         }
 
         if (r) {
-            const change = (Math.random() * 100) > 99;
+            const change = (Math.random() * 100) > 98;
             if (change) {
                 this.redColor = this.goodColor(r + Math.random() * mutationAmount * 2 - mutationAmount)
             } else {
@@ -38,7 +38,7 @@ class Tree {
         }
 
         if (g) {
-            const change = (Math.random() * 100) > 99;
+            const change = (Math.random() * 100) > 98;
             if (change) {
                 this.greenColor = this.goodColor(g + Math.random() * mutationAmount * 2 - mutationAmount)
             } else {
@@ -47,7 +47,7 @@ class Tree {
         }
 
         if (b) {
-            const change = (Math.random() * 100) > 99;
+            const change = (Math.random() * 100) > 98;
             if (change) {
                 this.blueColor = this.goodColor(b + Math.random() * mutationAmount * 2 - mutationAmount)
             } else {

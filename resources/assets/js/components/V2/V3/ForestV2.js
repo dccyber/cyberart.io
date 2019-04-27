@@ -15,7 +15,7 @@ class SoundCircle {
         const centerX = Math.floor(width/2);
         const centerY = Math.floor(height/2);
 
-        const treeCount = 500;
+        const treeCount = 10;
 
         for (let a = 0; a < treeCount; a++) {
             const randomX = Math.floor(Math.random() * width + 1);
@@ -63,18 +63,12 @@ class SoundCircle {
         const randomX = this.clampWidth(Math.floor(Math.random() * scatterDistance * 2) - scatterDistance + parentX);
         const randomY = this.clampHeight(Math.floor(Math.random() * scatterDistance * 2) - scatterDistance + parentY);
 
-        const collidingTree = this.polygons.find((polygon) => {
-            return polygon.x === randomX && polygon.y === randomY && !polygon.dead;
-        });
 
-        if (collidingTree) {
-            return;
-        }
             const veryLargeTrees = this.polygons.filter((polygon) => {
                 return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 243;
             });
 
-            if (veryLargeTrees.length > 300) { //100 g00d
+            if (veryLargeTrees.length > 350) { //100 g00d
                 return;
             }
 
@@ -82,7 +76,7 @@ class SoundCircle {
                 return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 81;
             });
 
-            if (largeTrees.length > 40) { //220
+            if (largeTrees.length > 50) { //220
                 return;
             }
 
@@ -106,7 +100,15 @@ class SoundCircle {
                 return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 3;
             });
 
-            if (veryCloseTrees.length > 9) { //27 max
+            if (veryCloseTrees.length > 7) { //27 max
+                return;
+            }
+
+            const collidingTree = veryCloseTrees.find((polygon) => {
+                return polygon.x === randomX && polygon.y === randomY && !polygon.dead;
+            });
+
+            if (collidingTree) {
                 return;
             }
 
