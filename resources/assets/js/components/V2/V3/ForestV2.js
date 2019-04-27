@@ -74,7 +74,7 @@ class SoundCircle {
                 return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 243;
             });
 
-            if (veryLargeTrees.length > 350) { //100 g00d
+            if (veryLargeTrees.length > 300) { //100 g00d
                 return;
             }
 
