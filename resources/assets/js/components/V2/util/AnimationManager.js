@@ -1,5 +1,5 @@
 const FPS = 60;
-const LIMIT_FRAMERATE = true;
+const LIMIT_FRAMERATE = false;
 
 export default class AnimationManager {
     constructor(animationList, changeAnimation) {

@@ -1,5 +1,5 @@
 export default class MathLib {
     static avg(a, b) {
-        return Math.floor((a + b) / 2);
+        return Math.round((a + b) / 2);
     }
 }

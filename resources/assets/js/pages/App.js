@@ -4,6 +4,7 @@ import RenderLib from "../components/V2/util/RenderLib";
 import { render } from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import V2 from "./V2";
+import V3 from "./V3";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
@@ -35,6 +36,7 @@ export default class App extends Component {
 
                            */}
                             <Route path="/v2" component={V2} />
+                            <Route path="/v3" component={V3} />
                             <Route component={NoMatch} />
                         </Switch>
                     </BrowserRouter>
