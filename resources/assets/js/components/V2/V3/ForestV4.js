@@ -40,10 +40,33 @@ class SoundCircle {
 
 
     clampWidth = (w) => {
+        /*
+        if (w > this.width) {
+            return w - this.width;
+        }
+
+        if (w < 0) {
+            return w + this.width;
+        }
+
+        return w;
+*/
         return Math.min(Math.max(0, w), this.width);
     };
 
     clampHeight = (h) => {
+        /*
+        if (h > this.height) {
+            return h - this.height;
+        }
+
+        if (h < 0) {
+            return h + this.height;
+        }
+
+        return h;
+        */
+
         return Math.min(Math.max(0, h), this.height);
     };
 
@@ -63,6 +86,7 @@ class SoundCircle {
         const randomX = this.clampWidth(Math.floor(Math.random() * scatterDistance * 2) - scatterDistance + parentX);
         const randomY = this.clampHeight(Math.floor(Math.random() * scatterDistance * 2) - scatterDistance + parentY);
 
+        /*
         if (randomX < this.width / 2 + 100 && randomX > this.width / 2 - 100) {
             return;
         }
@@ -70,14 +94,14 @@ class SoundCircle {
         if (randomY < this.height / 2 + 30 && randomY > this.height / 2 - 30) {
             return;
         }
-
+*/
 
 
         const veryLargeTrees = this.polygons.filter((polygon) => {
                 return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 243;
             });
 
-            if (veryLargeTrees.length > 1313) { //100 g00d
+            if (veryLargeTrees.length > 1813) { //1313 //100 g00d
                 return;
             }
 
@@ -214,6 +238,15 @@ class SoundCircle {
             this.polygons = this.polygons.filter(polygon => {
                 return !polygon.dead;
             });
+        }
+
+        if (this.framesElapsed % 50 === 0) {
+            const meteorLandsAtX = Math.floor(Math.random() * this.width);
+            const meteorLandsAtY = Math.floor(Math.random() * this.height);
+            const meteorSize = 50 + (Math.random() * 200);
+            this.polygons = this.polygons.filter(polygon => {
+                return Math.sqrt(Math.pow(polygon.x - meteorLandsAtX, 2) +  Math.pow(polygon.y - meteorLandsAtY, 2)) > meteorSize;
+            })
         }
     }
 }
