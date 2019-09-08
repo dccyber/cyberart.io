@@ -8,6 +8,7 @@ class InterfaceCanvas extends Component {
         super(props);
         this.iterate = this.iterate.bind(this);
         this.redraw = this.redraw.bind(this);
+        this.adjustPixel = this.adjustPixel.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +41,8 @@ class InterfaceCanvas extends Component {
 
         this.backgroundImage.onload = () => {
             self.ctx.drawImage(this.backgroundImage, 0, 0, self.props.width, self.props.height);
+            this.imageData = this.ctx.getImageData(0, 0, this.props.width, this.props.height);
+            this.g = this.imageData.data;
         };
     }
 
@@ -73,12 +76,35 @@ class InterfaceCanvas extends Component {
     iterate() {
         // Render a window background
 
-        // Advance animation to the next frame
-        this.props.animation.moveToNextFrame(this.ctx);
+
+
+
+
 
         //this.ctx.drawImage(this.backgroundImage, 0, 0, self.props.width, self.props.height);
 
         // TODO: draw the objects in the animation
+
+        for (let a=0; a< this.props.width; a++) {
+            for (let b=0; b<this.props.height; b++)
+            //this.adjustPixel(a, 2);
+            this.adjustPixel(a, b);
+        }
+
+        this.ctx.putImageData(this.imageData, 0, 0);
+
+        // Advance animation to the next frame
+        this.props.animation.moveToNextFrame(this.ctx);
+    }
+
+    adjustPixel(x,y) {
+        const imageData = this.g;
+        const idx = 4 * (x + y * this.props.width);
+
+        imageData[idx] = (imageData[idx] + 2)%255;
+        imageData[1 + idx] = (imageData[1 + idx] + 3) %255;
+        imageData[2 + idx] = (imageData[2 + idx] + 5) %255;
+        imageData[3 + idx] = 255;
     }
 
     paintPixel(x, y, rgba) {

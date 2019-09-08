@@ -18,7 +18,7 @@ class InterfaceAnimation {
     moveToNextFrame(ctx) {
         this.framesElapsed++;
 
-        ctx.drawImage(this.backgroundImage, 0, 0, this.width, this.height);
+        //ctx.drawImage(this.backgroundImage, 0, 0, this.width, this.height);
 
         this.applicationState.moveToNextFrame(ctx);
     }
