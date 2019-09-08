@@ -24,17 +24,16 @@ class Visualizer extends Component {
         this.stopAnimation = this.stopAnimation.bind(this);
         this.setRandomAnimation = this.setRandomAnimation.bind(this);
         this.setAnimationParameter = this.setAnimationParameter.bind(this);
+        this.beginAnimation = this.beginAnimation.bind(this);
     }
 
     componentWillMount() {
         this.registerVendorAnimationFunctions();
-
-        this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
-        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
-        this.state.animation = new ChosenAnimation(this.state.width, this.state.height);
     }
 
-    componentDidMount() {
+
+    beginAnimation () {
+
         this.animate();
     }
 

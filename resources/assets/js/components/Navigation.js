@@ -60,7 +60,7 @@ class Navigation extends Component {
                                 onClose={this.handleClose}
                             >
                                 <MenuItem onClick={this.handleClose('/')}>Random Canvas Demos</MenuItem>
-                                <MenuItem onClick={this.handleClose('/visualizer')}>Sound Visualizer</MenuItem>
+                                {/*<MenuItem onClick={this.handleClose('/visualizer')}>Sound Visualizer</MenuItem>*/}
                                 <MenuItem onClick={this.handleClose('/polygonVisualizer')}>Sound Visualizer</MenuItem>
                                 <MenuItem onClick={this.handleClose('/imageLoader')}>Image Effect, Canvas Interface</MenuItem>
                                 <MenuItem onClick={this.handleClose('/v2')}>Brownian Motion and Sin Waves</MenuItem>

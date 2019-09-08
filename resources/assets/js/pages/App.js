@@ -34,7 +34,7 @@ export default class App extends Component {
                     <BrowserRouter basename="/">
                         <Switch>
                             <Route exact path="/" component={RandomArt} />
-                            <Route path="/visualizer" component={SoundVisualizer} />
+                            {/*<Route path="/visualizer" component={SoundVisualizer} />*/}
                             <Route path="/polygonVisualizer" component={SoundPolygonVisualizer} />
                             <Route path="/imageLoader" component={ImageLoader} />
                             <Route path="/v2" component={V2} />

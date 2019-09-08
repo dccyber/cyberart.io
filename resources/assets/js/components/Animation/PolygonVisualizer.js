@@ -21,7 +21,8 @@ class PolygonVisualizer extends Visualizer {
 
         this.state = {
             width: VISUALIZER_WIDTH,
-            height: VISUALIZER_HEIGHT
+            height: VISUALIZER_HEIGHT,
+            animationStarted: false
         };
 
         // Don't feel like working out probabilities. They are what they are.
@@ -33,6 +34,19 @@ class PolygonVisualizer extends Visualizer {
             PoppingSquares2,
             RectEqualizer
         ];
+
+        this.beginAnimation = this.beginAnimation.bind(this);
+    }
+
+    beginAnimation () {
+
+        this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
+        const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
+        this.state.animation = new ChosenAnimation(this.state.width, this.state.height);
+
+        this.setState({
+            animationStarted: true
+        }, super.beginAnimation);
     }
 
     render() {
@@ -40,13 +54,17 @@ class PolygonVisualizer extends Visualizer {
 
         return (
             <React.Fragment>
-                {super.render()}
-                <PolygonCanvas
-                    ref={c => (this._canvas = c)}
-                    width={this.state.width}
-                    height={this.state.height}
-                    animation={this.state.animation}
-                />
+                {this.state.animationStarted ?
+                    <React.Fragment>
+                        {super.render()}
+                        <PolygonCanvas
+                        ref={c => (this._canvas = c)}
+                        width={this.state.width}
+                        height={this.state.height}
+                        animation={this.state.animation}
+                        />
+                    </React.Fragment> : <button onClick={this.beginAnimation}>Start Animation</button>
+                }
             </React.Fragment>
         );
     }
