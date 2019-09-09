@@ -2,7 +2,7 @@ import Circle from "./Circle";
 import MathLib from "./util/MathLib.js";
 
 class SoundCircle {
-    constructor(height, width, title = "Polygon Sound Visualizer - Brownian Motion Rainbow Circles") {
+    constructor(height, width, title = "Sin Waves with Brownian Motion based on Size") {
         this.title = title;
         this.framesElapsed = 0;
         this.waitingFramesElapsed = 0;

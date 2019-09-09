@@ -2,7 +2,7 @@ import Tree from "./TreeV4";
 import MathLib from "../util/MathLib.js";
 
 class SoundCircle {
-    constructor(height, width, title = "Forest Visualizer") {
+    constructor(height, width, title = "Forest Visualizer 2") {
         this.title = title;
         this.framesElapsed = 0;
         this.waitingFramesElapsed = 0;

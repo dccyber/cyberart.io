@@ -63,7 +63,7 @@ class Navigation extends Component {
                                 {/*<MenuItem onClick={this.handleClose('/visualizer')}>Sound Visualizer</MenuItem>*/}
                                 <MenuItem onClick={this.handleClose('/polygonVisualizer')}>Sound Visualizer</MenuItem>
                                 <MenuItem onClick={this.handleClose('/imageLoader')}>Image Effect, Canvas Interface</MenuItem>
-                                <MenuItem onClick={this.handleClose('/v2')}>Brownian Motion and Sin Waves</MenuItem>
+                                <MenuItem onClick={this.handleClose('/v2')}>Sin Waves with Brownian Motion</MenuItem>
                                 <MenuItem onClick={this.handleClose('/v3')}>Forest Visualizer 1</MenuItem>
                                 <MenuItem onClick={this.handleClose('/v4')}>Forest Visualizer 2</MenuItem>
                             </Menu>

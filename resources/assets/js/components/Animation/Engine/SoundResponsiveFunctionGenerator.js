@@ -24,6 +24,7 @@ SOFTWARE.
 // TODO: clean this up, or replace with another library
 class SoundResponsiveFunctionGenerator {
     constructor(soundEventCallback, sensitivity = 0.0001) {
+
         this.sensitivity = sensitivity;
 
         var audioContext = null;
@@ -57,7 +58,8 @@ class SoundResponsiveFunctionGenerator {
         this.soundEventCallback = [soundEventCallback];
     }
 
-    error() {
+    error(e) {
+        console.log(e.code, e.message, e.name)
         alert("Stream generation failed.");
     }
 
