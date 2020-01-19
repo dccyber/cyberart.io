@@ -1,9 +1,7 @@
-
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class StateBuffer {
-
     //life doesn't work with buffer size less than 2
     constructor(initialState, bufferSize = 2, unlimitedBuffer = false) {
         this.bufferSize = bufferSize;
@@ -22,33 +20,30 @@ class StateBuffer {
         output = Array.isArray(o) ? [] : {};
         for (key in o) {
             v = o[key];
-            output[key] = (typeof v === "object") ? this.copy(v) : v;
+            output[key] = typeof v === "object" ? this.copy(v) : v;
         }
         return output;
     }
 
-    at (idx) {
+    at(idx) {
         return this.buffer[idx];
     }
 
-    current () {
+    current() {
         return this.at(this.currentIndex);
     }
 
-    next () {
+    next() {
         return this.at(this.getNextIdx());
     }
 
-    tick () {
+    tick() {
         this.currentIndex = this.getNextIdx();
     }
 
-    getNextIdx () {
-        return this.unlimitedBuffer ?
-            (this.currentIndex + 1) :
-            (this.currentIndex + 1) % this.bufferSize;
+    getNextIdx() {
+        return this.unlimitedBuffer ? this.currentIndex + 1 : (this.currentIndex + 1) % this.bufferSize;
     }
-
 }
 
 export default StateBuffer;

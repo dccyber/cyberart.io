@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import InterfaceCanvas from "./Engine/InterfaceCanvas"; //TODO: replace with imageCanvas
 import Visualizer from "./Visualizer";
 import InterfaceAnimation from "./Animations/InterfaceAnimation";
@@ -9,21 +9,16 @@ const VISUALIZER_WIDTH = 1024;
 const VISUALIZER_HEIGHT = 768;
 
 class ImageLoaderVisualizer extends Visualizer {
-
-    constructor () {
+    constructor() {
         super();
 
         this.state = {
-            width:VISUALIZER_WIDTH,
+            width: VISUALIZER_WIDTH,
             height: VISUALIZER_HEIGHT
         };
 
-
         // Don't feel like working out probabilities. They are what they are.
-        this.animationList = [
-            InterfaceAnimation
-        ];
-
+        this.animationList = [InterfaceAnimation];
     }
 
     render() {
@@ -31,15 +26,14 @@ class ImageLoaderVisualizer extends Visualizer {
 
         return (
             <React.Fragment>
-                { super.render() }
+                {super.render()}
                 <InterfaceCanvas
-                    ref={(c) => this._canvas = c}
+                    ref={c => (this._canvas = c)}
                     width={this.state.width}
                     height={this.state.height}
                     animation={this.state.animation}
                 />
             </React.Fragment>
-
         );
     }
 }

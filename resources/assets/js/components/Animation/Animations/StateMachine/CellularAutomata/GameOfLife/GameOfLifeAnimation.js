@@ -5,37 +5,34 @@ import StateMachineAnimation from "../../../../Engine/StateMachineAnimation";
  * Copyright Aaron Boyarsky, 2018
  */
 class GameOfLifeAnimation extends StateMachineAnimation {
-
-    constructor (width, height, title = 'Game of Life') {
-
+    constructor(width, height, title = "Game of Life") {
         super(width, height, title);
     }
 
-    initialStateGenerator (i, j) {
-
+    initialStateGenerator(i, j) {
         let alive = Math.floor(Math.random() + 0.5) === 1;
         return {
             alive: alive,
             age: alive ? 1 : 0
         };
-    };
+    }
 
-    createNewCell (nextCellState) {
+    createNewCell(nextCellState) {
         nextCellState.alive = 1;
         nextCellState.age = 1;
     }
 
-    createDeadCell (nextCellState, cellState) {
+    createDeadCell(nextCellState, cellState) {
         nextCellState.alive = 0;
         nextCellState.age = 0;
     }
 
-    ageCell (nextCellState, cellState) {
+    ageCell(nextCellState, cellState) {
         nextCellState.alive = 1;
         nextCellState.age = cellState.age + 1;
     }
 
-    handleLivingCellTransition (cellState, nextCellState, neighborInfo) {
+    handleLivingCellTransition(cellState, nextCellState, neighborInfo) {
         if (neighborInfo.count < 2 || neighborInfo.count > 3) {
             this.createDeadCell(nextCellState, cellState);
         } else {
@@ -43,7 +40,7 @@ class GameOfLifeAnimation extends StateMachineAnimation {
         }
     }
 
-    handleDeadCellTransition (cellState, nextCellState, neighborInfo) {
+    handleDeadCellTransition(cellState, nextCellState, neighborInfo) {
         if (neighborInfo.count === 3) {
             this.createNewCell(nextCellState);
         } else {
@@ -51,23 +48,17 @@ class GameOfLifeAnimation extends StateMachineAnimation {
         }
     }
 
-
-
-
-
-
-    stateTransition (i, j, width, height, state, nextState) {
-
+    stateTransition(i, j, width, height, state, nextState) {
         let cellState = state[i][j];
         let nextCellState = nextState[i][j];
 
         let neighborInfo = this.getEmptyNeighborInfo();
 
-        for(let x=-1; x<2; x++) {
-            for(let y=-1; y<2; y++) {
-                if(x||y){
-                    let i2 = i+x;
-                    let j2 = j+y;
+        for (let x = -1; x < 2; x++) {
+            for (let y = -1; y < 2; y++) {
+                if (x || y) {
+                    let i2 = i + x;
+                    let j2 = j + y;
                     if (i2 < 0) {
                         i2 += width;
                     }
@@ -87,14 +78,13 @@ class GameOfLifeAnimation extends StateMachineAnimation {
         }
 
         if (cellState.alive) {
-            this.handleLivingCellTransition(cellState, nextCellState, neighborInfo)
+            this.handleLivingCellTransition(cellState, nextCellState, neighborInfo);
         } else {
             this.handleDeadCellTransition(cellState, nextCellState, neighborInfo);
         }
-
     }
 
-    getEmptyNeighborInfo () {
+    getEmptyNeighborInfo() {
         return {
             count: 0,
             ageTotal: 0
@@ -105,26 +95,23 @@ class GameOfLifeAnimation extends StateMachineAnimation {
         neighborInfo.count += cellState.alive;
     }
 
-
-    generateRed (cellState) {
+    generateRed(cellState) {
         return cellState.alive ? Math.min(cellState.age, 255) : 0;
     }
 
-    generateGreen (cellState) {
+    generateGreen(cellState) {
         return cellState.alive ? Math.min(255 - cellState.age, 255) : 0;
     }
 
-    generateBlue (cellState) {
-        return cellState.alive
-            ? 0
-            : (cellState.blooming) % 256;
+    generateBlue(cellState) {
+        return cellState.alive ? 0 : cellState.blooming % 256;
     }
 
-    colorGenerator (cellState, framesElapsed) {
+    colorGenerator(cellState, framesElapsed) {
         return {
             red: this.generateRed(cellState),
             green: this.generateGreen(cellState),
-            blue:this.generateBlue(cellState),//cellState.alive ? Math.min(cellState.age, 255) : 0,
+            blue: this.generateBlue(cellState), //cellState.alive ? Math.min(cellState.age, 255) : 0,
 
             /*
             red: (cellState.iter + framesElapsed * 3) % 256,
@@ -133,7 +120,7 @@ class GameOfLifeAnimation extends StateMachineAnimation {
             */
             alpha: 255
         };
-    };
+    }
 }
 
 export default GameOfLifeAnimation;

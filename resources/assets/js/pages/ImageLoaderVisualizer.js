@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import ContactButtons from '../components/Social/ContactButtons';
-import ImageLoaderVis from '../components/InterfaceApplication/ImageLoaderVis';
+import React, { Component } from "react";
+import ContactButtons from "../components/Social/ContactButtons";
+import ImageLoaderVis from "../components/InterfaceApplication/ImageLoaderVis";
 import Navigation from "../components/Navigation";
 
 class ImageLoaderVisualizer extends Component {
     render() {
-
         return (
             <div>
-                <Navigation/>
+                <Navigation />
                 <div id="container">
                     <div className="content">
                         <ImageLoaderVis />

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
 
 const DEFAULT_WIDTH = 1024;
 const DEFAULT_HEIGHT = 768;
@@ -7,8 +6,7 @@ const FPS = 120;
 const LIMIT_FRAMERATE = false;
 
 class Visualizer extends Component {
-
-    constructor () {
+    constructor() {
         super();
 
         this.state = {
@@ -17,7 +15,7 @@ class Visualizer extends Component {
         };
 
         this.counter = 0;
-        this.drawLoopInterval = Math.floor(1000/FPS);
+        this.drawLoopInterval = Math.floor(1000 / FPS);
         this.animationList = [];
 
         this.drawLoop = this.drawLoop.bind(this);
@@ -27,29 +25,29 @@ class Visualizer extends Component {
         this.setAnimationParameter = this.setAnimationParameter.bind(this);
     }
 
-    componentWillMount () {
+    componentWillMount() {
         this.registerVendorAnimationFunctions();
 
-        this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+        this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
         const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
-        this.state.animation = new ChosenAnimation(this.state.width, this.state.height );
+        this.state.animation = new ChosenAnimation(this.state.width, this.state.height);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.animate();
     }
 
     // TODO: would be good in a utility somewhere
-    registerVendorAnimationFunctions () {
-        const vendors = ['ms', 'moz', 'webkit', 'o'];
-        for(let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-            window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                || window[vendors[x]+'CancelRequestAnimationFrame'];
+    registerVendorAnimationFunctions() {
+        const vendors = ["ms", "moz", "webkit", "o"];
+        for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"];
+            window.cancelAnimationFrame =
+                window[vendors[x] + "CancelAnimationFrame"] || window[vendors[x] + "CancelRequestAnimationFrame"];
         }
     }
 
-    setRandomAnimation () {
+    setRandomAnimation() {
         if (this.animationList.length > 1) {
             console.log(this.animationList.length);
 
@@ -59,7 +57,7 @@ class Visualizer extends Component {
 
             // Ensure a different animatino
             while (oldAnimationIdx === this.chosenAnimationIdx) {
-                this.chosenAnimationIdx = Math.floor(Math.random()*this.animationList.length);
+                this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
             }
 
             const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
@@ -72,7 +70,7 @@ class Visualizer extends Component {
         }
     }
 
-    drawLoop () {
+    drawLoop() {
         // Redraw the canvas using the buffer
         this._canvas.redraw();
 
@@ -81,14 +79,13 @@ class Visualizer extends Component {
         } else {
             this.animate();
         }
-
     }
 
-    animate () {
+    animate() {
         this.animationId = requestAnimationFrame(this.drawLoop);
     }
 
-    stopAnimation () {
+    stopAnimation() {
         cancelAnimationFrame(this.animationId);
     }
 
@@ -97,7 +94,7 @@ class Visualizer extends Component {
         this.state.animation.sliderSize[parameterIdx] = newValue;
     }
 
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <div>Visualizer</div>

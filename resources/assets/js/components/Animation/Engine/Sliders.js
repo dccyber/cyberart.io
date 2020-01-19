@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import Slider from 'material-ui/Slider';
+import React, { Component } from "react";
+import Slider from "@material-ui/core/Slide";
 
 const style = {
-    position: 'absolute', left: 50, top: 50, width: '300px'
+    position: "absolute",
+    left: 50,
+    top: 50,
+    width: "300px"
 };
 
 class Sliders extends Component {
-
-    constructor () {
+    constructor() {
         super();
 
         this.sliders = [];
@@ -19,15 +21,17 @@ class Sliders extends Component {
 
     render() {
         return (
-            <div style={style}>{
-                this.sliders.map((defaultVal, sliderIdx) => {
-                    return <Slider
-                        key={sliderIdx}
-                        defaultValue={defaultVal}
-                        onChange={(event, newValue) => this.props.setAnimationParameter(sliderIdx, newValue)}
-                    />;
-                })
-            }</div>
+            <div style={style}>
+                {this.sliders.map((defaultVal, sliderIdx) => {
+                    return (
+                        <Slide
+                            key={sliderIdx}
+                            defaultValue={defaultVal}
+                            onChange={(event, newValue) => this.props.setAnimationParameter(sliderIdx, newValue)}
+                        />
+                    );
+                })}
+            </div>
         );
     }
 }

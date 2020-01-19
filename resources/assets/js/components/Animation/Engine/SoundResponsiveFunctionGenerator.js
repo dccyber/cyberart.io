@@ -1,4 +1,3 @@
-
 // Adapted from code by Chris Wilson
 // @see https://github.com/cwilso/PitchDetect
 
@@ -22,7 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 // TODO: clean this up, or replace with another library
 class SoundResponsiveFunctionGenerator {
     constructor(soundEventCallback, sensitivity = 0.0001) {
@@ -36,27 +34,21 @@ class SoundResponsiveFunctionGenerator {
         var theBuffer = null;
         var DEBUGCANVAS = null;
         var mediaStreamSource = null;
-        var detectorElem,
-            canvasElem,
-            waveCanvas,
-            pitchElem,
-            noteElem,
-            detuneElem,
-            detuneAmount;
+        var detectorElem, canvasElem, waveCanvas, pitchElem, noteElem, detuneElem, detuneAmount;
 
-            window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.audioContext = new AudioContext();
-            this.MAX_SIZE = Math.max(4, Math.floor(this.audioContext.sampleRate / 5000));	// corresponds to a 5kHz signal
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        this.audioContext = new AudioContext();
+        this.MAX_SIZE = Math.max(4, Math.floor(this.audioContext.sampleRate / 5000)); // corresponds to a 5kHz signal
 
-            this.detuneAmount = 0; //TODO: figure out what this needs to be
+        this.detuneAmount = 0; //TODO: figure out what this needs to be
 
         this.rafID = null;
         this.buflen = 1024;
-        this.buf = new Float32Array( this.buflen );
+        this.buf = new Float32Array(this.buflen);
 
         this.noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-        this.MIN_SAMPLES = 0;  // will be initialized when AudioContext is created.
+        this.MIN_SAMPLES = 0; // will be initialized when AudioContext is created.
         this.GOOD_ENOUGH_CORRELATION = 0.9; // this is the "bar" for how close a correlation needs to be
 
         this.toggleLiveInput = this.toggleLiveInput.bind(this);
@@ -66,19 +58,18 @@ class SoundResponsiveFunctionGenerator {
         this.soundEventCallback = [soundEventCallback];
     }
 
-    error() {
-        alert('Stream generation failed.');
+    error(e) {
+        console.log(e.code, e.message, e.name)
+        alert("Stream generation failed.");
     }
 
     getUserMedia(dictionary, callback) {
         try {
             navigator.getUserMedia =
-                navigator.getUserMedia ||
-                navigator.webkitGetUserMedia ||
-                navigator.mozGetUserMedia;
+                navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia(dictionary, callback, this.error);
         } catch (e) {
-            alert('getUserMedia threw exception :' + e);
+            alert("getUserMedia threw exception :" + e);
         }
     }
 
@@ -93,7 +84,6 @@ class SoundResponsiveFunctionGenerator {
         this.updatePitch();
     }
 
-
     toggleLiveInput() {
         if (this.isPlaying) {
             //stop playing and return
@@ -101,70 +91,66 @@ class SoundResponsiveFunctionGenerator {
             this.sourceNode = null;
             this.analyser = null;
             this.isPlaying = false;
-            if (!window.cancelAnimationFrame)
-                window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
+            if (!window.cancelAnimationFrame) window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
             window.cancelAnimationFrame(this.rafID);
         }
         this.getUserMedia(
             {
-                "audio": {
-                    "mandatory": {
-                        "googEchoCancellation": "false",
-                        "googAutoGainControl": "false",
-                        "googNoiseSuppression": "false",
-                        "googHighpassFilter": "false"
+                audio: {
+                    mandatory: {
+                        googEchoCancellation: "false",
+                        googAutoGainControl: "false",
+                        googNoiseSuppression: "false",
+                        googHighpassFilter: "false"
                     },
-                    "optional": []
-                },
-            }, this.gotStream);
-
-
+                    optional: []
+                }
+            },
+            this.gotStream
+        );
     }
 
-
-
-    noteFromPitch( frequency ) {
-        const noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );
-        return Math.round( noteNum ) + 69;
+    noteFromPitch(frequency) {
+        const noteNum = 12 * (Math.log(frequency / 440) / Math.log(2));
+        return Math.round(noteNum) + 69;
     }
 
-    frequencyFromNoteNumber( note ) {
-        return 440 * Math.pow(2,(note-69)/12);
+    frequencyFromNoteNumber(note) {
+        return 440 * Math.pow(2, (note - 69) / 12);
     }
 
-    centsOffFromPitch( frequency, note ) {
-        return Math.floor( 1200 * Math.log( frequency / this.frequencyFromNoteNumber( note ))/Math.log(2) );
+    centsOffFromPitch(frequency, note) {
+        return Math.floor((1200 * Math.log(frequency / this.frequencyFromNoteNumber(note))) / Math.log(2));
     }
 
-
-
-    autoCorrelate( buf, sampleRate ) {
+    autoCorrelate(buf, sampleRate) {
         let SIZE = buf.length;
-        let MAX_SAMPLES = Math.floor(SIZE/2);
+        let MAX_SAMPLES = Math.floor(SIZE / 2);
         let best_offset = -1;
         let best_correlation = 0;
         let rms = 0;
         let foundGoodCorrelation = false;
         let correlations = [MAX_SAMPLES];
 
-        for (let i=0;i<SIZE;i++) {
+        for (let i = 0; i < SIZE; i++) {
             let val = buf[i];
-            rms += val*val;
+            rms += val * val;
         }
-        rms = Math.sqrt(rms/SIZE);
-        if (rms< this.sensitivity) // not enough signal
+        rms = Math.sqrt(rms / SIZE);
+        if (rms < this.sensitivity)
+            // not enough signal
             return -1;
 
-        let lastCorrelation=1;
+        let lastCorrelation = 1;
         for (let offset = this.MIN_SAMPLES; offset < MAX_SAMPLES; offset++) {
             let correlation = 0;
 
-            for (let i=0; i<MAX_SAMPLES; i++) {
-                correlation += Math.abs((buf[i])-(buf[i+offset]));
+            for (let i = 0; i < MAX_SAMPLES; i++) {
+                correlation += Math.abs(buf[i] - buf[i + offset]);
             }
-            correlation = 1 - (correlation/MAX_SAMPLES);
+            correlation = 1 - correlation / MAX_SAMPLES;
             correlations[offset] = correlation; // store it, for the tweaking we need to do below.
-            if ((correlation>this.GOOD_ENOUGH_CORRELATION) && (correlation > lastCorrelation)) {
+            if (correlation > this.GOOD_ENOUGH_CORRELATION && correlation > lastCorrelation) {
                 foundGoodCorrelation = true;
                 if (correlation > best_correlation) {
                     best_correlation = correlation;
@@ -180,50 +166,45 @@ class SoundResponsiveFunctionGenerator {
                 // we know best_offset >=1,
                 // since foundGoodCorrelation cannot go to true until the second pass (offset=1), and
                 // we can't drop into this clause until the following pass (else if).
-                let shift = (correlations[best_offset+1] - correlations[best_offset-1])/correlations[best_offset];
-                return sampleRate/(best_offset+(8*shift));
+                let shift = (correlations[best_offset + 1] - correlations[best_offset - 1]) / correlations[best_offset];
+                return sampleRate / (best_offset + 8 * shift);
             }
             lastCorrelation = correlation;
         }
         if (best_correlation > this.sensitivity) {
             // console.log("f = " + sampleRate/best_offset + "Hz (rms: " + rms + " confidence: " + best_correlation + ")")
-            return sampleRate/best_offset;
+            return sampleRate / best_offset;
         }
         return -1;
-//	var best_frequency = sampleRate/best_offset;
+        //	var best_frequency = sampleRate/best_offset;
     }
 
-    updatePitch( time ) {
+    updatePitch(time) {
         let cycles = [];
-        this.analyser.getFloatTimeDomainData( this.buf );
-        let ac = this.autoCorrelate( this.buf, this.audioContext.sampleRate );
+        this.analyser.getFloatTimeDomainData(this.buf);
+        let ac = this.autoCorrelate(this.buf, this.audioContext.sampleRate);
         // TODO: Paint confidence meter on canvasElem here.
 
         if (ac == -1) {
-
         } else {
             let pitch = ac;
-            let note =  this.noteFromPitch( this.autoCorrelate( this.buf, this.audioContext.sampleRate ) );
+            let note = this.noteFromPitch(this.autoCorrelate(this.buf, this.audioContext.sampleRate));
 
             let bufferLength = this.analyser.frequencyBinCount;
             let dataArray = new Float32Array(bufferLength);
             this.analyser.getFloatFrequencyData(dataArray);
 
             this.soundEventCallback[0](note, dataArray);
-            let detune = this.centsOffFromPitch( pitch, note );
-            if (detune == 0 ) {
+            let detune = this.centsOffFromPitch(pitch, note);
+            if (detune == 0) {
             } else {
                 //detuneAmount.innerHTML = Math.abs( detune );
             }
         }
 
-        if (!window.requestAnimationFrame)
-            window.requestAnimationFrame = window.webkitRequestAnimationFrame;
-        this.rafID = window.requestAnimationFrame( this.updatePitch );
+        if (!window.requestAnimationFrame) window.requestAnimationFrame = window.webkitRequestAnimationFrame;
+        this.rafID = window.requestAnimationFrame(this.updatePitch);
     }
-
-
-
 }
 
 export default SoundResponsiveFunctionGenerator;

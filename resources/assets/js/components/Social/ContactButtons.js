@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import SlackButton from './SlackButton';
-import GithubButton from './GithubButton';
-import FacebookButtons from './FacebookButtons';
+import React, { Component } from "react";
+import SlackButton from "./SlackButton";
+import GithubButton from "./GithubButton";
+import FacebookButtons from "./FacebookButtons";
 
 class ContactButtons extends Component {
     render() {
@@ -11,7 +11,8 @@ class ContactButtons extends Component {
                     <FacebookButtons />
                 </div>
                 <div className="contact-button-column-two">
-                    <SlackButton /><br/>
+                    <SlackButton />
+                    <br />
                     <GithubButton />
                 </div>
             </div>

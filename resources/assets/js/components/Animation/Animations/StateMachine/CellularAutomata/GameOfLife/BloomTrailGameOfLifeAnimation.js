@@ -5,12 +5,11 @@ import BloomingGameOfLifeAnimation from "./BloomingGameOfLifeAnimation";
  * Copyright Aaron Boyarsky, 2018
  */
 class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
-    constructor (width, height, title = "Game of Life - Bloom Mod w/Trails - Random Seed") {
-        super(width, height, title );
+    constructor(width, height, title = "Game of Life - Bloom Mod w/Trails - Random Seed") {
+        super(width, height, title);
     }
 
-
-    handleLivingCellTransition (cellState, nextCellState, neighborInfo) {
+    handleLivingCellTransition(cellState, nextCellState, neighborInfo) {
         if (neighborInfo.count < 2 || neighborInfo.count > 3) {
             nextCellState.alive = 0;
             nextCellState.age = 0;
@@ -22,18 +21,18 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
         }
     }
 
-    createNewCell (nextCellState) {
+    createNewCell(nextCellState) {
         super.createNewCell(nextCellState);
         nextCellState.fade = 0;
     }
 
-    createDeadCell (nextCellState, cellState) {
+    createDeadCell(nextCellState, cellState) {
         nextCellState.blooming = 0;
         super.createDeadCell(nextCellState, cellState);
         nextCellState.fade = Math.max(0, cellState.fade - 0.5);
     }
 
-    handleDeadCellTransition (cellState, nextCellState, neighborInfo) {
+    handleDeadCellTransition(cellState, nextCellState, neighborInfo) {
         const bloomTimeFactor = 1;
         const maxNeighborAgeToBloom = 500 * bloomTimeFactor;
         const totalNeighborAgeToBloom = 1950 * bloomTimeFactor;
@@ -41,10 +40,12 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
         if (neighborInfo.count === 3) {
             this.createNewCell(nextCellState);
         } else {
-
             if (neighborInfo.maxAge > maxNeighborAgeToBloom || neighborInfo.ageTotal > totalNeighborAgeToBloom) {
                 this.createNewCell(nextCellState);
-            } else if (neighborInfo.maxAge > (maxNeighborAgeToBloom - 255) || neighborInfo.ageTotal > (totalNeighborAgeToBloom - 255)) {
+            } else if (
+                neighborInfo.maxAge > maxNeighborAgeToBloom - 255 ||
+                neighborInfo.ageTotal > totalNeighborAgeToBloom - 255
+            ) {
                 nextCellState.blooming = neighborInfo.ageTotal - (maxNeighborAgeToBloom - 255);
                 nextCellState.alive = 0;
                 nextCellState.age = 0;
@@ -52,12 +53,10 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
             } else {
                 this.createDeadCell(nextCellState, cellState);
             }
-
         }
     }
 
-
-    getEmptyNeighborInfo () {
+    getEmptyNeighborInfo() {
         return {
             count: 0,
             ageTotal: 0,
@@ -68,24 +67,19 @@ class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
     updateNeighborInfo(neighborInfo, cellState) {
         neighborInfo.count += cellState.alive;
         neighborInfo.ageTotal += cellState.age;
-        neighborInfo.maxAge = neighborInfo.maxAge - cellState.age > 0 ? neighborInfo.maxAge : cellState.age
+        neighborInfo.maxAge = neighborInfo.maxAge - cellState.age > 0 ? neighborInfo.maxAge : cellState.age;
     }
 
-
-    generateGreen (cellState) {
+    generateGreen(cellState) {
         return cellState.alive
             ? Math.max(255 - cellState.age, 0)
             : cellState.blooming
-                ? (cellState.blooming * 11) % 256
-                : cellState.fade / 2;
+            ? (cellState.blooming * 11) % 256
+            : cellState.fade / 2;
     }
 
-    generateBlue (cellState) {
-        return cellState.alive
-            ? 0
-            : cellState.blooming
-                ? (cellState.blooming) % 256
-                : cellState.fade;
+    generateBlue(cellState) {
+        return cellState.alive ? 0 : cellState.blooming ? cellState.blooming % 256 : cellState.fade;
     }
 }
 

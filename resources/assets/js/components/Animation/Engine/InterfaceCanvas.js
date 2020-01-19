@@ -1,28 +1,27 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class InterfaceCanvas extends Component {
-
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.iterate = this.iterate.bind(this);
         this.redraw = this.redraw.bind(this);
     }
 
     componentDidMount() {
-        this.ctx = this.refs.canvas.getContext('2d');
-        this.imageData = this.ctx.createImageData( this.props.width, this.props.height );
-        this.g  = this.imageData.data;
+        this.ctx = this.refs.canvas.getContext("2d");
+        this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
+        this.g = this.imageData.data;
 
         this.ctx.putImageData(this.imageData, 0, 0);
 
-        this.ctx.fillStyle="#555555";
+        this.ctx.fillStyle = "#555555";
         this.ctx.fillRect(0, 0, this.props.width, this.props.height);
 
         let self = this;
-        this.refs.canvas.addEventListener('click', function (e) {
+        this.refs.canvas.addEventListener("click", function(e) {
             let MouseX = e.pageX - this.offsetLeft;
             let MouseY = e.pageY - this.offsetTop;
 
@@ -40,14 +39,13 @@ class InterfaceCanvas extends Component {
         */
     }
 
-    redraw(){
+    redraw() {
         this.iterate();
 
         //Used for drawing raw pixels in the buffer
-
     }
 
-    handleMouseClick (x, y) {
+    handleMouseClick(x, y) {
         console.log(x, y);
 
         /*
@@ -62,8 +60,7 @@ class InterfaceCanvas extends Component {
         */
     }
 
-    iterate () {
-
+    iterate() {
         // Render a window background
 
         //this.ctx.fillStyle="#BBBBBB";
@@ -73,7 +70,7 @@ class InterfaceCanvas extends Component {
 
         const left = (this.props.width - windowWidth) / 2;
         const top = (this.props.height - windowHeight) / 2;
-/*
+        /*
         this.ctx.fillRect(
             left,
             top,
@@ -99,7 +96,7 @@ class InterfaceCanvas extends Component {
         );
         */
 
-/*
+        /*
         this.buttons = [
             {
                 id: 1,
@@ -115,13 +112,13 @@ class InterfaceCanvas extends Component {
         this.props.animation.moveToNextFrame(this.ctx);
 
         // TODO: draw the objects in the animation
-    };
+    }
 
     paintPixel(x, y, rgba) {
         //TODO: explanation
         const imageData = this.g;
         const idx = 4 * (x + y * this.props.width);
-        const {red, green, blue, alpha} = rgba;
+        const { red, green, blue, alpha } = rgba;
 
         imageData[idx] = red;
         imageData[1 + idx] = green;
@@ -129,21 +126,13 @@ class InterfaceCanvas extends Component {
         imageData[3 + idx] = alpha;
     }
 
-
     render() {
         return (
             <React.Fragment>
-
-                <h5 style={{margin: '5px'}}>{this.props.animation.title}</h5>
-                { this.props.animation.render ? this.props.animation.render() : null}
-                <canvas
-                    id="canvas"
-                    ref="canvas"
-                    width={this.props.width}
-                    height={this.props.height}
-                />
+                <h5 style={{ margin: "5px" }}>{this.props.animation.title}</h5>
+                {this.props.animation.render ? this.props.animation.render() : null}
+                <canvas id="canvas" ref="canvas" width={this.props.width} height={this.props.height} />
             </React.Fragment>
-
         );
     }
 }

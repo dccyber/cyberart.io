@@ -1,5 +1,3 @@
-
-
 // TODO: cleanup and comment
 import MandelbrotAnimation from "./MandelbrotAnimation";
 
@@ -7,9 +5,8 @@ import MandelbrotAnimation from "./MandelbrotAnimation";
  * Copyright Aaron Boyarsky, 2018
  */
 class MandelbrotAnimationZoom extends MandelbrotAnimation {
-
-    constructor (width, height, title = 'Mandelbrot Set - Zoom with 2 color phases') {
-        super(width, height, title );
+    constructor(width, height, title = "Mandelbrot Set - Zoom with 2 color phases") {
+        super(width, height, title);
     }
 
     generateParams() {
@@ -20,7 +17,7 @@ class MandelbrotAnimationZoom extends MandelbrotAnimation {
         const leftward = -2; // Increase to move the fractal leftward relative to the view pane
 
         //default 0
-        const upward = 17 // Increase to move the fractal upward relative to the view pane
+        const upward = 17; // Increase to move the fractal upward relative to the view pane
 
         //TODO: rename
         this.a = 4 / (this.height * zoom);

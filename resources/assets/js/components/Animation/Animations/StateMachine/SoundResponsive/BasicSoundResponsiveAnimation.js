@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
 import SoundResponsiveFunctionGenerator from "../../../Engine/SoundResponsiveFunctionGenerator";
 
@@ -6,11 +6,13 @@ import SoundResponsiveFunctionGenerator from "../../../Engine/SoundResponsiveFun
  * Copyright Aaron Boyarsky, 2018
  */
 class BasicSoundResponsiveAnimation extends StateMachineAnimation {
-
-    constructor (width, height, title = 'Basic Equalizer') {
+    constructor(width, height, title = "Basic Equalizer") {
         super(width, height, title);
-        this.width = width; this.height =height;
-        this.soundGenerator = new SoundResponsiveFunctionGenerator((note, frequencyData) => this.soundEventCallback(note, frequencyData, this));
+        this.width = width;
+        this.height = height;
+        this.soundGenerator = new SoundResponsiveFunctionGenerator((note, frequencyData) =>
+            this.soundEventCallback(note, frequencyData, this)
+        );
 
         this.note = 0;
         this.frequencyData = [];
@@ -20,7 +22,7 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
         this.soundGenerator.toggleLiveInput();
     }
 
-    initialStateGenerator (i, j) {
+    initialStateGenerator(i, j) {
         this.left = 50;
         this.top = 150;
         this.rectwidth = 50;
@@ -33,21 +35,19 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
             rectangleStrength: 0,
             barTop: 0
         };
-    };
+    }
 
-    soundEventCallback (note, frequencyData, self) {
+    soundEventCallback(note, frequencyData, self) {
         //console.log(this.noteStrings[note%12]);
         //console.log(note);
         //console.log(self);
         self.note = note;
         self.frequencyData = frequencyData || [];
-    };
+    }
 
-
-    stateTransition (i, j, width, height, state, nextState) {
-
+    stateTransition(i, j, width, height, state, nextState) {
         let cellState = state[i][j];
-/*
+        /*
         let isPlayingAt = (this.note - 69)*2;
 
         let maxBarTop = height;
@@ -85,24 +85,22 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
 
         // Percentage of lower end to show
         const percentageOfSonicSpectrum = 0.37;
-        const positionMultiplier = percentageOfSonicSpectrum * 1024/width;
+        const positionMultiplier = (percentageOfSonicSpectrum * 1024) / width;
 
-        for( let a = Math.floor(i * positionMultiplier); a < Math.ceil((i+1)*positionMultiplier); a++ ) {
+        for (let a = Math.floor(i * positionMultiplier); a < Math.ceil((i + 1) * positionMultiplier); a++) {
             total += this.frequencyData[a];
             count++;
         }
 
-        let avg = total/count;
+        let avg = total / count;
 
         let m = 140;
         let n = 90;
         let barHeight = avg + m;
-        let barHeight2 = (barHeight/n)*(barHeight);
-
-
+        let barHeight2 = (barHeight / n) * barHeight;
 
         //(this.frequencyData[Math.floor(i*1024/width)] + 140) * 2
-        cellState.isRectangle = j > height - barHeight2 * height/n;//i < width * this.frequencyData.length / 1024;
+        cellState.isRectangle = j > height - (barHeight2 * height) / n; //i < width * this.frequencyData.length / 1024;
         //cellState.isNote = i === Math.floor((this.note - 60) * 1.9) && cellState.isRectangle;
         if (cellState.isRectangle) {
             cellState.timeSinceSound = 0;
@@ -112,63 +110,58 @@ class BasicSoundResponsiveAnimation extends StateMachineAnimation {
             //(height - j) / (height - w) => 1
             //height - j / (height - w) => 0
 
-            let w = (height - j) / ( (barHeight) * height/n);
+            let w = (height - j) / ((barHeight * height) / n);
 
-            cellState.rectangleStrength = 4*w*w*w;
+            cellState.rectangleStrength = 4 * w * w * w;
         } else {
             if (cellState.timeSinceSound !== null) {
                 cellState.timeSinceSound = Math.min(256, cellState.timeSinceSound + 20);
             }
-
         }
-
     }
 
-    stateTransitionCleanup () {
+    stateTransitionCleanup() {
         //console.log(this.frequencyData.length);
         this.note = -1;
         //console.log(this.frequencyData);
     }
 
-
-    generateRed (cellState) {
-        return cellState.isRectangle ?
-            255*cellState.rectangleStrength :
-            cellState.timeSinceSound === null ?
-                0 :
-                Math.max(0, (255 - cellState.timeSinceSound*2));
+    generateRed(cellState) {
+        return cellState.isRectangle
+            ? 255 * cellState.rectangleStrength
+            : cellState.timeSinceSound === null
+            ? 0
+            : Math.max(0, 255 - cellState.timeSinceSound * 2);
     }
 
-    generateGreen (cellState) {
-
-        return cellState.isRectangle ?
-            0 :
-            cellState.timeSinceSound === null ?
-                0 :
-                Math.max(0, 255 - cellState.timeSinceSound*1.5);
-
+    generateGreen(cellState) {
+        return cellState.isRectangle
+            ? 0
+            : cellState.timeSinceSound === null
+            ? 0
+            : Math.max(0, 255 - cellState.timeSinceSound * 1.5);
     }
 
-    generateBlue (cellState) {
-        return cellState.isRectangle ?
-            0 :
-            cellState.timeSinceSound === null ?
-                0 :
-                Math.min(255, (4 * cellState.timeSinceSound - (cellState.timeSinceSound*cellState.timeSinceSound/64)));
+    generateBlue(cellState) {
+        return cellState.isRectangle
+            ? 0
+            : cellState.timeSinceSound === null
+            ? 0
+            : Math.min(255, 4 * cellState.timeSinceSound - (cellState.timeSinceSound * cellState.timeSinceSound) / 64);
     }
 
-    colorGenerator (cellState, framesElapsed) {
+    colorGenerator(cellState, framesElapsed) {
         return {
             red: this.generateRed(cellState),
             green: this.generateGreen(cellState),
-            blue:this.generateBlue(cellState),
+            blue: this.generateBlue(cellState),
 
             alpha: 255
         };
-    };
+    }
 
-    render () {
-        return null;//<button onClick={this.soundGenerator.toggleLiveInput}>toggle live input</button>
+    render() {
+        return null; //<button onClick={this.soundGenerator.toggleLiveInput}>toggle live input</button>
     }
 }
 

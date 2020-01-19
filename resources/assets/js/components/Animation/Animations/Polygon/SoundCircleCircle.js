@@ -1,17 +1,14 @@
-
-
 import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
 import Circle from "../../Engine/Polygons/Circle";
 import Circle2 from "../../Engine/Polygons/Circle2";
 
 class SoundCircleCircle {
-    constructor (height, width, title = 'Polygon Sound Visualizer - Triangle of Circles') {
+    constructor(height, width, title = "Polygon Sound Visualizer - Triangle of Circles") {
         this.title = title;
         this.framesElapsed = 0;
 
         this.height = height;
         this.width = width;
-
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
             (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
@@ -30,29 +27,28 @@ class SoundCircleCircle {
         this.shapeIdx = 0;
 
         let bigCircleRadius = 300;
-        for (let a=0; a < 1024; a++) {
+        for (let a = 0; a < 1024; a++) {
             this.polygons.push(new Circle2(a));
         }
 
         this.returningHome = false;
 
-        this.sortable = 'idx';
+        this.sortable = "idx";
         this.sortOrder = 1;
     }
 
-    soundEventCallback (note, frequencyData) {
+    soundEventCallback(note, frequencyData) {
         this.note = note;
         this.frequencyData = frequencyData;
 
         //console.log(note);
-        for(let a=0; a < frequencyData.length; a++) {
+        for (let a = 0; a < frequencyData.length; a++) {
             this.polygons[a].height = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
-
     }
 
-    avg (a, b) {
-        return Math.floor((a+b)/2);
+    avg(a, b) {
+        return Math.floor((a + b) / 2);
     }
 
     moveToNextFrame() {
@@ -61,10 +57,7 @@ class SoundCircleCircle {
         if (this.framesElapsed % 600 === 0 && this.framesElapsed > 0) {
             this.shapeIdx = Math.ceil(Math.random() * 4);
 
-
-            for(let a=0; a<this.polygons.length; a++) {
-
-
+            for (let a = 0; a < this.polygons.length; a++) {
                 let x = this.polygons[a].x;
                 let y = this.polygons[a].y;
 
@@ -80,7 +73,6 @@ class SoundCircleCircle {
 
                 this.polygons[a].shapeIdx = this.shapeIdx;
             }
-
 
             //console.log(this.shapeIdx);
             this.returningHome = true;
@@ -106,8 +98,7 @@ class SoundCircleCircle {
         const rotationSpeed = 2;
 
         this.stillReturningHome = false;
-        for(let a=0; a<this.polygons.length; a++) {
-
+        for (let a = 0; a < this.polygons.length; a++) {
             // Remember
             this.polygons[a].prevX = this.polygons[a].x;
             this.polygons[a].prevY = this.polygons[a].y;
@@ -115,8 +106,7 @@ class SoundCircleCircle {
             // Deflate
             this.polygons[a].height = Math.max(0, this.polygons[a].height - 1);
 
-            if(this.returningHome) {
-
+            if (this.returningHome) {
                 this.polygons[a].setCenterForIdx(this.framesElapsed, false);
 
                 let xDiff = this.polygons[a].originalX - this.polygons[a].x;
@@ -130,19 +120,15 @@ class SoundCircleCircle {
                 // If any x or y differences exist for any polygon, you aren't home yet
                 this.stillReturningHome = this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;
 
-
                 //this.polygons[a].x = this.avg(this.polygons[a].x, this.polygons[a].originalX);
                 //this.polygons[a].y = this.avg(this.polygons[a].y, this.polygons[a].originalY);
-
-
-             } else {
+            } else {
                 this.polygons[a].setCenterForIdx(this.framesElapsed);
             }
         }
 
         // If you finish returning home, you're not returning home anymore.
         this.returningHome = this.stillReturningHome;
-
     }
 }
 

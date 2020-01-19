@@ -5,14 +5,11 @@ import TwoDimensionalStateMachine from "./TwoDimensionalStateMachine";
  * Copyright Aaron Boyarsky, 2018
  */
 class StateMachineAnimation {
-
-    constructor (width, height, title = 'Untitled Animation') {
+    constructor(width, height, title = "Untitled Animation") {
         this.framesElapsed = 0;
         this.title = title;
         this.width = width;
         this.height = height;
-
-
 
         // TODO: instantiation with param this makes it hard to update machine dimensions
         this.stateMachine = new TwoDimensionalStateMachine(this);
@@ -27,19 +24,15 @@ class StateMachineAnimation {
         this.stateMachine.performStateTransition();
     }
 
-    initialStateGenerator (i, j) {
+    initialStateGenerator(i, j) {
         return { i, j };
-    };
-
-    stateTransition (i, j, width, height, state, nextState) {
-
     }
 
-    stateTransitionCleanup () {
+    stateTransition(i, j, width, height, state, nextState) {}
 
-    }
+    stateTransitionCleanup() {}
 
-    colorGenerator (cellState, framesElapsed) {
+    colorGenerator(cellState, framesElapsed) {
         return {
             red: 0,
             green: 0,
@@ -47,8 +40,6 @@ class StateMachineAnimation {
             alpha: 255
         };
     }
-
-
 }
 
 export default StateMachineAnimation;

@@ -5,12 +5,11 @@ import StateMachineAnimation from "../../../../Engine/StateMachineAnimation";
  * Copyright Aaron Boyarsky, 2018
  */
 class MandelbrotAnimation extends StateMachineAnimation {
-
-    constructor (width, height, title = 'Mandelbrot Set') {
-        super(width, height, title );
+    constructor(width, height, title = "Mandelbrot Set") {
+        super(width, height, title);
     }
 
-    generateParams () {
+    generateParams() {
         //default 1
         const zoom = 1; // Increase to zoom in
 
@@ -18,7 +17,7 @@ class MandelbrotAnimation extends StateMachineAnimation {
         const leftward = 0; // Increase to move the fractal leftward relative to the view pane
 
         //default 0
-        const upward = 0 // Increase to move the fractal upward relative to the view pane
+        const upward = 0; // Increase to move the fractal upward relative to the view pane
 
         //TODO: rename
         this.a = 4 / (this.height * zoom);
@@ -30,10 +29,8 @@ class MandelbrotAnimation extends StateMachineAnimation {
         this.usePrecalc = false;
     }
 
-    initialStateGenerator (i, j) {
-
+    initialStateGenerator(i, j) {
         if (!this.a) {
-
             this.generateParams();
 
             // when width/height = 2, coefficient should be 1
@@ -45,26 +42,25 @@ class MandelbrotAnimation extends StateMachineAnimation {
 
             if (this.usePrecalc) {
                 this.precalcColors = [];
-                for (let e=0; e < 1000; e++) {
-                    let f = Math.abs(Math.sin(e/17)) * 5;
-                    let g = Math.abs(Math.sin(e/29)) * 5;
-                    let h = Math.abs(Math.sin(e/13)) * 5;
+                for (let e = 0; e < 1000; e++) {
+                    let f = Math.abs(Math.sin(e / 17)) * 5;
+                    let g = Math.abs(Math.sin(e / 29)) * 5;
+                    let h = Math.abs(Math.sin(e / 13)) * 5;
                     this.precalcColors[e] = [];
-                    for(let m=0; m<102; m++) {
+                    for (let m = 0; m < 102; m++) {
                         this.precalcColors[e][m] = {
                             red: (m * f) % 256,
                             green: (m * g) % 256,
                             blue: (m * h) % 256,
                             alpha: 255
-                        }
+                        };
                     }
                 }
             }
         }
 
-
-        const real_seed = i*this.a + this.b;
-        const imag_seed = j*this.c + this.d;
+        const real_seed = i * this.a + this.b;
+        const imag_seed = j * this.c + this.d;
 
         return {
             real: 0,
@@ -77,11 +73,10 @@ class MandelbrotAnimation extends StateMachineAnimation {
         };
     }
 
-    stateTransition (i, j, width, height, state, nextState) {
+    stateTransition(i, j, width, height, state, nextState) {
         const cellState = state[i][j];
 
         if (!(cellState.escaped || cellState.dead)) {
-
             // The mandelbrot equation
             let newReal = (cellState.real + cellState.imag) * (cellState.real - cellState.imag);
             let newImag = 2 * cellState.real * cellState.imag;
@@ -89,30 +84,34 @@ class MandelbrotAnimation extends StateMachineAnimation {
             cellState.real = newReal + cellState.real_seed;
             cellState.imag = newImag + cellState.imag_seed;
 
-
             cellState.iter++;
             cellState.escaped = this.escaped(cellState.real, cellState.imag);
 
             // Stop iterating after this many iterations
-            if (cellState.iter > 100) { //TODO: use constant
+            if (cellState.iter > 100) {
+                //TODO: use constant
                 //cellState.dead = true;
             }
         }
     }
 
-    colorGenerator (cellState, framesElapsed)  {
+    colorGenerator(cellState, framesElapsed) {
         if (cellState.dead) {
             //return null;
         }
 
         if (cellState.escaped) {
-            if (this.usePrecalc && this.precalcColors[framesElapsed] && this.precalcColors[framesElapsed][cellState.iter]) {
+            if (
+                this.usePrecalc &&
+                this.precalcColors[framesElapsed] &&
+                this.precalcColors[framesElapsed][cellState.iter]
+            ) {
                 return this.precalcColors[framesElapsed][cellState.iter];
             }
             return {
-                red: (cellState.iter * Math.abs(Math.sin(framesElapsed/101)) * 89) % 256,
-                green: (cellState.iter * Math.abs(Math.sin(framesElapsed/61)) * 67) % 256,
-                blue: (cellState.iter * Math.abs(Math.sin(framesElapsed/107)) * 20) % 256,
+                red: (cellState.iter * Math.abs(Math.sin(framesElapsed / 101)) * 89) % 256,
+                green: (cellState.iter * Math.abs(Math.sin(framesElapsed / 61)) * 67) % 256,
+                blue: (cellState.iter * Math.abs(Math.sin(framesElapsed / 107)) * 20) % 256,
 
                 /*
                 red: (cellState.iter + framesElapsed * 3) % 256,
@@ -131,15 +130,12 @@ class MandelbrotAnimation extends StateMachineAnimation {
                 blue: 0,
                 alpha: 255
             };
-
         }
-
     }
 
-    escaped (real, imag) {
-        return real*real + imag*imag > 4;
-    };
-
+    escaped(real, imag) {
+        return real * real + imag * imag > 4;
+    }
 }
 
 export default MandelbrotAnimation;

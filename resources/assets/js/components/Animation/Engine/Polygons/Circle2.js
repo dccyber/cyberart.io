@@ -1,8 +1,5 @@
-
-
 class Circle2 {
-    constructor (idx) {
-
+    constructor(idx) {
         this.height = 1;
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
@@ -16,7 +13,6 @@ class Circle2 {
         this.setCenterForIdx = this.setCenterForIdx.bind(this);
         this.setCenterForIdx(idx);
 
-
         this.returningHome = false;
 
         this.radians = 0;
@@ -24,11 +20,8 @@ class Circle2 {
         this.shapeIdx = 0;
     }
 
-    setCenterForIdx (framesElapsed = 0, withLocation=true) {
-
+    setCenterForIdx(framesElapsed = 0, withLocation = true) {
         const rotationSpeed = 2;
-
-
 
         //let height = Math.floor(this.bigCircleRadius * Math.sin(radians * 4) );
 
@@ -36,23 +29,21 @@ class Circle2 {
         switch (this.shapeIdx) {
             case 0:
                 // atom
-                radius = Math.floor(this.bigCircleRadius * Math.sin(this.radians * 4) );
+                radius = Math.floor(this.bigCircleRadius * Math.sin(this.radians * 4));
                 break;
             case 1:
                 //heart
-                radius = Math.floor(this.bigCircleRadius * (Math.sin(this.radians) + 1)/2);
+                radius = Math.floor((this.bigCircleRadius * (Math.sin(this.radians) + 1)) / 2);
                 break;
 
             case 2:
                 //sunflower
-                radius = Math.floor(this.bigCircleRadius * (Math.sin(this.idx) + 1)/2);
+                radius = Math.floor((this.bigCircleRadius * (Math.sin(this.idx) + 1)) / 2);
                 break;
 
             default:
-                radius = Math.floor(this.bigCircleRadius * (1024 - this.idx) / 1024);
+                radius = Math.floor((this.bigCircleRadius * (1024 - this.idx)) / 1024);
         }
-
-
 
         //spiral
 
@@ -62,77 +53,54 @@ class Circle2 {
         this.prevY = this.y;
         this.originalY = this.y;
         */
-        const radians = Math.abs(2*Math.PI* ((this.idx - framesElapsed * rotationSpeed) % 1024)/1024);
+        const radians = Math.abs((2 * Math.PI * ((this.idx - framesElapsed * rotationSpeed) % 1024)) / 1024);
         this.radians = radians;
 
-        if(withLocation) {
-
+        if (withLocation) {
             //inside: circles move appropriately, but color skips
             this.x = 842 + radius * Math.cos(radians);
             this.y = 842 + radius * Math.sin(radians);
-
-
-
         }
 
         //this.originalX = 842 + height * Math.cos(this.originalRadians);
         //this.originalY = 842 + height * Math.sin(this.originalRadians);
 
-
-
-
-
         //outside: circles are discont, but color moves approp
-
-
     }
 
     goodColor(color) {
-        return Math.min(
-            256,
-            Math.max(
-                10,
-                color
-            )
-        );
+        return Math.min(256, Math.max(10, color));
     }
 
-    avg (a, b) {
-        return Math.floor((a+b)/2);
+    avg(a, b) {
+        return Math.floor((a + b) / 2);
     }
 
     red(ctx, framesElapsed) {
-        return this.goodColor (
-            Math.floor((this.idx * 5 + framesElapsed / 3) % 256)
-        );
+        return this.goodColor(Math.floor((this.idx * 5 + framesElapsed / 3) % 256));
     }
 
     green(ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor((this.idx * 3 + framesElapsed / 5) % 256)
-        );
+        return this.goodColor(Math.floor((this.idx * 3 + framesElapsed / 5) % 256));
     }
 
-    blue (ctx, framesElapsed) {
-        return this.goodColor(
-            Math.floor(256 * this.radians / (2 * Math.PI))
-        );
+    blue(ctx, framesElapsed) {
+        return this.goodColor(Math.floor((256 * this.radians) / (2 * Math.PI)));
     }
 
-    draw (ctx, framesElapsed) {
+    draw(ctx, framesElapsed) {
         let red = this.red(ctx, framesElapsed);
 
         //let green = this.goodColor(this.height);
-        let green =this.green(ctx, framesElapsed);
+        let green = this.green(ctx, framesElapsed);
 
         let blue = this.blue(ctx, framesElapsed);
 
-        ctx.fillStyle=`rgb(${red},${green},${blue})`;
+        ctx.fillStyle = `rgb(${red},${green},${blue})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
         ctx.fill();
     }
-
 }
 
 export default Circle2;

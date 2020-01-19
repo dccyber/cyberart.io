@@ -1,8 +1,7 @@
 import FullCenteredWindow from "./FullCenteredWindow";
 
 export default class MainMenu {
-
-    constructor (width, height) {
+    constructor(width, height) {
         this.framesElapsed = 0;
 
         this.position = {
@@ -21,33 +20,28 @@ export default class MainMenu {
         this.activeWindow.draw(ctx);
     }
 
-    isClicked (x, y) {
-        const {left, top, width, height} = this.position;
+    isClicked(x, y) {
+        const { left, top, width, height } = this.position;
 
-        return (
-            x >= left && x <= left + width &&
-            y >= top && y <= top + height
-        );
+        return x >= left && x <= left + width && y >= top && y <= top + height;
     }
 
-    handleMouseDown (x, y) {
-
+    handleMouseDown(x, y) {
         if (this.isClicked(x, y)) {
             // Delegate to the active window
             const windowClicked = this.activeWindow.handleMouseDown(x, y);
             if (!windowClicked) {
-                console.log('Background click was started');
+                console.log("Background click was started");
             }
         }
     }
 
-    handleMouseClick (x, y) {
-
+    handleMouseClick(x, y) {
         if (this.isClicked(x, y)) {
             // Delegate to the active window
             const windowClicked = this.activeWindow.handleMouseClick(x, y);
             if (!windowClicked) {
-                console.log('Background click was finished');
+                console.log("Background click was finished");
             }
         }
     }

@@ -1,5 +1,3 @@
-
-
 import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
 import Circle from "../../Engine/Polygons/Circle";
 import Circle2 from "../../Engine/Polygons/Circle2";
@@ -8,13 +6,12 @@ import PoppinSquare from "../../Engine/Polygons/PoppinSquare";
 import PoppinSquare2 from "../../Engine/Polygons/PoppinSquare2";
 
 class PoppingSquares2 {
-    constructor (height, width, title = 'Polygon Sound Visualizer - Popping Squares') {
+    constructor(height, width, title = "Polygon Sound Visualizer - Popping Squares") {
         this.title = title;
         this.framesElapsed = 0;
 
         this.height = height;
         this.width = width;
-
 
         this.soundGenerator = new SoundResponsiveFunctionGenerator(
             (note, frequencyData) => this.soundEventCallback(note, frequencyData, this),
@@ -32,10 +29,10 @@ class PoppingSquares2 {
 
         this.shapeIdx = 0;
 
-        this.sortable = 'idx';
+        this.sortable = "idx";
         this.sortOrder = 1;
 
-        for (let a=0; a < 1024; a++) {
+        for (let a = 0; a < 1024; a++) {
             let x = Math.random() * 1684;
             let y = Math.random() * 1684;
 
@@ -46,28 +43,23 @@ class PoppingSquares2 {
         }
 
         this.returningHome = false;
-        this.sliderSize = [
-            0.5,
-            0.5
-        ];
-
+        this.sliderSize = [0.5, 0.5];
     }
 
-    soundEventCallback (note, frequencyData) {
+    soundEventCallback(note, frequencyData) {
         this.note = note;
         this.frequencyData = frequencyData;
 
         //console.log(note);
-        for(let a=0; a < frequencyData.length; a++) {
+        for (let a = 0; a < frequencyData.length; a++) {
             this.polygons[a].width = Math.max(1, Math.floor(frequencyData[a] + 110) * 4 * this.sliderSize[0]);
             this.polygons[a].strength = Math.max(1, Math.floor(frequencyData[a] + 110) * 10 * this.sliderSize[1]);
             //this.polygons[a].radius = Math.max(0, Math.floor(frequencyData[a] + 110) * 3);
         }
-
     }
 
-    avg (a, b) {
-        return Math.floor((a+b)/2);
+    avg(a, b) {
+        return Math.floor((a + b) / 2);
     }
 
     moveToNextFrame() {
@@ -76,26 +68,19 @@ class PoppingSquares2 {
         let driftSpeed;
 
         for (let a = 0; a < this.polygons.length; a++) {
-
             this.polygons[a].redRate = this.sliderSize[2];
 
             driftSpeed = Math.floor(this.polygons[a].strength / 8);
             // Brownian motion Drift
-            this.polygons[a].x = (
-                this.polygons[a].x + (
-                    Math.floor(Math.random() * driftSpeed * 2- driftSpeed + 0.5)
-                )
-            ) % this.width;
+            this.polygons[a].x =
+                (this.polygons[a].x + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.width;
 
             if (this.polygons[a].x < 0) {
                 this.polygons[a].x += this.width;
             }
 
-            this.polygons[a].y = (
-                this.polygons[a].y + (
-                    Math.floor(Math.random() * driftSpeed * 2- driftSpeed + 0.5)
-                )
-            ) % this.height;
+            this.polygons[a].y =
+                (this.polygons[a].y + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.height;
 
             if (this.polygons[a].y < 0) {
                 this.polygons[a].y += this.height;

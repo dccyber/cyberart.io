@@ -1,18 +1,18 @@
-const EARTH = 'earth';
-const WATER = 'water';
-const GRASS = 'grass';
+const EARTH = "earth";
+const WATER = "water";
+const GRASS = "grass";
 const CONTENT_COLORS = {
-    [EARTH] : {
+    [EARTH]: {
         r: 139,
         g: 69,
         b: 19
     },
-    [WATER] : {
+    [WATER]: {
         r: 30,
         g: 144,
         b: 255
     },
-    [GRASS] : {
+    [GRASS]: {
         r: 124,
         g: 252,
         b: 0
@@ -20,7 +20,7 @@ const CONTENT_COLORS = {
 };
 
 class Cell {
-    constructor (x, y, width, idx, content, depth) {
+    constructor(x, y, width, idx, content, depth) {
         this.x = x;
         this.prevX = x;
         this.y = y;
@@ -34,17 +34,11 @@ class Cell {
     }
 
     goodColor(color) {
-        return Math.min(
-            256,
-            Math.max(
-                10,
-                color
-            )
-        );
+        return Math.min(256, Math.max(10, color));
     }
 
-    avg (a, b) {
-        return Math.floor((a+b)/2);
+    avg(a, b) {
+        return Math.floor((a + b) / 2);
     }
 
     red(ctx, framesElapsed) {
@@ -55,27 +49,25 @@ class Cell {
         return 50;
     }
 
-    green (ctx, framesElapsed) {
+    green(ctx, framesElapsed) {
         let green = 100;
         return Math.max(green, 0);
     }
 
-    draw (ctx, framesElapsed) {
+    draw(ctx, framesElapsed) {
         let red = this.red(ctx, framesElapsed);
 
         //let green = this.goodColor(this.height);
-        let green =this.green(ctx, framesElapsed);
+        let green = this.green(ctx, framesElapsed);
 
         let blue = this.blue(ctx, framesElapsed);
 
-        ctx.fillStyle=`rgb(${red},${green},${blue})`;
+        ctx.fillStyle = `rgb(${red},${green},${blue})`;
         ctx.beginPath();
 
         ctx.rect(this.x, this.y, this.width, this.width);
         ctx.fill();
-
     }
-
 }
 
 export default Cell;
