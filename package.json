@@ -11,7 +11,7 @@
         "prettier": "prettier --tab-width 4 --print-width 120 --write \"./resources/assets/js/**/*.{js,jsx,json}\""
     },
     "devDependencies": {
-        "axios": "^0.17",
+        "axios": "^0.18",
         "babel-preset-react": "^6.23.0",
         "bootstrap-sass": "^3.4.1",
         "cross-env": "^5.2.0",
