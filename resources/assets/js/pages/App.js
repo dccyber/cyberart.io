@@ -10,6 +10,7 @@ import ImageLoader from './ImageLoaderVisualizer';
 import V2 from "./V2";
 import V3 from "./V3";
 import V4 from "./V4";
+import GalaxyZ from "./GalaxyZ";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
@@ -40,6 +41,7 @@ export default class App extends Component {
                             <Route path="/v2" component={V2} />
                             <Route path="/v3" component={V3} />
                             <Route path="/v4" component={V4} />
+                            <Route path="/galaxyz" component={GalaxyZ} />
                             <Route component={NoMatch} />
                         </Switch>
                     </BrowserRouter>
