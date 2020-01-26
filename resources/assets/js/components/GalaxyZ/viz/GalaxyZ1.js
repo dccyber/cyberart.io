@@ -18,16 +18,17 @@ class GalaxyZ1 {
         // const centerY = Math.floor(height/2);
 
         this.things = [];
-        for (let x=0; x<100; x++) {
-            for (let y=0; y<100; y++) {
+        const maxSize = 300;
+        for (let x=0; x<maxSize; x++) {
+            for (let y=0; y<maxSize; y++) {
 
                 // Some condition for a thing
-                const isThing = Math.random() * 100 > 99.8;
+                const isThing = Math.random() * 100 > 99.9;
 
                 if (isThing) {
                     this.things.push(
                         new GalaxyThing(
-                            Math.floor(Math.random() * 100), Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * maxSize), Math.floor(Math.random() * maxSize),
                             5,
                             this.addTree
                         )
@@ -38,8 +39,7 @@ class GalaxyZ1 {
                     this.polygons.push(
                         new GalaxyFresh(
                             x,y,
-                            5,
-                            this.addTree
+                            5
                         )
                     );
 
@@ -102,22 +102,31 @@ class GalaxyZ1 {
     moveToNextFrame() {
         this.framesElapsed++;
 
-
-        this.things.map(thing => {
+        this.things.forEach(thing => {
             this.polygons.filter(polygon => {
                 return polygon.boardX === thing.boardX && polygon.boardY === thing.boardY && polygon.thingState === THING_STATES.fresh;
             }).forEach(polygon => {
+                // Refresh the board square to a starting state with the color of the thing
+                if (thing.currentSpot) {
+                    thing.currentSpot.redraw = true;
+                }
                 polygon.growth = 1;
                 polygon.thingType = thing.thingType;
+                thing.currentSpot = polygon;
             });
-        })
+        });
+
 
 
         if (this.framesElapsed % 25 === 0) {
-            this.polygons = this.polygons.filter(polygon => {
-                return !polygon.dead;
+            this.polygons = this.polygons.map(polygon => {
+                return !polygon.dead ? polygon : new GalaxyFresh(
+                    polygon.boardX, polygon.boardY,
+                    5
+                );
             });
         }
+
     }
 }
 

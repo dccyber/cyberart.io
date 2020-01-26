@@ -49,6 +49,7 @@ class Visualizer extends Component {
                 height={height}
                 animation={animation}
                 beginAnimation={this.animationManager.animate}
+                persistent={true}
             />
         );
     }

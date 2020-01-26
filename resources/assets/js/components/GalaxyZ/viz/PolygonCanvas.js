@@ -21,8 +21,11 @@ class PolygonCanvas extends Component {
     };
 
     iterate = () => {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(0, 0, this.props.width, this.props.height);
+        if (!this.props.persistent) {
+            this.ctx.fillStyle = "#000000";
+            this.ctx.fillRect(0, 0, this.props.width, this.props.height);
+        }
+
 
         // Advance animation to the next frame
         this.props.animation.moveToNextFrame();

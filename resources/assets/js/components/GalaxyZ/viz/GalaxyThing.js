@@ -12,7 +12,7 @@ const THING_COLORS = {
     [THING_STATES.thing]: {
         r: 255,
         g: 255,
-        b: 0
+        b: 255
     }
 };
 
@@ -22,6 +22,8 @@ class GalaxyThing {
 
         this.boardX = boardX;
         this.boardY = boardY;
+        this.prevBoardX = boardX;
+        this.prevBoardY = boardY;
 
         this.x = 10 + boardX * ( 5 );
         this.y = 10 + boardY * ( 5 );
@@ -37,7 +39,7 @@ class GalaxyThing {
         this.anticlockwise = false;
 
         this.thingState = THING_STATES.thing;
-        this.thingType = Math.floor(Math.random() * 3);
+        this.thingType = 1 + Math.floor(Math.random() * 6); // TODO: change to 7 for white
         this.thingColors = THING_COLORS[this.thingState];
 
         this.redColor = this.goodColor(this.thingColors.r);
@@ -92,12 +94,14 @@ class GalaxyThing {
         ctx.rect(this.x, this.y, this.height, this.height);
         ctx.stroke();
 
+        this.prevBoardX = this.boardX;
+        this.prevBoardY = this.boardY;
 
             this.boardY = this.boardY + Math.floor(Math.random()*3) - 1;
             this.boardX = this.boardX + Math.floor(Math.random()*3) - 1;
 
-            this.boardX = Math.min(100, Math.max(0, this.boardX))
-            this.boardY = Math.min(100, Math.max(0, this.boardY))
+            this.boardX = Math.min(299, Math.max(0, this.boardX))
+            this.boardY = Math.min(299, Math.max(0, this.boardY))
 /*
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
