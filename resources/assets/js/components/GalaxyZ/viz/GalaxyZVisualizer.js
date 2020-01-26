@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import ForestV4 from "./GalaxyZ1";
+import GalaxyZ1 from "./GalaxyZ1";
 import Visualizer from "./Visualizer";
 import ScreenModes from "./ScreenModes";
 
@@ -8,7 +8,7 @@ class GalaxyZVisualizer extends Component {
         return (
             <Visualizer
                 animations={[
-                    ForestV4,
+                    GalaxyZ1,
                 ]}
                 mode={ ScreenModes.FULLSCREEN }
             />

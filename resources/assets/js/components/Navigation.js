@@ -93,4 +93,4 @@ const styles = {
     }
 };
 
-export default withRouter(withStyles(styles)(withTheme()(Navigation)));
+export default withRouter(withStyles(styles)(withTheme(Navigation)));
