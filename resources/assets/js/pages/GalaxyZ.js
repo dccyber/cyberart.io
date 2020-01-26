@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navigation from "../components/Navigation";
-import GalaxyZVisualizer from "../components/GalaxyZ/GalaxyZVisualizer";
+import GalaxyZVisualizer from "../components/GalaxyZ/viz/GalaxyZVisualizer";
 
 class GalaxyZ extends Component {
     render() {
