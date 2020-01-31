@@ -1,9 +1,9 @@
-import RectangleArea from "./RectangleArea";
+import RectangleArea from './RectangleArea';
 
 export default class Button {
     constructor(left, top, width, height) {
         this.position = { left, top, width, height };
-        this.color = "#FF0000";
+        this.color = '#FF0000';
         this.clickBehavior = [];
     }
 
@@ -19,8 +19,8 @@ export default class Button {
 
     handleMouseDown(x, y) {
         if (this.isClicked(x, y)) {
-            console.log("you started to click the red button!");
-            this.color = "#00FF00";
+            console.log('you started to click the red button!');
+            this.color = '#00FF00';
             return true;
         }
         return false;
@@ -28,8 +28,8 @@ export default class Button {
 
     handleMouseClick(x, y) {
         if (this.isClicked(x, y)) {
-            console.log("you released the red button!");
-            this.color = "#FF0000";
+            console.log('you released the red button!');
+            this.color = '#FF0000';
             this.clickBehavior.forEach(fn => {
                 fn();
             });

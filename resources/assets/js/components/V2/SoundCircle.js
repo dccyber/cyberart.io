@@ -1,8 +1,8 @@
-import Circle from "./Circle";
-import MathLib from "./util/MathLib.js";
+import Circle from './Circle';
+import MathLib from './util/MathLib.js';
 
 class SoundCircle {
-    constructor(height, width, title = "Sin Waves with Brownian Motion based on Size") {
+    constructor(height, width, title = 'Sin Waves with Brownian Motion based on Size') {
         this.title = title;
         this.framesElapsed = 0;
         this.waitingFramesElapsed = 0;
@@ -34,18 +34,14 @@ class SoundCircle {
 
         for (let x = 0; x < height; x += 4) {
             this.polygons.push(
-                new Circle(
-                    x + Math.round(Math.sin(x / 75) * 200),
-                    x,
-                    Math.round((Math.sin(x / 50) + 1) * 7) + 2
-                )
+                new Circle(x + Math.round(Math.sin(x / 75) * 200), x, Math.round((Math.sin(x / 50) + 1) * 7) + 2)
             );
         }
 
         for (let x = 0; x < height; x += 4) {
             this.polygons.push(
                 new Circle(
-                    x + Math.round(2 * width / 3) + Math.round(Math.sin(x / 75) * 200),
+                    x + Math.round((2 * width) / 3) + Math.round(Math.sin(x / 75) * 200),
                     x,
                     Math.round((Math.sin(x / 50) + 1) * 7) + 2
                 )
@@ -53,7 +49,7 @@ class SoundCircle {
         }
 
         this.returningHome = false;
-        this.sortable = "radius";
+        this.sortable = 'radius';
         this.sortOrder = 1;
     }
 
@@ -72,7 +68,6 @@ class SoundCircle {
                 this.waitingFramesElapsed++;
                 return;
             }
-
         }
 
         // TODO: ramp movement speed up after each return home
@@ -92,8 +87,6 @@ class SoundCircle {
         });
         */
 
-
-
         this.stillReturningHome = false;
         for (let a = 0; a < this.polygons.length; a++) {
             // Remember
@@ -102,7 +95,7 @@ class SoundCircle {
 
             // small circles drift faster (get more momentum from collisions)
             const driftSpeed = Math.ceil((20 - this.polygons[a].height) / 2);
-            const returnHomeSpeed = 2;//driftSpeed / 5;
+            const returnHomeSpeed = 2; //driftSpeed / 5;
 
             // Deflate
             //this.polygons[a].height = Math.max(1, this.polygons[a].height - 1);
@@ -154,20 +147,21 @@ class SoundCircle {
                 if (this.returningHomeFramesElapsed < 200) {
                     // Brownian motion Drift
                     this.polygons[a].x =
-                        (this.polygons[a].x + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.width;
+                        (this.polygons[a].x + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) %
+                        this.width;
 
                     if (this.polygons[a].x < 0) {
                         this.polygons[a].x += this.width;
                     }
 
                     this.polygons[a].y =
-                        (this.polygons[a].y + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) % this.height;
+                        (this.polygons[a].y + Math.floor(Math.random() * driftSpeed * 2 - driftSpeed + 0.5)) %
+                        this.height;
 
                     if (this.polygons[a].y < 0) {
                         this.polygons[a].y += this.height;
                     }
                 }
-
 
                 // If any x or y differences exist for any polygon, you aren't home yet
                 this.stillReturningHome = this.stillReturningHome || xDiffSgn !== 0 || yDiffSgn !== 0;

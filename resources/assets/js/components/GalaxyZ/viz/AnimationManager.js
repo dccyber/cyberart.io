@@ -56,5 +56,5 @@ export default class AnimationManager {
 
     refreshAnimation = () => {
         this.changeAnimation(this.getCurrentAnimation());
-    }
+    };
 }

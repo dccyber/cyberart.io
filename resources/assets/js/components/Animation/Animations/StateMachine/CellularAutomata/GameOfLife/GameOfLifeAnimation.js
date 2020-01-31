@@ -1,11 +1,11 @@
-import StateMachineAnimation from "../../../../Engine/StateMachineAnimation";
+import StateMachineAnimation from '../../../../Engine/StateMachineAnimation';
 
 // TODO: cleanup and comment
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class GameOfLifeAnimation extends StateMachineAnimation {
-    constructor(width, height, title = "Game of Life") {
+    constructor(width, height, title = 'Game of Life') {
         super(width, height, title);
     }
 

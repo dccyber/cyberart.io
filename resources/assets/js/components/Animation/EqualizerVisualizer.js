@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Canvas from "./Engine/Canvas";
-import BasicSoundResponsiveAnimation from "./Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation";
-import Visualizer from "./Visualizer";
+import React, { Component } from 'react';
+import Canvas from './Engine/Canvas';
+import BasicSoundResponsiveAnimation from './Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation';
+import Visualizer from './Visualizer';
 
 const VISUALIZER_WIDTH = 512;
 const VISUALIZER_HEIGHT = 250;

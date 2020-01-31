@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import InterfaceCanvas from "./Engine/InterfaceCanvas"; //TODO: replace with imageCanvas
-import Visualizer from "./Visualizer";
-import InterfaceAnimation from "./Animations/InterfaceAnimation";
+import React, { Component } from 'react';
+import InterfaceCanvas from './Engine/InterfaceCanvas'; //TODO: replace with imageCanvas
+import Visualizer from './Visualizer';
+import InterfaceAnimation from './Animations/InterfaceAnimation';
 
 const BLOCK_WIDTH = 5;
 const BLOCK_COUNT = 199;

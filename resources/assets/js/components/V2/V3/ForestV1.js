@@ -1,8 +1,8 @@
-import Tree from "./TreeV1";
-import MathLib from "../util/MathLib.js";
+import Tree from './TreeV1';
+import MathLib from '../util/MathLib.js';
 
 class SoundCircle {
-    constructor(height, width, title = "Forest Visualizer") {
+    constructor(height, width, title = 'Forest Visualizer') {
         this.title = title;
         this.framesElapsed = 0;
         this.waitingFramesElapsed = 0;
@@ -12,8 +12,8 @@ class SoundCircle {
         this.width = width;
 
         this.polygons = [];
-        const centerX = Math.floor(width/2);
-        const centerY = Math.floor(height/2);
+        const centerX = Math.floor(width / 2);
+        const centerY = Math.floor(height / 2);
 
         const treeCount = 500;
 
@@ -21,29 +21,19 @@ class SoundCircle {
             const randomX = Math.floor(Math.random() * width + 1);
             const randomY = Math.floor(Math.random() * height + 1);
 
-            this.polygons.push(
-                new Tree(
-                    randomX,
-                    randomY,
-                    1,
-                    this.addTree
-                )
-            );
+            this.polygons.push(new Tree(randomX, randomY, 1, this.addTree));
         }
-
-
     }
 
-    killTreeAt = (index) => {
+    killTreeAt = index => {
         this.polygons.splice(index, 1);
     };
 
-
-    clampWidth = (w) => {
+    clampWidth = w => {
         return Math.min(Math.max(0, w), this.width);
     };
 
-    clampHeight = (h) => {
+    clampHeight = h => {
         return Math.min(Math.max(0, h), this.height);
     };
 
@@ -54,7 +44,7 @@ class SoundCircle {
         const randomX = this.clampWidth(Math.floor(Math.random() * scatterDistance * 2) - scatterDistance + parentX);
         const randomY = this.clampHeight(Math.floor(Math.random() * scatterDistance * 2) - scatterDistance + parentY);
 
-        const collidingTree = this.polygons.find((polygon) => {
+        const collidingTree = this.polygons.find(polygon => {
             return polygon.x === randomX && polygon.y === randomY && !polygon.dead;
         });
 
@@ -64,16 +54,20 @@ class SoundCircle {
 
         const breedFailureChance = Math.random() * 100 > 0;
         if (breedFailureChance) {
-            const veryCloseTrees = this.polygons.filter((polygon) => {
-                return !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 3;
+            const veryCloseTrees = this.polygons.filter(polygon => {
+                return (
+                    !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 3
+                );
             });
 
             if (veryCloseTrees.length > 5) {
                 return;
             }
 
-            const closeTrees = this.polygons.filter((polygon) => {
-                return !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 6;
+            const closeTrees = this.polygons.filter(polygon => {
+                return (
+                    !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 6
+                );
             });
 
             if (closeTrees > 10) {
@@ -82,10 +76,16 @@ class SoundCircle {
         }
 
         const chance = Math.random() * 100 > 99.5;
-        if (chance) { //breed
-            const anotherTree = this.polygons.find((polygon) => {
-                return !polygon.dead && polygon.x > parentX - 5 && polygon.x < parentX + 5 &&
-                    polygon.y > parentY - 5 && polygon.y < parentY + 5;
+        if (chance) {
+            //breed
+            const anotherTree = this.polygons.find(polygon => {
+                return (
+                    !polygon.dead &&
+                    polygon.x > parentX - 5 &&
+                    polygon.x < parentX + 5 &&
+                    polygon.y > parentY - 5 &&
+                    polygon.y < parentY + 5
+                );
             });
 
             this.polygons.push(
@@ -104,7 +104,8 @@ class SoundCircle {
                     MathLib.avg(childCost, anotherTree.childCost)
                 )
             );
-        } else { //clone
+        } else {
+            //clone
             this.polygons.push(
                 new Tree(
                     randomX,
@@ -113,13 +114,16 @@ class SoundCircle {
                     this.addTree,
                     maxAge,
                     breedingAge,
-                    breedingFrequency, r, g, b, childCount, childCost
+                    breedingFrequency,
+                    r,
+                    g,
+                    b,
+                    childCount,
+                    childCost
                 )
             );
         }
-
-
-    }
+    };
 
     moveToNextFrame() {
         this.framesElapsed++;

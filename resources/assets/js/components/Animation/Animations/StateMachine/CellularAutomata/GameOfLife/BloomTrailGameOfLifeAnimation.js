@@ -1,11 +1,11 @@
-import BloomingGameOfLifeAnimation from "./BloomingGameOfLifeAnimation";
+import BloomingGameOfLifeAnimation from './BloomingGameOfLifeAnimation';
 
 // TODO: cleanup and comment
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class BloomTrailGameOfLifeAnimation extends BloomingGameOfLifeAnimation {
-    constructor(width, height, title = "Game of Life - Bloom Mod w/Trails - Random Seed") {
+    constructor(width, height, title = 'Game of Life - Bloom Mod w/Trails - Random Seed') {
         super(width, height, title);
     }
 

@@ -1,12 +1,12 @@
-import React from "react";
-import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
-import SoundResponsiveFunctionGenerator from "../../../Engine/SoundResponsiveFunctionGenerator";
+import React from 'react';
+import StateMachineAnimation from '../../../Engine/StateMachineAnimation';
+import SoundResponsiveFunctionGenerator from '../../../Engine/SoundResponsiveFunctionGenerator';
 
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class BasicSoundResponsiveAnimation extends StateMachineAnimation {
-    constructor(width, height, title = "Basic Equalizer") {
+    constructor(width, height, title = 'Basic Equalizer') {
         super(width, height, title);
         this.width = width;
         this.height = height;

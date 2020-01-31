@@ -1,9 +1,9 @@
-import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
-import Circle from "../../Engine/Polygons/Circle";
-import Circle2 from "../../Engine/Polygons/Circle2";
+import SoundResponsiveFunctionGenerator from '../../Engine/SoundResponsiveFunctionGenerator';
+import Circle from '../../Engine/Polygons/Circle';
+import Circle2 from '../../Engine/Polygons/Circle2';
 
 class SoundCircleCircle {
-    constructor(height, width, title = "Polygon Sound Visualizer - Triangle of Circles") {
+    constructor(height, width, title = 'Polygon Sound Visualizer - Triangle of Circles') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -33,7 +33,7 @@ class SoundCircleCircle {
 
         this.returningHome = false;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
     }
 

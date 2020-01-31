@@ -1,8 +1,8 @@
-import Tree from "./TreeV4";
-import MathLib from "../util/MathLib.js";
+import Tree from './TreeV4';
+import MathLib from '../util/MathLib.js';
 
 class SoundCircle {
-    constructor(height, width, title = "Forest Visualizer 2") {
+    constructor(height, width, title = 'Forest Visualizer 2') {
         this.title = title;
         this.framesElapsed = 0;
         this.waitingFramesElapsed = 0;
@@ -12,8 +12,8 @@ class SoundCircle {
         this.width = width;
 
         this.polygons = [];
-        const centerX = Math.floor(width/2);
-        const centerY = Math.floor(height/2);
+        const centerX = Math.floor(width / 2);
+        const centerY = Math.floor(height / 2);
 
         const treeCount = 500;
 
@@ -21,25 +21,15 @@ class SoundCircle {
             const randomX = Math.floor(Math.random() * width + 1);
             const randomY = Math.floor(Math.random() * height + 1);
 
-            this.polygons.push(
-                new Tree(
-                    randomX,
-                    randomY,
-                    1,
-                    this.addTree
-                )
-            );
+            this.polygons.push(new Tree(randomX, randomY, 1, this.addTree));
         }
-
-
     }
 
-    killTreeAt = (index) => {
+    killTreeAt = index => {
         this.polygons.splice(index, 1);
     };
 
-
-    clampWidth = (w) => {
+    clampWidth = w => {
         /*
         if (w > this.width) {
             return w - this.width;
@@ -54,7 +44,7 @@ class SoundCircle {
         return Math.min(Math.max(0, w), this.width);
     };
 
-    clampHeight = (h) => {
+    clampHeight = h => {
         /*
         if (h > this.height) {
             return h - this.height;
@@ -71,7 +61,6 @@ class SoundCircle {
     };
 
     addTree = (parentX, parentY, maxAge, breedingAge, breedingFrequency, r, g, b, childCount, childCost) => {
-
         if (this.polygons.length > 100000) {
             return;
         }
@@ -96,57 +85,81 @@ class SoundCircle {
         }
 */
 
+        const veryLargeTrees = this.polygons.filter(polygon => {
+            return (
+                !(polygon.x === parentX && polygon.y === parentY) &&
+                !polygon.dead &&
+                Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 243
+            );
+        });
 
-        const veryLargeTrees = this.polygons.filter((polygon) => {
-                return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 243;
-            });
+        if (veryLargeTrees.length > 1813) {
+            //1313 //100 g00d
+            return;
+        }
 
-            if (veryLargeTrees.length > 1813) { //1313 //100 g00d
-                return;
-            }
+        const largeTrees = veryLargeTrees.filter(polygon => {
+            return (
+                !(polygon.x === parentX && polygon.y === parentY) &&
+                !polygon.dead &&
+                Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 81
+            );
+        });
 
-            const largeTrees = veryLargeTrees.filter((polygon) => {
-                return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 81;
-            });
+        if (largeTrees.length > 180) {
+            //220
+            return;
+        }
 
-            if (largeTrees.length > 180) { //220
-                return;
-            }
+        const moderateTrees = largeTrees.filter(polygon => {
+            return (
+                !(polygon.x === parentX && polygon.y === parentY) &&
+                !polygon.dead &&
+                Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 49
+            );
+        });
 
-            const moderateTrees = largeTrees.filter((polygon) => {
-                return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 49;
-            });
+        if (moderateTrees.length > 80) {
+            //100 g00d
+            return;
+        }
 
-            if (moderateTrees.length > 80) { //100 g00d
-                return;
-            }
+        const closeTrees = moderateTrees.filter(polygon => {
+            return (
+                !(polygon.x === parentX && polygon.y === parentY) &&
+                !polygon.dead &&
+                Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 9
+            );
+        });
 
-            const closeTrees = moderateTrees.filter((polygon) => {
-                return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 9;
-            });
+        if (closeTrees.length > 9) {
+            //300 max
+            return;
+        }
 
-            if (closeTrees.length > 9) { //300 max
-                return;
-            }
+        const veryCloseTrees = closeTrees.filter(polygon => {
+            return (
+                !(polygon.x === parentX && polygon.y === parentY) &&
+                !polygon.dead &&
+                Math.sqrt(Math.pow(polygon.x - parentX, 2) + Math.pow(polygon.y - parentY, 2)) < 3
+            );
+        });
 
-            const veryCloseTrees = closeTrees.filter((polygon) => {
-                return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 3;
-            });
+        if (veryCloseTrees.length > 7) {
+            //27 max
+            return;
+        }
 
-            if (veryCloseTrees.length > 7) { //27 max
-                return;
-            }
+        const collidingTree = veryCloseTrees.find(polygon => {
+            return polygon.x === randomX && polygon.y === randomY && !polygon.dead;
+        });
 
-            const collidingTree = veryCloseTrees.find((polygon) => {
-                return polygon.x === randomX && polygon.y === randomY && !polygon.dead;
-            });
+        if (collidingTree) {
+            return;
+        }
 
-            if (collidingTree) {
-                return;
-            }
-
-            // Quasicrystalline
-            /*
+        // Quasicrystalline
+        /*
              const largeTrees = this.polygons.filter((polygon) => {
                 return !(polygon.x === parentX && polygon.y === parentY) && !polygon.dead && Math.sqrt(Math.pow(polygon.x - parentX, 2) +  Math.pow(polygon.y - parentY, 2)) < 81;
             });
@@ -180,18 +193,22 @@ class SoundCircle {
             }
              */
 
-
-
         //90 good
         const chance = Math.random() * 100 > 0;
-        if (chance) { //breed
-            const anotherTree = veryCloseTrees.find((polygon) => {
-                return !polygon.dead && !(polygon.x === parentX && polygon.y === parentY) && polygon.x > parentX - 4 && polygon.x < parentX + 4 &&
-                    polygon.y > parentY - 4 && polygon.y < parentY + 4;
+        if (chance) {
+            //breed
+            const anotherTree = veryCloseTrees.find(polygon => {
+                return (
+                    !polygon.dead &&
+                    !(polygon.x === parentX && polygon.y === parentY) &&
+                    polygon.x > parentX - 4 &&
+                    polygon.x < parentX + 4 &&
+                    polygon.y > parentY - 4 &&
+                    polygon.y < parentY + 4
+                );
             });
 
             if (anotherTree) {
-
                 //console.log(MathLib.avg(r, anotherTree.redColor), r, anotherTree.redColor);
                 this.polygons.push(
                     new Tree(
@@ -212,25 +229,26 @@ class SoundCircle {
 
                 return;
             }
-
-
         }
 
         //clone
-            this.polygons.push(
-                new Tree(
-                    randomX,
-                    randomY,
-                    1,
-                    this.addTree,
-                    maxAge,
-                    breedingAge,
-                    breedingFrequency, r, g, b, childCount, childCost
-                )
-            );
-
-
-    }
+        this.polygons.push(
+            new Tree(
+                randomX,
+                randomY,
+                1,
+                this.addTree,
+                maxAge,
+                breedingAge,
+                breedingFrequency,
+                r,
+                g,
+                b,
+                childCount,
+                childCost
+            )
+        );
+    };
 
     moveToNextFrame() {
         this.framesElapsed++;
@@ -243,10 +261,13 @@ class SoundCircle {
         if (this.framesElapsed % 50 === 0) {
             const meteorLandsAtX = Math.floor(Math.random() * this.width);
             const meteorLandsAtY = Math.floor(Math.random() * this.height);
-            const meteorSize = 50 + (Math.random() * 200);
+            const meteorSize = 50 + Math.random() * 200;
             this.polygons = this.polygons.filter(polygon => {
-                return Math.sqrt(Math.pow(polygon.x - meteorLandsAtX, 2) +  Math.pow(polygon.y - meteorLandsAtY, 2)) > meteorSize;
-            })
+                return (
+                    Math.sqrt(Math.pow(polygon.x - meteorLandsAtX, 2) + Math.pow(polygon.y - meteorLandsAtY, 2)) >
+                    meteorSize
+                );
+            });
         }
     }
 }

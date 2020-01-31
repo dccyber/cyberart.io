@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PolygonCanvas from "./Engine/PolygonCanvas";
-import FlowA from "./Animations/MineFlow/FlowA";
-import Visualizer from "./Visualizer";
+import React, { Component } from 'react';
+import PolygonCanvas from './Engine/PolygonCanvas';
+import FlowA from './Animations/MineFlow/FlowA';
+import Visualizer from './Visualizer';
 
 const BLOCK_WIDTH = 5;
 const BLOCK_COUNT = 199;

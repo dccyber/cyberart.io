@@ -1,8 +1,8 @@
-import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
-import Circle from "../../Engine/Polygons/Circle";
+import SoundResponsiveFunctionGenerator from '../../Engine/SoundResponsiveFunctionGenerator';
+import Circle from '../../Engine/Polygons/Circle';
 
 class SoundCircle {
-    constructor(height, width, title = "Polygon Sound Visualizer - Brownian Motion Rainbow Circles") {
+    constructor(height, width, title = 'Polygon Sound Visualizer - Brownian Motion Rainbow Circles') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -27,7 +27,7 @@ class SoundCircle {
         }
 
         this.returningHome = false;
-        this.sortable = "radius";
+        this.sortable = 'radius';
         this.sortOrder = 1;
     }
 

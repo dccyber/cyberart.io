@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PolygonCanvas from "./PolygonCanvas";
-import AnimationManager from "./AnimationManager";
-import {getClientDimensions} from "./WindowLib";
-import ScreenModes from "./ScreenModes";
+import React, { Component } from 'react';
+import PolygonCanvas from './PolygonCanvas';
+import AnimationManager from './AnimationManager';
+import { getClientDimensions } from './WindowLib';
+import ScreenModes from './ScreenModes';
 
 const DEFAULT_WIDTH = 1662;
 const DEFAULT_HEIGHT = 1662;
 
-const getInitialStateFromProps = (props) => {
+const getInitialStateFromProps = props => {
     let width, height;
     if (props.mode === ScreenModes.FULLSCREEN) {
         ({ width, height } = getClientDimensions());
@@ -20,12 +20,12 @@ const getInitialStateFromProps = (props) => {
     }
 
     return {
-        width, height
-    }
+        width,
+        height
+    };
 };
 
 class Visualizer extends Component {
-
     state = getInitialStateFromProps(this.props);
 
     constructor(props) {
@@ -38,8 +38,7 @@ class Visualizer extends Component {
     }
 
     render() {
-
-        const {animation, width, height} = this.state;
+        const { animation, width, height } = this.state;
 
         if (!animation) return null;
 
@@ -56,7 +55,7 @@ class Visualizer extends Component {
 
     changeAnimation = Animation => {
         const animation = new Animation(this.state.height, this.state.width);
-        this.setState({animation});
+        this.setState({ animation });
     };
 }
 

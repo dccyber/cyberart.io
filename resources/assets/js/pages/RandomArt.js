@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ContactButtons from "../components/Social/ContactButtons";
-import ArtBox from "../components/Animation/ArtBox";
-import Navigation from "../components/Navigation";
+import React, { Component } from 'react';
+import ContactButtons from '../components/Social/ContactButtons';
+import ArtBox from '../components/Animation/ArtBox';
+import Navigation from '../components/Navigation';
 
 class RandomArt extends Component {
     render() {

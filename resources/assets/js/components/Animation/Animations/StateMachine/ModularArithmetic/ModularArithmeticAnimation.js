@@ -1,10 +1,10 @@
-import StateMachineAnimation from "../../../Engine/StateMachineAnimation";
+import StateMachineAnimation from '../../../Engine/StateMachineAnimation';
 
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class ModularArithmeticAnimation extends StateMachineAnimation {
-    constructor(width, height, title = "Modular Arithmetic Sample #1") {
+    constructor(width, height, title = 'Modular Arithmetic Sample #1') {
         super(width, height, title);
     }
 

@@ -1,4 +1,4 @@
-import FullCenteredWindow from "./FullCenteredWindow";
+import FullCenteredWindow from './FullCenteredWindow';
 
 export default class MainMenu {
     constructor(width, height) {
@@ -31,7 +31,7 @@ export default class MainMenu {
             // Delegate to the active window
             const windowClicked = this.activeWindow.handleMouseDown(x, y);
             if (!windowClicked) {
-                console.log("Background click was started");
+                console.log('Background click was started');
             }
         }
     }
@@ -41,7 +41,7 @@ export default class MainMenu {
             // Delegate to the active window
             const windowClicked = this.activeWindow.handleMouseClick(x, y);
             if (!windowClicked) {
-                console.log("Background click was finished");
+                console.log('Background click was finished');
             }
         }
     }

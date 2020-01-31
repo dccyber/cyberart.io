@@ -1,8 +1,8 @@
-import FullCenteredWindow from "./FullCenteredWindow";
-import MainMenu from "./MainMenu";
+import FullCenteredWindow from './FullCenteredWindow';
+import MainMenu from './MainMenu';
 
 class InterfaceAnimation {
-    constructor(width, height, title = "Interface Simulation") {
+    constructor(width, height, title = 'Interface Simulation') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -12,7 +12,7 @@ class InterfaceAnimation {
         this.applicationState = new MainMenu(width, height);
 
         this.backgroundImage = new Image();
-        this.backgroundImage.src = "/img/coolpic.jpg";
+        this.backgroundImage.src = '/img/coolpic.jpg';
     }
 
     moveToNextFrame(ctx) {

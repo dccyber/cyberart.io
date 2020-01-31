@@ -1,11 +1,11 @@
 // TODO: cleanup and comment
-import BloomTrailGameOfLifeAnimation from "./BloomTrailGameOfLifeAnimation";
+import BloomTrailGameOfLifeAnimation from './BloomTrailGameOfLifeAnimation';
 
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class SymmetricalBTGameOfLifeAnimation extends BloomTrailGameOfLifeAnimation {
-    constructor(width, height, title = "Game of Life - Bloom Mod w/Trails - Small Symmetrical Seed") {
+    constructor(width, height, title = 'Game of Life - Bloom Mod w/Trails - Small Symmetrical Seed') {
         super(width, height, title);
     }
 

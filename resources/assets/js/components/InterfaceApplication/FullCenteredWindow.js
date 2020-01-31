@@ -1,5 +1,5 @@
-import Button from "./Button";
-import Window from "./Window";
+import Button from './Button';
+import Window from './Window';
 
 export default class FullCenteredWindow extends Window {
     constructor(containerPosition) {
@@ -14,7 +14,7 @@ export default class FullCenteredWindow extends Window {
             width: width * 0.8,
             height: height * 0.8
         };
-        this.mode = "centered";
+        this.mode = 'centered';
 
         this.buildButtons();
     }
@@ -36,9 +36,9 @@ export default class FullCenteredWindow extends Window {
 
         button2.addClickBehavior(() => {
             let { top, left, height, width } =
-                this.mode === "centered" ? this.centeredPosition : this.containerPosition;
+                this.mode === 'centered' ? this.centeredPosition : this.containerPosition;
 
-            this.mode = this.mode === "centered" ? "full" : "centered";
+            this.mode = this.mode === 'centered' ? 'full' : 'centered';
 
             //TODO: need to actually move the window
             this.position.left = left;
@@ -81,7 +81,7 @@ export default class FullCenteredWindow extends Window {
             });
             if (!buttonClicked) {
                 // actions exclusive to the window click (no buttons) go here
-                console.log("you started to click the window!");
+                console.log('you started to click the window!');
             }
             return true;
         }
@@ -100,7 +100,7 @@ export default class FullCenteredWindow extends Window {
             });
             if (!buttonClicked) {
                 // actions exclusive to the window click (no buttons) go here
-                console.log("you finished clicking the window the window!");
+                console.log('you finished clicking the window the window!');
             }
             return true;
         }

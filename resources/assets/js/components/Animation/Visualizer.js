@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Sliders from "./Engine/Sliders";
+import React, { Component } from 'react';
+import Sliders from './Engine/Sliders';
 
 const DEFAULT_WIDTH = 1024;
 const DEFAULT_HEIGHT = 768;
@@ -31,19 +31,17 @@ class Visualizer extends Component {
         this.registerVendorAnimationFunctions();
     }
 
-
-    beginAnimation () {
-
+    beginAnimation() {
         this.animate();
     }
 
     // TODO: would be good in a utility somewhere
     registerVendorAnimationFunctions() {
-        const vendors = ["ms", "moz", "webkit", "o"];
+        const vendors = ['ms', 'moz', 'webkit', 'o'];
         for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-            window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"];
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
             window.cancelAnimationFrame =
-                window[vendors[x] + "CancelAnimationFrame"] || window[vendors[x] + "CancelRequestAnimationFrame"];
+                window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
         }
     }
 

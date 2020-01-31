@@ -1,12 +1,12 @@
-import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
-import Circle from "../../Engine/Polygons/Circle";
-import Circle2 from "../../Engine/Polygons/Circle2";
-import Square from "../../Engine/Polygons/Square";
-import PoppinSquare from "../../Engine/Polygons/PoppinSquare";
-import PoppinSquare2 from "../../Engine/Polygons/PoppinSquare2";
+import SoundResponsiveFunctionGenerator from '../../Engine/SoundResponsiveFunctionGenerator';
+import Circle from '../../Engine/Polygons/Circle';
+import Circle2 from '../../Engine/Polygons/Circle2';
+import Square from '../../Engine/Polygons/Square';
+import PoppinSquare from '../../Engine/Polygons/PoppinSquare';
+import PoppinSquare2 from '../../Engine/Polygons/PoppinSquare2';
 
 class PoppingSquares2 {
-    constructor(height, width, title = "Polygon Sound Visualizer - Popping Squares") {
+    constructor(height, width, title = 'Polygon Sound Visualizer - Popping Squares') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -29,7 +29,7 @@ class PoppingSquares2 {
 
         this.shapeIdx = 0;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
 
         for (let a = 0; a < 1024; a++) {

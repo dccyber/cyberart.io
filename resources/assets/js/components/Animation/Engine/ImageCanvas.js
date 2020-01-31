@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 /**
  * Copyright Aaron Boyarsky, 2018
@@ -11,17 +11,17 @@ class ImageCanvas extends Component {
     }
 
     componentDidMount() {
-        this.ctx = this.refs.canvas.getContext("2d");
+        this.ctx = this.refs.canvas.getContext('2d');
         this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
         this.g = this.imageData.data;
 
         this.ctx.putImageData(this.imageData, 0, 0);
 
-        this.ctx.fillStyle = "#000000";
+        this.ctx.fillStyle = '#000000';
         this.ctx.fillRect(0, 0, this.props.width, this.props.height);
 
         const image = new Image();
-        image.src = "/img/coolpic.jpg";
+        image.src = '/img/coolpic.jpg';
         let self = this;
 
         image.onload = () => {
@@ -90,7 +90,7 @@ class ImageCanvas extends Component {
     render() {
         return (
             <React.Fragment>
-                <h5 style={{ margin: "5px" }}>{this.props.animation.title}</h5>
+                <h5 style={{ margin: '5px' }}>{this.props.animation.title}</h5>
                 {this.props.animation.render ? this.props.animation.render() : null}
                 <canvas id="canvas" ref="canvas" width={this.props.width} height={this.props.height} />
             </React.Fragment>

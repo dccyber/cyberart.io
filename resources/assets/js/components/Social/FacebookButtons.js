@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class FacebookButtons extends Component {
     render() {
@@ -18,7 +18,7 @@ class FacebookButtons extends Component {
                     data-show-faces="true"
                     data-share="true"
                 >
-                    {" "}
+                    {' '}
                 </div>
             </React.Fragment>
         );

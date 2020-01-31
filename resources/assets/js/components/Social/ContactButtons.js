@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import SlackButton from "./SlackButton";
-import GithubButton from "./GithubButton";
-import FacebookButtons from "./FacebookButtons";
+import React, { Component } from 'react';
+import SlackButton from './SlackButton';
+import GithubButton from './GithubButton';
+import FacebookButtons from './FacebookButtons';
 
 class ContactButtons extends Component {
     render() {

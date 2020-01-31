@@ -1,11 +1,11 @@
-import Cell from "./Items/Cell";
+import Cell from './Items/Cell';
 
 const BLOCK_WIDTH = 5;
 const BLOCK_COUNT = 199;
 const HALF_BLOCK = (BLOCK_COUNT - 1) / 2;
 
 class FlowA {
-    constructor(height, width, title = "Mine River Flow") {
+    constructor(height, width, title = 'Mine River Flow') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -20,7 +20,7 @@ class FlowA {
 
         this.shapeIdx = 0;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
 
         for (let a = 0; a < BLOCK_COUNT; a++) {
@@ -29,15 +29,15 @@ class FlowA {
                 let x = a * BLOCK_WIDTH;
                 let y = b * BLOCK_WIDTH;
 
-                let contents = b === BLOCK_COUNT - 1 && a === HALF_BLOCK ? "water" : "earth";
+                let contents = b === BLOCK_COUNT - 1 && a === HALF_BLOCK ? 'water' : 'earth';
                 let depth = b === BLOCK_COUNT - 1 && a === HALF_BLOCK ? 300 : 0;
                 let square = new Cell(x, y, BLOCK_WIDTH - 1, a * BLOCK_COUNT + b, contents, depth);
                 this.polygons.push(square);
                 this.grid[a][b] = square;
 
-                if (contents === "water") {
+                if (contents === 'water') {
                     this.waterBlocks.push(square);
-                } else if (contents === "earth") {
+                } else if (contents === 'earth') {
                     this.earthBlocks.push(square);
                 }
             }
@@ -61,7 +61,7 @@ class FlowA {
         }
 
         this.waterBlocks[0].adjacent.forEach(adjacent => {
-            adjacent.contents = "grass";
+            adjacent.contents = 'grass';
         });
 
         this.returningHome = false;
@@ -78,10 +78,10 @@ class FlowA {
         for (let a = 0; a < BLOCK_COUNT; a++) {
             for (let b = 0; b < BLOCK_COUNT; b++) {
                 switch (this.grid[a][b].contents) {
-                    case "water":
+                    case 'water':
                         score += -5;
                         break;
-                    case "grass":
+                    case 'grass':
                         score += 1;
                         break;
                     default:
@@ -108,9 +108,9 @@ class FlowA {
                     if (0.95 > Math.random()) {
                         score = this.getScore();
                         //TRY TO FLOW
-                        if (adjacentBlock.contents !== "water" && waterBlock.depth > 1) {
+                        if (adjacentBlock.contents !== 'water' && waterBlock.depth > 1) {
                             let previousContents = adjacentBlock.contents;
-                            adjacentBlock.contents = "water";
+                            adjacentBlock.contents = 'water';
                             adjacentBlock.depth = waterBlock.depth - 1;
                             this.waterBlocks.push(adjacentBlock);
 
@@ -125,8 +125,8 @@ class FlowA {
                                     b < Math.min(adjacentBlock.y / BLOCK_WIDTH + 5, BLOCK_COUNT);
                                     b++
                                 ) {
-                                    if (this.grid[a][b].contents === "earth") {
-                                        this.grid[a][b].contents = "grass";
+                                    if (this.grid[a][b].contents === 'earth') {
+                                        this.grid[a][b].contents = 'grass';
                                         changed.push([a, b]);
                                     }
                                 }
@@ -135,9 +135,9 @@ class FlowA {
                             let newScore = this.getScore();
 
                             if (newScore < score) {
-                                console.log("reverting flow, score was less");
+                                console.log('reverting flow, score was less');
                                 changed.forEach(change => {
-                                    this.grid[change[0]][change[1]].contents = "earth";
+                                    this.grid[change[0]][change[1]].contents = 'earth';
                                 });
                                 this.waterBlocks.pop();
                                 adjacentBlock.contents = previousContents;

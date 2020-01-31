@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class PolygonCanvas extends Component {
     componentDidMount() {
-        this.ctx = this.refs.canvas.getContext("2d");
+        this.ctx = this.refs.canvas.getContext('2d');
         this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
         this.g = this.imageData.data;
 
@@ -22,10 +22,9 @@ class PolygonCanvas extends Component {
 
     iterate = () => {
         if (!this.props.persistent) {
-            this.ctx.fillStyle = "#000000";
+            this.ctx.fillStyle = '#000000';
             this.ctx.fillRect(0, 0, this.props.width, this.props.height);
         }
-
 
         // Advance animation to the next frame
         this.props.animation.moveToNextFrame();
@@ -81,7 +80,6 @@ class PolygonCanvas extends Component {
         */
     };
 
-
     paintPixel(x, y, rgba) {
         //TODO: explanation
         const imageData = this.g;
@@ -97,7 +95,7 @@ class PolygonCanvas extends Component {
     render() {
         return (
             <React.Fragment>
-                <h5 style={{ margin: "5px" }}>{this.props.animation.title}</h5>
+                <h5 style={{ margin: '5px' }}>{this.props.animation.title}</h5>
                 {this.props.animation.render ? this.props.animation.render() : null}
 
                 <canvas id="canvas" ref="canvas" width={this.props.width} height={this.props.height} />

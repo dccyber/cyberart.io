@@ -1,10 +1,10 @@
-import BloomTrailGameOfLifeAnimation from "./BloomTrailGameOfLifeAnimation";
+import BloomTrailGameOfLifeAnimation from './BloomTrailGameOfLifeAnimation';
 
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class SymmetricalBTGameOfLifeAnimationC extends BloomTrailGameOfLifeAnimation {
-    constructor(width, height, title = "Game of Life - Bloom/Trails - Central Cross Seed") {
+    constructor(width, height, title = 'Game of Life - Bloom/Trails - Central Cross Seed') {
         super(width, height, title);
     }
 

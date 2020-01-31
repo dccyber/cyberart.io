@@ -1,11 +1,11 @@
-import TwoDimensionalStateMachine from "./TwoDimensionalStateMachine";
+import TwoDimensionalStateMachine from './TwoDimensionalStateMachine';
 
 // TODO Combine with state machine
 /**
  * Copyright Aaron Boyarsky, 2018
  */
 class StateMachineAnimation {
-    constructor(width, height, title = "Untitled Animation") {
+    constructor(width, height, title = 'Untitled Animation') {
         this.framesElapsed = 0;
         this.title = title;
         this.width = width;

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PolygonCanvas from "./PolygonCanvas";
-import AnimationManager from "./util/AnimationManager";
+import React, { Component } from 'react';
+import PolygonCanvas from './PolygonCanvas';
+import AnimationManager from './util/AnimationManager';
 
 const DEFAULT_WIDTH = 1662;
 const DEFAULT_HEIGHT = 1662;

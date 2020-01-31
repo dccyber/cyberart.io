@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import RenderLib from "../components/V2/util/RenderLib";
-import { render } from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import RandomArt from "./RandomArt"
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import RenderLib from '../components/V2/util/RenderLib';
+import { render } from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import RandomArt from './RandomArt';
 import SoundVisualizer from './SoundVisualizer';
 import SoundPolygonVisualizer from './SoundPolygonVisualizer';
 import ImageLoader from './ImageLoaderVisualizer';
-import V2 from "./V2";
-import V3 from "./V3";
-import V4 from "./V4";
-import GalaxyZ from "./GalaxyZ";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import V2 from './V2';
+import V3 from './V3';
+import V4 from './V4';
+import GalaxyZ from './GalaxyZ';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
     palette: {
-        type: "dark",
+        type: 'dark',
         primary: {
-            main: "#222"
+            main: '#222'
         }
     }
 });
@@ -55,6 +55,6 @@ const NoMatch = () => {
     return <p>No Match!</p>;
 };
 
-if (document.getElementById("app")) {
-    ReactDOM.render(<App />, document.getElementById("app"));
+if (document.getElementById('app')) {
+    ReactDOM.render(<App />, document.getElementById('app'));
 }

@@ -5,19 +5,20 @@ const THING_STATES = {
 
 const THING_COLORS = {
     [THING_STATES.fresh]: {
-        r: 0,
         g: 255,
+        r: 0,
+
         b: 0
     },
     [THING_STATES.thing]: {
-        r: 255,
         g: 255,
+        r: 255,
+
         b: 0
     }
 };
 
 class GalaxyFresh {
-
     private boardX: number;
     private boardY: number;
 
@@ -40,13 +41,12 @@ class GalaxyFresh {
     private myFramesElapsed: number;
     private dead: boolean;
 
-
     constructor(boardX: number, boardY: number, radius: number) {
         this.boardX = boardX;
         this.boardY = boardY;
 
-        this.x = 10 + boardX * ( 5 );
-        this.y = 10 + boardY * ( 5 );
+        this.x = 10 + boardX * 5;
+        this.y = 10 + boardY * 5;
 
         this.height = radius;
 
@@ -67,11 +67,11 @@ class GalaxyFresh {
         this.dead = false;
     }
 
-    goodColor = (color: number) :number => {
+    public goodColor = (color: number): number => {
         return Math.min(256, Math.max(10, color));
-    }
+    };
 
-    avg(a: number, b: number) :number {
+    public avg(a: number, b: number): number {
         return Math.floor((a + b) / 2);
     }
 
@@ -89,7 +89,7 @@ class GalaxyFresh {
      * @returns {number}
      */
 
-    red = (framesElapsed: number) => {
+    public red = (framesElapsed: number) => {
         return [4, 5, 6, 7].indexOf(this.thingType) !== -1 ? this.goodColor(10 * this.growth) : 0;
         /*
         return Math.max(
@@ -97,27 +97,26 @@ class GalaxyFresh {
             0//this.goodColor(Math.floor(Math.sin(framesElapsed / 7) * 128 + 80))
         );
         */
-    }
+    };
 
-    green(framesElapsed: number) {
+    public green(framesElapsed: number) {
         return [2, 3, 6, 7].indexOf(this.thingType) !== -1 ? this.goodColor(10 * this.growth) : 0;
     }
 
-    blue(framesElapsed: number) {
+    public blue(framesElapsed: number) {
         return [1, 3, 5, 7].indexOf(this.thingType) !== -1 ? this.goodColor(10 * this.growth) : 0;
     }
 
-    draw(ctx: any, framesElapsed: number) {
-
-
+    public draw(ctx: any, framesElapsed: number) {
+        const foo: string = 'foo';
 
         if (this.prevGrowth !== this.growth && this.thingType !== 0) {
             this.redColor = this.red(framesElapsed);
             this.greenColor = this.green(framesElapsed);
             this.blueColor = this.blue(framesElapsed);
 
-            this.x = 10 + this.boardX * (5);
-            this.y = 10 + this.boardY * (5);
+            this.x = 10 + this.boardX * 5;
+            this.y = 10 + this.boardY * 5;
 
             this.prevGrowth = this.growth;
             this.fillStyle = `rgb(${this.redColor},${this.greenColor},${this.blueColor})`;
@@ -139,7 +138,7 @@ class GalaxyFresh {
             this.myFramesElapsed = 1;
         }
 
-        if ((this.myFramesElapsed) % 200 === 0) {
+        if (this.myFramesElapsed % 200 === 0) {
             this.prevGrowth = this.growth;
             this.growth = Math.min(this.growth + 1, 25);
         }

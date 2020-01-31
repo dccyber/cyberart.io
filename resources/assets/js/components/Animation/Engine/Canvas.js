@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 /**
  * Copyright Aaron Boyarsky, 2018
@@ -11,7 +11,7 @@ class Canvas extends Component {
     }
 
     componentDidMount() {
-        this.ctx = this.refs.canvas.getContext("2d");
+        this.ctx = this.refs.canvas.getContext('2d');
         this.imageData = this.ctx.createImageData(this.props.width, this.props.height);
         this.g = this.imageData.data;
     }
@@ -55,7 +55,7 @@ class Canvas extends Component {
     render() {
         return (
             <React.Fragment>
-                <h5 style={{ margin: "5px" }}>{this.props.animation.title}</h5>
+                <h5 style={{ margin: '5px' }}>{this.props.animation.title}</h5>
                 {this.props.animation.render ? this.props.animation.render() : null}
 
                 <canvas id="canvas" ref="canvas" width={this.props.width} height={this.props.height} />

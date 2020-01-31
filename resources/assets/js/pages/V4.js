@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ContactButtons from "../components/Social/ContactButtons";
-import CircleLineVisualizer from "../components/V2/V3/ForestVisualizer4";
-import Navigation from "../components/Navigation";
+import React, { Component } from 'react';
+import ContactButtons from '../components/Social/ContactButtons';
+import CircleLineVisualizer from '../components/V2/V3/ForestVisualizer4';
+import Navigation from '../components/Navigation';
 
 class SoundPolygonVisualizer extends Component {
     render() {

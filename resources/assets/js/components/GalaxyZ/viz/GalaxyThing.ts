@@ -17,16 +17,27 @@ const THING_COLORS = {
 };
 
 class GalaxyThing {
-
-    constructor(boardX, boardY, radius, addTree, maxAge = null, breedingAge = null, breedingFrequency = null, r = null, g = null, b = null, childCount = null, childCost = null) {
-
+    constructor(
+        boardX,
+        boardY,
+        radius,
+        addTree,
+        maxAge = null,
+        breedingAge = null,
+        breedingFrequency = null,
+        r = null,
+        g = null,
+        b = null,
+        childCount = null,
+        childCost = null
+    ) {
         this.boardX = boardX;
         this.boardY = boardY;
         this.prevBoardX = boardX;
         this.prevBoardY = boardY;
 
-        this.x = 10 + boardX * ( 5 );
-        this.y = 10 + boardY * ( 5 );
+        this.x = 10 + boardX * 5;
+        this.y = 10 + boardY * 5;
 
         this.prevX = this.x;
         this.originalX = this.x;
@@ -45,18 +56,17 @@ class GalaxyThing {
         this.redColor = this.goodColor(this.thingColors.r);
         this.greenColor = this.goodColor(this.thingColors.g);
         this.blueColor = this.goodColor(this.thingColors.b);
-
     }
 
-    goodColor = (color) => {
+    public goodColor = color => {
         return Math.min(256, Math.max(10, color));
-    }
+    };
 
-    avg(a, b) {
+    public avg(a, b) {
         return Math.floor((a + b) / 2);
     }
 
-    red = (ctx, framesElapsed) => {
+    public red = (ctx, framesElapsed) => {
         return this.redColor;
         /*
         return Math.max(
@@ -64,30 +74,30 @@ class GalaxyThing {
             0//this.goodColor(Math.floor(Math.sin(framesElapsed / 7) * 128 + 80))
         );
         */
-    }
+    };
 
-    green(ctx, framesElapsed) {
+    public green(ctx, framesElapsed) {
         return this.greenColor;
     }
 
-    blue(ctx, framesElapsed) {
+    public blue(ctx, framesElapsed) {
         return this.blueColor;
     }
 
-    draw(ctx, framesElapsed) {
+    public draw(ctx, framesElapsed) {
         if (this.dead) {
             return;
         }
-        let red = this.red(ctx, framesElapsed);
+        const red = this.red(ctx, framesElapsed);
 
-        //let green = this.goodColor(this.height);
-        let green = this.green(ctx, framesElapsed);
+        // let green = this.goodColor(this.height);
+        const green = this.green(ctx, framesElapsed);
 
-        let blue = this.blue(ctx, framesElapsed);
+        const blue = this.blue(ctx, framesElapsed);
 
         ctx.fillStyle = `rgb(${red},${green},${blue})`;
-        this.x = 10 + this.boardX * ( 5 );
-        this.y = 10 + this.boardY * ( 5 );
+        this.x = 10 + this.boardX * 5;
+        this.y = 10 + this.boardY * 5;
         ctx.fillRect(this.x, this.y, this.height, this.height);
 
         ctx.beginPath();
@@ -97,12 +107,12 @@ class GalaxyThing {
         this.prevBoardX = this.boardX;
         this.prevBoardY = this.boardY;
 
-            this.boardY = this.boardY + Math.floor(Math.random()*3) - 1;
-            this.boardX = this.boardX + Math.floor(Math.random()*3) - 1;
+        this.boardY = this.boardY + Math.floor(Math.random() * 3) - 1;
+        this.boardX = this.boardX + Math.floor(Math.random() * 3) - 1;
 
-            this.boardX = Math.min(299, Math.max(0, this.boardX))
-            this.boardY = Math.min(299, Math.max(0, this.boardY))
-/*
+        this.boardX = Math.min(299, Math.max(0, this.boardX));
+        this.boardY = Math.min(299, Math.max(0, this.boardY));
+        /*
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.height, this.startAngle, this.endAngle, this.anticlockwise);
         ctx.fill();

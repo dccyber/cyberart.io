@@ -1,4 +1,9 @@
-const tetrisColors = [[255, 255, 0], [0, 0, 255], [0, 255, 255], [138, 43, 226]];
+const tetrisColors = [
+    [255, 255, 0],
+    [0, 0, 255],
+    [0, 255, 255],
+    [138, 43, 226]
+];
 
 class EqSpark {
     constructor(x, y, width, height, idx, parentIdx) {
@@ -78,7 +83,7 @@ class EqSpark {
         ctx.translate(-this.x - Math.round(this.width / 2), -this.y - Math.round(this.height / 2));
 
         ctx.beginPath();
-        ctx.strokeStyle = "#FFFFFF";
+        ctx.strokeStyle = '#FFFFFF';
         ctx.lineWidth = 1;
 
         switch (this.tetrisShape) {

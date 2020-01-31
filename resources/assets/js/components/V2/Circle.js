@@ -38,7 +38,11 @@ class Circle {
             30,
             this.goodColor(
                 Math.floor(
-                    Math.sin(((framesElapsed + 500) / (Math.sin((this.height * this.avg(this.x, this.y)) / 100) + 19)) * 3) * 128 + 10
+                    Math.sin(
+                        ((framesElapsed + 500) / (Math.sin((this.height * this.avg(this.x, this.y)) / 100) + 19)) * 3
+                    ) *
+                        128 +
+                        10
                 )
             )
         );

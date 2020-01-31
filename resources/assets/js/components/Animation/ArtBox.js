@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Canvas from "./Engine/Canvas";
-import RandomModularArithmeticAnimation from "./Animations/StateMachine/ModularArithmetic/RandomModularArithmeticAnimation";
-import MandelbrotAnimation from "./Animations/StateMachine/Fractals/Mandelbrot/MandelbrotAnimation";
-import ModularArithmeticAnimation from "./Animations/StateMachine/ModularArithmetic/ModularArithmeticAnimation";
-import BloomingGameOfLifeAnimation from "./Animations/StateMachine/CellularAutomata/GameOfLife/BloomingGameOfLifeAnimation";
-import SymmetricalBTGameOfLifeAnimation from "./Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimation";
-import SymmetricalBTGameOfLifeAnimationB from "./Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB";
-import MandelbrotAnimationZoom from "./Animations/StateMachine/Fractals/Mandelbrot/MandelbrotAnimationZoom";
-import SymmetricalBTGameOfLifeAnimationC from "./Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC";
+import React, { Component } from 'react';
+import Canvas from './Engine/Canvas';
+import RandomModularArithmeticAnimation from './Animations/StateMachine/ModularArithmetic/RandomModularArithmeticAnimation';
+import MandelbrotAnimation from './Animations/StateMachine/Fractals/Mandelbrot/MandelbrotAnimation';
+import ModularArithmeticAnimation from './Animations/StateMachine/ModularArithmetic/ModularArithmeticAnimation';
+import BloomingGameOfLifeAnimation from './Animations/StateMachine/CellularAutomata/GameOfLife/BloomingGameOfLifeAnimation';
+import SymmetricalBTGameOfLifeAnimation from './Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimation';
+import SymmetricalBTGameOfLifeAnimationB from './Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationB';
+import MandelbrotAnimationZoom from './Animations/StateMachine/Fractals/Mandelbrot/MandelbrotAnimationZoom';
+import SymmetricalBTGameOfLifeAnimationC from './Animations/StateMachine/CellularAutomata/GameOfLife/SymmetricalBTGameOfLifeAnimationC';
 
 const FPS = 120;
 const LIMIT_FRAMERATE = false;
@@ -78,11 +78,11 @@ class ArtBox extends Component {
 
     // TODO: would be good in a utility somewhere
     registerVendorAnimationFunctions() {
-        const vendors = ["ms", "moz", "webkit", "o"];
+        const vendors = ['ms', 'moz', 'webkit', 'o'];
         for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-            window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"];
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
             window.cancelAnimationFrame =
-                window[vendors[x] + "CancelAnimationFrame"] || window[vendors[x] + "CancelRequestAnimationFrame"];
+                window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
         }
     }
 
@@ -110,7 +110,7 @@ class ArtBox extends Component {
 
         return (
             <div>
-                <button style={{ marginBottom: "5px", marginTop: "5px" }} onClick={this.setRandomAnimation}>
+                <button style={{ marginBottom: '5px', marginTop: '5px' }} onClick={this.setRandomAnimation}>
                     Randomize
                 </button>
                 <Canvas

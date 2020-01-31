@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ContactButtons from "../components/Social/ContactButtons";
-import Visualizer from "../components/Animation/Visualizer";
-import Navigation from "../components/Navigation";
+import React, { Component } from 'react';
+import ContactButtons from '../components/Social/ContactButtons';
+import Visualizer from '../components/Animation/Visualizer';
+import Navigation from '../components/Navigation';
 
 class SoundVisualizer extends Component {
     render() {

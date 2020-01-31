@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import Canvas from "./Engine/Canvas";
-import BasicSoundResponsiveAnimation from "./Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation";
-import PolygonCanvas from "./Engine/PolygonCanvas";
-import SoundCircle from "./Animations/Polygon/SoundCircle";
-import SoundCircleCircle from "./Animations/Polygon/SoundCircleCircle";
-import SquareSpiral from "./Animations/Polygon/SquareSpiral";
-import PoppingSquares from "./Animations/Polygon/PoppingSquares";
-import PoppingSquares2 from "./Animations/Polygon/PoppingSquares2";
-import RectEqualizer from "./Animations/Polygon/RectEqualizer";
-import SoundTriangle from "./Animations/Polygon/SoundTriangle";
-import Visualizer from "./Visualizer";
-import PoppingSquares3 from "./Animations/Polygon/PoppingSquares3";
+import React, { Component } from 'react';
+import Canvas from './Engine/Canvas';
+import BasicSoundResponsiveAnimation from './Animations/StateMachine/SoundResponsive/BasicSoundResponsiveAnimation';
+import PolygonCanvas from './Engine/PolygonCanvas';
+import SoundCircle from './Animations/Polygon/SoundCircle';
+import SoundCircleCircle from './Animations/Polygon/SoundCircleCircle';
+import SquareSpiral from './Animations/Polygon/SquareSpiral';
+import PoppingSquares from './Animations/Polygon/PoppingSquares';
+import PoppingSquares2 from './Animations/Polygon/PoppingSquares2';
+import RectEqualizer from './Animations/Polygon/RectEqualizer';
+import SoundTriangle from './Animations/Polygon/SoundTriangle';
+import Visualizer from './Visualizer';
+import PoppingSquares3 from './Animations/Polygon/PoppingSquares3';
 
 const VISUALIZER_WIDTH = 1662;
 const VISUALIZER_HEIGHT = 1662;
@@ -38,15 +38,17 @@ class PolygonVisualizer extends Visualizer {
         this.beginAnimation = this.beginAnimation.bind(this);
     }
 
-    beginAnimation () {
-
+    beginAnimation() {
         this.chosenAnimationIdx = Math.floor(Math.random() * this.animationList.length);
         const ChosenAnimation = this.animationList[this.chosenAnimationIdx];
         this.state.animation = new ChosenAnimation(this.state.width, this.state.height);
 
-        this.setState({
-            animationStarted: true
-        }, super.beginAnimation);
+        this.setState(
+            {
+                animationStarted: true
+            },
+            super.beginAnimation
+        );
     }
 
     render() {
@@ -54,17 +56,19 @@ class PolygonVisualizer extends Visualizer {
 
         return (
             <React.Fragment>
-                {this.state.animationStarted ?
+                {this.state.animationStarted ? (
                     <React.Fragment>
                         {super.render()}
                         <PolygonCanvas
-                        ref={c => (this._canvas = c)}
-                        width={this.state.width}
-                        height={this.state.height}
-                        animation={this.state.animation}
+                            ref={c => (this._canvas = c)}
+                            width={this.state.width}
+                            height={this.state.height}
+                            animation={this.state.animation}
                         />
-                    </React.Fragment> : <button onClick={this.beginAnimation}>Start Animation</button>
-                }
+                    </React.Fragment>
+                ) : (
+                    <button onClick={this.beginAnimation}>Start Animation</button>
+                )}
             </React.Fragment>
         );
     }

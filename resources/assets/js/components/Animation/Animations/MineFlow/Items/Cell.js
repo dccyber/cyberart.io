@@ -1,6 +1,6 @@
-const EARTH = "earth";
-const WATER = "water";
-const GRASS = "grass";
+const EARTH = 'earth';
+const WATER = 'water';
+const GRASS = 'grass';
 const CONTENT_COLORS = {
     [EARTH]: {
         r: 139,

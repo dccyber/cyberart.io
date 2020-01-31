@@ -1,9 +1,9 @@
-import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
-import Circle from "../../Engine/Polygons/Circle";
-import Triangle from "../../Engine/Polygons/Triangle";
+import SoundResponsiveFunctionGenerator from '../../Engine/SoundResponsiveFunctionGenerator';
+import Circle from '../../Engine/Polygons/Circle';
+import Triangle from '../../Engine/Polygons/Triangle';
 
 class SoundTriangle {
-    constructor(height, width, title = "Polygon Sound Visualizer - Triangle") {
+    constructor(height, width, title = 'Polygon Sound Visualizer - Triangle') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -34,7 +34,7 @@ class SoundTriangle {
         }
 
         this.returningHome = false;
-        this.sortable = "radius";
+        this.sortable = 'radius';
         this.sortOrder = 1;
     }
 

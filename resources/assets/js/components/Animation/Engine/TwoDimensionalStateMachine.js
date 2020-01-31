@@ -1,4 +1,4 @@
-import StateBuffer from "./StateBuffer";
+import StateBuffer from './StateBuffer';
 
 //TODO: combine this class into StateMachineAnimation
 /**

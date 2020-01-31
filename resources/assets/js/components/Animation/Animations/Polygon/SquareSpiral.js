@@ -1,10 +1,10 @@
-import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
-import Circle from "../../Engine/Polygons/Circle";
-import Circle2 from "../../Engine/Polygons/Circle2";
-import Square from "../../Engine/Polygons/Square";
+import SoundResponsiveFunctionGenerator from '../../Engine/SoundResponsiveFunctionGenerator';
+import Circle from '../../Engine/Polygons/Circle';
+import Circle2 from '../../Engine/Polygons/Circle2';
+import Square from '../../Engine/Polygons/Square';
 
 class SquareSpiral {
-    constructor(height, width, title = "Polygon Sound Visualizer - Square Spiral") {
+    constructor(height, width, title = 'Polygon Sound Visualizer - Square Spiral') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -27,7 +27,7 @@ class SquareSpiral {
 
         this.shapeIdx = 0;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
 
         for (let a = 0; a < 1024; a++) {

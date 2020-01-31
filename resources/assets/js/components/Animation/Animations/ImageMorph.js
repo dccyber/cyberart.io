@@ -1,5 +1,5 @@
 class ImageMorph {
-    constructor(height, width, title = "Mine River Flow") {
+    constructor(height, width, title = 'Mine River Flow') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -11,7 +11,7 @@ class ImageMorph {
 
         this.shapeIdx = 0;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
 
         this.returningHome = false;
@@ -25,7 +25,7 @@ class ImageMorph {
         this.framesElapsed++;
 
         if (this.framesElapsed % 100 === 0) {
-            console.log("frame " + this.framesElapsed);
+            console.log('frame ' + this.framesElapsed);
         }
     }
 }

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import Slider from "@material-ui/core/Slide";
+import React, { Component } from 'react';
+import Slider from '@material-ui/core/Slide';
 
 const style = {
-    position: "absolute",
+    position: 'absolute',
     left: 50,
     top: 50,
-    width: "300px"
+    width: '300px'
 };
 
 class Sliders extends Component {

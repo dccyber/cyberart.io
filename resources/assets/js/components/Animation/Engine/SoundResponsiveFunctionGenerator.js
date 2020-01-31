@@ -24,7 +24,6 @@ SOFTWARE.
 // TODO: clean this up, or replace with another library
 class SoundResponsiveFunctionGenerator {
     constructor(soundEventCallback, sensitivity = 0.0001) {
-
         this.sensitivity = sensitivity;
 
         var audioContext = null;
@@ -46,7 +45,7 @@ class SoundResponsiveFunctionGenerator {
         this.buflen = 1024;
         this.buf = new Float32Array(this.buflen);
 
-        this.noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        this.noteStrings = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
         this.MIN_SAMPLES = 0; // will be initialized when AudioContext is created.
         this.GOOD_ENOUGH_CORRELATION = 0.9; // this is the "bar" for how close a correlation needs to be
@@ -59,8 +58,8 @@ class SoundResponsiveFunctionGenerator {
     }
 
     error(e) {
-        console.log(e.code, e.message, e.name)
-        alert("Stream generation failed.");
+        console.log(e.code, e.message, e.name);
+        alert('Stream generation failed.');
     }
 
     getUserMedia(dictionary, callback) {
@@ -69,7 +68,7 @@ class SoundResponsiveFunctionGenerator {
                 navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia(dictionary, callback, this.error);
         } catch (e) {
-            alert("getUserMedia threw exception :" + e);
+            alert('getUserMedia threw exception :' + e);
         }
     }
 
@@ -98,10 +97,10 @@ class SoundResponsiveFunctionGenerator {
             {
                 audio: {
                     mandatory: {
-                        googEchoCancellation: "false",
-                        googAutoGainControl: "false",
-                        googNoiseSuppression: "false",
-                        googHighpassFilter: "false"
+                        googEchoCancellation: 'false',
+                        googAutoGainControl: 'false',
+                        googNoiseSuppression: 'false',
+                        googHighpassFilter: 'false'
                     },
                     optional: []
                 }

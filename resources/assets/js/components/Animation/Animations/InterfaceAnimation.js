@@ -1,5 +1,5 @@
 class InterfaceAnimation {
-    constructor(width, height, title = "Interface Simulation") {
+    constructor(width, height, title = 'Interface Simulation') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -11,7 +11,7 @@ class InterfaceAnimation {
 
         this.shapeIdx = 0;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
 
         this.returningHome = false;
@@ -32,11 +32,11 @@ class InterfaceAnimation {
 
     drawWindows(ctx) {
         this.windowList.forEach(aWindow => {
-            ctx.fillStyle = "#BBBBBB";
+            ctx.fillStyle = '#BBBBBB';
             ctx.fillRect(aWindow.left, 1 * aWindow.top, aWindow.width, aWindow.height);
 
             //now a button
-            ctx.fillStyle = "#FF0000";
+            ctx.fillStyle = '#FF0000';
             const buttonWidth = 100;
             const buttonHeight = 40;
 
@@ -51,7 +51,7 @@ class InterfaceAnimation {
         this.framesElapsed++;
 
         if (this.framesElapsed % 100 === 0) {
-            console.log("frame " + this.framesElapsed);
+            console.log('frame ' + this.framesElapsed);
         }
 
         this.drawWindows(ctx);

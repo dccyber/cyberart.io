@@ -1,14 +1,14 @@
-import SoundResponsiveFunctionGenerator from "../../Engine/SoundResponsiveFunctionGenerator";
-import Circle from "../../Engine/Polygons/Circle";
-import Circle2 from "../../Engine/Polygons/Circle2";
-import Square from "../../Engine/Polygons/Square";
-import PoppinSquare from "../../Engine/Polygons/PoppinSquare";
-import PoppinSquare2 from "../../Engine/Polygons/PoppinSquare2";
-import EqRect from "../../Engine/Polygons/EqRect";
-import EqSpark from "../../Engine/Polygons/EqSpark";
+import SoundResponsiveFunctionGenerator from '../../Engine/SoundResponsiveFunctionGenerator';
+import Circle from '../../Engine/Polygons/Circle';
+import Circle2 from '../../Engine/Polygons/Circle2';
+import Square from '../../Engine/Polygons/Square';
+import PoppinSquare from '../../Engine/Polygons/PoppinSquare';
+import PoppinSquare2 from '../../Engine/Polygons/PoppinSquare2';
+import EqRect from '../../Engine/Polygons/EqRect';
+import EqSpark from '../../Engine/Polygons/EqSpark';
 
 class RectEqualizer {
-    constructor(height, width, title = "Polygon Sound Visualizer - Tetris Confetti Equalizer") {
+    constructor(height, width, title = 'Polygon Sound Visualizer - Tetris Confetti Equalizer') {
         this.title = title;
         this.framesElapsed = 0;
 
@@ -31,7 +31,7 @@ class RectEqualizer {
 
         this.shapeIdx = 0;
 
-        this.sortable = "idx";
+        this.sortable = 'idx';
         this.sortOrder = 1;
 
         let rectWidth = 1;
