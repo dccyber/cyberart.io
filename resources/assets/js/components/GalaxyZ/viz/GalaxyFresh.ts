@@ -1,22 +1,3 @@
-const THING_STATES = {
-    fresh: 0,
-    thing: 1
-};
-
-const THING_COLORS = {
-    [THING_STATES.fresh]: {
-        g: 255,
-        r: 0,
-
-        b: 0
-    },
-    [THING_STATES.thing]: {
-        g: 255,
-        r: 255,
-
-        b: 0
-    }
-};
 
 class GalaxyFresh {
     private boardX: number;
@@ -26,9 +7,7 @@ class GalaxyFresh {
     private y: number;
 
     private height: number;
-    private thingState: number;
     private thingType: number;
-    private thingColors: any;
 
     private growth: number;
     private prevGrowth: number;
@@ -50,9 +29,7 @@ class GalaxyFresh {
 
         this.height = radius;
 
-        this.thingState = THING_STATES.fresh;
         this.thingType = 0;
-        this.thingColors = THING_COLORS[this.thingState];
 
         this.growth = 1;
         this.prevGrowth = 1;
@@ -89,7 +66,7 @@ class GalaxyFresh {
      * @returns {number}
      */
 
-    public red = (framesElapsed: number) => {
+    public red = () => {
         return [4, 5, 6, 7].indexOf(this.thingType) !== -1 ? this.goodColor(10 * this.growth) : 0;
         /*
         return Math.max(
@@ -99,21 +76,20 @@ class GalaxyFresh {
         */
     };
 
-    public green(framesElapsed: number) {
+    public green() {
         return [2, 3, 6, 7].indexOf(this.thingType) !== -1 ? this.goodColor(10 * this.growth) : 0;
     }
 
-    public blue(framesElapsed: number) {
+    public blue() {
         return [1, 3, 5, 7].indexOf(this.thingType) !== -1 ? this.goodColor(10 * this.growth) : 0;
     }
 
-    public draw(ctx: any, framesElapsed: number) {
-        const foo: string = 'foo';
+    public draw(ctx: any) {
 
         if (this.prevGrowth !== this.growth && this.thingType !== 0) {
-            this.redColor = this.red(framesElapsed);
-            this.greenColor = this.green(framesElapsed);
-            this.blueColor = this.blue(framesElapsed);
+            this.redColor = this.red();
+            this.greenColor = this.green();
+            this.blueColor = this.blue();
 
             this.x = 10 + this.boardX * 5;
             this.y = 10 + this.boardY * 5;

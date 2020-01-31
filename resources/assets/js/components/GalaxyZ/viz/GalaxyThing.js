@@ -58,15 +58,15 @@ class GalaxyThing {
         this.blueColor = this.goodColor(this.thingColors.b);
     }
 
-    public goodColor = color => {
+    goodColor = color => {
         return Math.min(256, Math.max(10, color));
     };
 
-    public avg(a, b) {
+    avg(a, b) {
         return Math.floor((a + b) / 2);
     }
 
-    public red = (ctx, framesElapsed) => {
+    red = (ctx, framesElapsed) => {
         return this.redColor;
         /*
         return Math.max(
@@ -76,15 +76,15 @@ class GalaxyThing {
         */
     };
 
-    public green(ctx, framesElapsed) {
+    green(ctx, framesElapsed) {
         return this.greenColor;
     }
 
-    public blue(ctx, framesElapsed) {
+    blue(ctx, framesElapsed) {
         return this.blueColor;
     }
 
-    public draw(ctx, framesElapsed) {
+    draw(ctx, framesElapsed) {
         if (this.dead) {
             return;
         }
