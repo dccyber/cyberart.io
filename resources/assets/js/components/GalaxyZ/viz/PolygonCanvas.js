@@ -61,6 +61,13 @@ class PolygonCanvas extends Component {
         });
 
         /*
+        const { ctx } = this;
+        ctx.font        = "normal 36px Arial";
+        ctx.fillStyle = "#00FF00";
+        ctx.fillText("Moving", 50 + this.props.animation.framesElapsed, 90);
+        */
+
+        /*
         let x = 50;
         let y = 50;
         let height = 10;
@@ -73,6 +80,7 @@ class PolygonCanvas extends Component {
         this.ctx.fill();
         */
     };
+
 
     paintPixel(x, y, rgba) {
         //TODO: explanation
