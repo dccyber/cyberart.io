@@ -1,14 +1,24 @@
-import React, { Component } from 'react';
-import PolygonCanvas from './PolygonCanvas';
+import React from 'react';
 import AnimationManager from './AnimationManager';
-import { getClientDimensions } from './WindowLib';
+import PolygonCanvas from './PolygonCanvas';
 import ScreenModes from './ScreenModes';
+import { getClientDimensions } from './WindowLib';
 
 const DEFAULT_WIDTH = 1662;
 const DEFAULT_HEIGHT = 1662;
 
-const getInitialStateFromProps = props => {
-    let width, height;
+interface IProps {
+    mode: number;
+    animations: any[]; // TODO
+    shrinkHeight?: number;
+}
+
+type State = ReturnType<typeof getInitialStateFromProps>;
+
+const getInitialStateFromProps = (props: IProps) => {
+    let width;
+    let height;
+
     if (props.mode === ScreenModes.FULLSCREEN) {
         ({ width, height } = getClientDimensions());
         if (props.shrinkHeight) {
@@ -20,40 +30,44 @@ const getInitialStateFromProps = props => {
     }
 
     return {
-        width,
-        height
+        animation: null,
+        height,
+        width
     };
 };
 
-class Visualizer extends Component {
-    state = getInitialStateFromProps(this.props);
+class Visualizer extends React.Component<IProps, State> {
+    public readonly state = getInitialStateFromProps(this.props);
+    private animationManager: AnimationManager;
 
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
         this.animationManager = new AnimationManager(this.props.animations, this.changeAnimation);
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         this.animationManager.refreshAnimation();
     }
 
-    render() {
+    public render() {
         const { animation, width, height } = this.state;
 
-        if (!animation) return null;
+        if (!animation) {
+            return null;
+        }
 
         return (
             <PolygonCanvas
                 width={width}
                 height={height}
-                animation={animation}
+                animation={animation!}
                 beginAnimation={this.animationManager.animate}
                 persistent={true}
             />
         );
     }
 
-    changeAnimation = Animation => {
+    private changeAnimation = (Animation: any) => {
         const animation = new Animation(this.state.height, this.state.width);
         this.setState({ animation });
     };

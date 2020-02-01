@@ -1,4 +1,4 @@
-import {THING_STATES} from "./GalaxyThing";
+import { THING_STATES } from './GalaxyThing';
 
 class GalaxyFresh {
     public boardX: number;
@@ -21,9 +21,7 @@ class GalaxyFresh {
     private blueColor: number;
     private fillStyle: string;
 
-
     private myFramesElapsed: number;
-
 
     constructor(boardX: number, boardY: number, radius: number) {
         this.boardX = boardX;

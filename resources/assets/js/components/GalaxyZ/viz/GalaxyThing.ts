@@ -1,4 +1,4 @@
-import GalaxyFresh from "./GalaxyFresh";
+import GalaxyFresh from './GalaxyFresh';
 
 export const THING_STATES = {
     fresh: 0,
@@ -15,12 +15,12 @@ const THING_COLORS = {
     [THING_STATES.fresh]: {
         b: 0,
         g: 255,
-        r: 0,
+        r: 0
     },
     [THING_STATES.thing]: {
         b: 255,
         g: 255,
-        r: 255,
+        r: 255
     }
 };
 
@@ -39,8 +39,6 @@ class GalaxyThing {
     private redColor: number;
     private greenColor: number;
     private blueColor: number;
-
-
 
     constructor(boardX: number, boardY: number, radius: number) {
         this.boardX = boardX;
@@ -84,6 +82,16 @@ class GalaxyThing {
         this.boardX = Math.min(299, Math.max(0, this.boardX));
         this.boardY = Math.min(299, Math.max(0, this.boardY));
     }
+
+    public atCell = (cell: GalaxyFresh) => {
+        return cell.boardX === this.boardX && cell.boardY === this.boardY;
+    };
+
+    public paintCell = (cell: GalaxyFresh) => {
+        cell.growth = 1;
+        cell.thingType = this.thingType;
+        this.currentSpot = cell;
+    };
 
     private goodColor = (color: number): number => {
         return Math.min(256, Math.max(10, color));
