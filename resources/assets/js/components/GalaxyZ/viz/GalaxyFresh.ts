@@ -1,24 +1,29 @@
+import {THING_STATES} from "./GalaxyThing";
 
 class GalaxyFresh {
-    private boardX: number;
-    private boardY: number;
+    public boardX: number;
+    public boardY: number;
+
+    public thingType: number;
+    public thingState: number;
+
+    public growth: number;
+    public dead: boolean;
+    public redraw: boolean;
 
     private x: number;
     private y: number;
 
     private height: number;
-    private thingType: number;
-
-    private growth: number;
     private prevGrowth: number;
     private redColor: number;
     private greenColor: number;
     private blueColor: number;
     private fillStyle: string;
 
-    private redraw: boolean;
+
     private myFramesElapsed: number;
-    private dead: boolean;
+
 
     constructor(boardX: number, boardY: number, radius: number) {
         this.boardX = boardX;
@@ -30,6 +35,7 @@ class GalaxyFresh {
         this.height = radius;
 
         this.thingType = 0;
+        this.thingState = THING_STATES.fresh;
 
         this.growth = 1;
         this.prevGrowth = 1;
@@ -85,7 +91,6 @@ class GalaxyFresh {
     }
 
     public draw(ctx: any) {
-
         if (this.prevGrowth !== this.growth && this.thingType !== 0) {
             this.redColor = this.red();
             this.greenColor = this.green();

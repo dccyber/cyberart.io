@@ -8,13 +8,9 @@ class GalaxyZ1 {
         this.framesElapsed = 0;
         this.waitingFramesElapsed = 0;
         this.waiting = true;
-
         this.height = height;
         this.width = width;
-
         this.polygons = [];
-        // const centerX = Math.floor(width/2);
-        // const centerY = Math.floor(height/2);
 
         this.things = [];
         const maxSize = 300;
@@ -28,8 +24,7 @@ class GalaxyZ1 {
                         new GalaxyThing(
                             Math.floor(Math.random() * maxSize),
                             Math.floor(Math.random() * maxSize),
-                            5,
-                            this.addTree
+                            5
                         )
                     );
                 }
@@ -39,25 +34,6 @@ class GalaxyZ1 {
         }
 
         this.polygons = this.polygons.concat(this.things);
-
-        /*
-        const treeCount = 500;
-
-        for (let a = 0; a < treeCount; a++) {
-            const randomX = Math.floor(Math.random() * width + 1);
-            const randomY = Math.floor(Math.random() * height + 1);
-
-            this.polygons.push(
-                new GalaxyThing(
-                    randomX,
-                    randomY,
-                    1,
-                    this.addTree
-                )
-            );
-        }
-
-         */
     }
 
     /*
@@ -74,22 +50,15 @@ class GalaxyZ1 {
         return Math.min(Math.max(0, h), this.height);
     };
 
-    addTree = (parentX, parentY, maxAge, breedingAge, breedingFrequency, r, g, b, childCount, childCost) => {
-        //clone
-        /*
-            this.polygons.push(
-
-            );
-
-         */
-    };
-
     moveToNextFrame() {
         this.framesElapsed++;
 
+        // O(n)
         this.things.forEach(thing => {
+            // TODO: this is O(n^2)
             this.polygons
                 .filter(polygon => {
+                    //console.log(polygon.boardX);
                     return (
                         polygon.boardX === thing.boardX &&
                         polygon.boardY === thing.boardY &&
@@ -101,6 +70,7 @@ class GalaxyZ1 {
                     if (thing.currentSpot) {
                         thing.currentSpot.redraw = true;
                     }
+
                     polygon.growth = 1;
                     polygon.thingType = thing.thingType;
                     thing.currentSpot = polygon;
