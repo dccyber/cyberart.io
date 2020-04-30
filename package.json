@@ -22,7 +22,7 @@
         "babel-preset-react": "^6.24.1",
         "bootstrap-sass": "^3.4.1",
         "cross-env": "^7.0.0",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.15",
         "prettier": "^1.19.1",
